@@ -138,6 +138,12 @@ class Chart(object):
 				key, value = line.split('=')
 				current_line.setLineSpacing(value.strip())
 				continue
+			# If we find a ColumnSize spec., set the column spacing.
+			elif all_lines[i].upper().startswith('COLUMNSIZES'):
+				line = all_lines[i]
+				key, value = line.split('=')
+				current_line.setColumnSizes(value)
+				continue
 			# If we have a data line...
 			elif all_lines[i].upper().startswith('20'):
 				line = all_lines[i]
@@ -166,6 +172,9 @@ class Chart(object):
 					# Strip out any quote marks.
 					if text.startswith('"') or text.startswith("'"):
 						text = text.strip('"\'')
+					# Check for blank lines - insert a space in that case.
+					if text == '':
+						text = ' '
 					# Add a section to the current line.
 					a_section = Section(ratio, text)
 					current_line.addSection(a_section)

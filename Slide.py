@@ -279,13 +279,15 @@ class Slide(object):
 			line_font = current_line.font()
 			full_font_name = self.fixFontName(line_font)
 			num_sections = len(current_line.sections())
-			section_width = slide_width / num_sections
+			all_section_widths = current_line.columnSizes()
 			sect_x = 0
 			sect_y = 0
 			all_rendered_sections = []
 			line_height = 0
 			default_chr_position = 0
-			for each_section in current_line.sections():
+			for i, each_section in enumerate(current_line.sections()):
+				# Figure the current section width.
+				section_width = slide_width * all_section_widths[i] / 100
 				# Get the scaling factor and calculate the size in pixels
 				scale_factor = each_section.scaleFactor()
 				line_size = self.calculateSize(lane_length, scale_factor, dpi)
@@ -313,6 +315,7 @@ class Slide(object):
 					chr_surface.set_colorkey(NOTBLACK)
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
+					# Check for default character position.
 					if default_chr_position == current_line.defaultCharacterPosition():
 						self._default_characters.append([x_pos, y_pos, scale_factor, chr_width, space_width])
 					x_pos = x_pos + chr_width + space_width
@@ -321,7 +324,10 @@ class Slide(object):
 			# Now blit all the section surfaces onto a line surface.
 			line_surface = pygame.Surface([slide_width, line_height])
 			line_surface.fill(WHITE)
-			for each_sect_surf in all_rendered_sections:
+			for i, each_sect_surf in enumerate(all_rendered_sections):
+				# Get the correct width for this section.
+				section_width = slide_width * all_section_widths[i] / 100
+				sect_y = (line_surface.get_height() - each_sect_surf.get_height()) / 2.0
 				section_position = [sect_x, sect_y]
 				line_surface.blit(each_sect_surf, section_position)
 				sect_x += section_width
@@ -359,6 +365,9 @@ class Slide(object):
 				y = position[1]
 				pg_coords = [x, y]
 				self._pages.append(pg_coords)
+			# Find the line spaceing for this line.
+			scale_factor = all_lines[line_no].lineSpaceingScaleFactor()
+			line_spaceing = self.calculateSize(lane_length, scale_factor, dpi)
 			# Incriment the position for the next line.
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing

@@ -1,7 +1,9 @@
 # Chart file for Optichart.
 # A simple Baush & Lome Chart
 
+LineSize = 20/100
 20/200 : r~d
+LineSize = 20/80
 20/100 : zvne
 20/80 : gty~d
 !
@@ -16,7 +18,7 @@
 20/20 : fshdvr~gue
 20/15 : dhr~uspei5
 20/15 : psnezu~dgp
-20/20 : ' '
+20/10 : defp~otcez
 !
 # The astigmatic dial.
 20/500 : +

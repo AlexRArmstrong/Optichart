@@ -1,6 +1,7 @@
 # Chart file for Optichart.  
 # A chart with three columns
 
+ColumnSizes = 45|10|45
 LineSize = 20/30
 20/100 : E | 20/20 : U | 20/100 : E
 20/80 : NZ | 20/20 : T | 20/80 : ZN

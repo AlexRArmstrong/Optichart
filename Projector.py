@@ -677,7 +677,6 @@ class Projector(object):
 			self.isolateSingleLine()
 		
 		self.checkVerticalCentering()
-		self.update()
 	
 	def previousChart(self):
 		'''
@@ -693,7 +692,6 @@ class Projector(object):
 			self.isolateSingleLine()
 		
 		self.checkVerticalCentering()
-		self.update()
 	
 	def pollLircEvents(self):
 		'''
