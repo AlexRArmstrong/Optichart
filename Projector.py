@@ -132,8 +132,8 @@ class Projector(object):
 		# Create a screen.
 		# Calling set_mode with zeros will return a surface the same size as the
 		# current display.
-	#	size = (0, 0)
-		size = (1920, 1080) # NOTE! The dpi depends on resolution and physical size if change one other must change too else get funny results.
+		size = (0, 0)
+	#	size = (1920, 1080) # NOTE! The dpi depends on resolution and physical size if change one other must change too else get funny results.
 	#	size = (1280, 768)
 		self.screen = pygame.display.set_mode(size, pygame.NOFRAME)
 	#	screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
