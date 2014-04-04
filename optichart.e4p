@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-4.6.dtd">
+<!-- eric4 project file for project optichart -->
+<!-- Saved: 2014-04-03, 02:00:40 -->
+<!-- Copyright (C) 2014 Alexander Armstrong, AlexRArmstrong@gmail.com -->
+<Project version="4.6">
+  <Language></Language>
+  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <ProjectType>Console</ProjectType>
+  <Description>A chart for checking eyes.</Description>
+  <Version>0.1</Version>
+  <Author>Alexander Armstrong</Author>
+  <Email>AlexRArmstrong@gmail.com</Email>
+  <Sources>
+    <Source>main.py</Source>
+    <Source>tt.py</Source>
+  </Sources>
+  <Forms>
+  </Forms>
+  <Translations>
+  </Translations>
+  <Resources>
+  </Resources>
+  <Interfaces>
+  </Interfaces>
+  <Others>
+    <Other>charts/10-chart.chart</Other>
+    <Other>charts/20-chart.chart</Other>
+    <Other>charts/30-chart.chart</Other>
+    <Other>charts/40-chart.chart</Other>
+    <Other>charts/50-chart.chart</Other>
+    <Other>charts/70-chart.chart</Other>
+    <Other>charts/60-chart.chart</Other>
+    <Other>config.conf</Other>
+  </Others>
+  <MainScript>main.py</MainScript>
+  <Vcs>
+    <VcsType>None</VcsType>
+  </Vcs>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.pyw" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+  </FiletypeAssociations>
+</Project>
