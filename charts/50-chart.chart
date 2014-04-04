@@ -1,0 +1,20 @@
+# Chart file for Optichart.  Use #'s for comments, !'s for commands
+# referencing the formating of the next line. By default strings are
+# centered.  We start with the chart named 01 and work our way up.
+# 
+# s:size
+#
+! s:576
+E
+! s:576
+ZN
+! s:576
+SLV
+! s:576
+PVFU
+! s:576
+FRTSN
+! s:576
+BTGLCR
+! s:576
+URFPVTH

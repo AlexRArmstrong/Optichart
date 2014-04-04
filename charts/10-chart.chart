@@ -1,0 +1,25 @@
+# Chart file for Optichart.  
+# We start with the chart named 01 and work our way up.
+# Use #'s for comments, Blank lines are ignored.
+# By default each line is centered.
+# Each line is of the format:
+# [Snellen Ratio] : [Text]
+# Currently we use a Sloan font, this could be 
+# specified as a per file or even a per line item if needed.
+
+20/200 : RD
+20/100 : ZVNE
+20/80 :GTYD
+20/60 : RNZP6 
+20/40 : GPFOHR4
+20/30 : SHNYTZU3
+20/80 : 
+20/30 : NFCUVSRU
+20/80 : 
+20/25 : YHTPGN2S
+
+20/25 : ZGEVRNDOS
+20/20 : RDGZUPNS2
+20/20 : FSHDVRGUE
+20/15 : DHRUSPEI5
+20/15 : PSNEZUDGP
