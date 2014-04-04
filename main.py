@@ -186,6 +186,7 @@ def main():
 				visible_lines.append(each_line)
 			else:
 				visible_size -= each_line.get_height()
+				visible_size -= line_spacing
 				break
 		
 		
