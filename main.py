@@ -40,6 +40,7 @@ def main():
 	Initilize the program and start the main loop.
 	'''
 	global monitor_vert_size, lane_length, chart, dpi
+	global current_chart_index, chart_list
 	
 	BLACK = (0, 0, 0)
 	WHITE = (255, 255, 255)
@@ -321,6 +322,7 @@ def main():
 		
 		
 	def mainLoop():
+		global current_chart_index, chart_list
 		while True:
 			for each_event in pygame.event.get():
 				if each_event.type == KEYDOWN:
