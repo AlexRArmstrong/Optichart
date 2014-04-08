@@ -97,6 +97,10 @@ def main():
 #				continue
 			else:
 				# Get the line.
+				# split_line = each_line.split(':')
+				# Then would parse the results, starting with the first one beign
+				# a ratio, next letters, and repeiting. Might be able to add
+				# control characters, but that would then require reworking the display function.
 				ratio, text = each_line.split(':')
 				ratio = ratio.strip()
 				text = text.strip()
@@ -141,6 +145,99 @@ def main():
 		vertical_dpi_size = vertical_inch_size * dpi
 		return vertical_dpi_size
 		
+	def disp2(chart_name):
+		'''
+		Takes a chart, loads and displays it.
+		'''
+		global lane_length, dpi
+		global big_surf, top_left, viewport
+		
+		# Some initial values.
+		size = 10
+		position = [XMAX / 2, YMAX / 2]
+		visible_size = 0
+		visible_lines = []
+		
+		
+		# Clear the screen.
+		screen.fill(WHITE)
+		
+		# Read the chart and make an array with the data.
+		chart = readChart(chart_name)
+		
+		
+		all_rendered_text = []
+		for each_line in chart:
+			# Get the scaling factor and calculate the size in pixels
+			size_factor = each_line[SCALE_FACTOR]
+			line_size = calculateSize(lane_length, size_factor, dpi)
+			# Create a font.
+			font = pygame.font.Font(full_font_name, int(line_size))
+			# Get the text to render.
+			text = each_line[TEXT]
+			# Create a rendered surface.
+			text_surface = font.render(text, True, BLACK, WHITE)
+			# Add the rendered surface to the list of all surfaces.
+			all_rendered_text.append(text_surface)
+		
+		# Calculate the space between each line - a 20/80 line.
+		line_spacing = calculateSize(lane_length, (80/20), dpi)
+		
+		# Find the total size of the chart.
+		total_chart_heigh_px = 0
+		total_chart_width_px = 0
+		for each_line in all_rendered_text:
+			ln_width, ln_height = each_line.get_size()
+			total_chart_heigh_px = total_chart_heigh_px + ln_height + line_spacing
+			if total_chart_width_px < ln_width:
+				total_chart_width_px = ln_width
+		# Make a big surface.
+		#total_size = [total_chart_width_px, total_chart_heigh_px]
+		total_size = [XMAX, total_chart_heigh_px]
+		big_surf = pygame.Surface(total_size)
+	#	big_surf.fill(WHITE)
+		
+		# Now render all the text to the big surface.
+		position = [XMAX / 2, 0]
+		for each_line in all_rendered_text:
+			x_r, y_r = each_line.get_size()
+			position[0] = position[0] - (x_r / 2)
+			#position[1] = position[1] - (y_r / 2)
+			
+			big_surf.blit(each_line, position)
+			position[0] = XMAX / 2
+	#			print 'sur getsize', y_r
+	#			print 'get ht', font.get_height()
+	#			print 'line size', font.get_linesize()
+	#			print 'font size', font.size('E')
+			position[1] += y_r + line_spacing
+			
+		top_left = [0, 0]
+		viewport = pygame.Rect(0, -line_spacing, XMAX, YMAX)
+		screen.blit(big_surf, top_left, viewport)
+			
+	#	flip_surf = pygame.transform.flip(screen, True, False)
+	#	screen.blit(flip_surf, (0, 0))
+		
+		pygame.display.update()
+		
+		
+	def moveUp():
+		global big_surf, top_left, viewport
+		jump_dist = 40 # Pix
+		screen.fill(WHITE)
+		viewport = viewport.move(0, jump_dist)
+		screen.blit(big_surf, top_left, viewport)
+		pygame.display.update()
+		
+	def moveDown():
+		global big_surf, top_left, viewport
+		jump_dist = -40 # Pix
+		screen.fill(WHITE)
+		viewport = viewport.move(0, jump_dist)
+		screen.blit(big_surf, top_left, viewport)
+		pygame.display.update()
+		
 	def display(chart_name):
 		'''
 		Takes a chart, loads and displays it.
@@ -174,8 +271,10 @@ def main():
 			text_surface = font.render(text, True, BLACK, WHITE)
 			# Add the rendered surface to the list of all surfaces.
 			all_rendered_text.append(text_surface)
-			
+		
+		# Calculate the space between each line - a 20/80 line.
 		line_spacing = calculateSize(lane_length, (80/20), dpi)
+		
 		# Now figure out how many lines we are going to display.
 		for each_line in all_rendered_text:
 			print visible_size
@@ -188,7 +287,10 @@ def main():
 				visible_size -= each_line.get_height()
 				visible_size -= line_spacing
 				break
+				
 		
+			
+
 		
 		# Set up the vertical centering.
 		extra_white_space = height_px - visible_size
@@ -224,24 +326,31 @@ def main():
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
-					if each_event.dict['key'] == 27:
+					if each_event.dict['key'] == 27:		# Esc Quits
 						exit()
-					elif each_event.dict['key'] == 113:
+					elif each_event.dict['key'] == 113:		# Q Quits
 						exit()
-					elif each_event.dict['key'] == 273:
-						print 'UP' #Debug
+					elif each_event.dict['key'] == 275:		# Right Arrow Next Chart
+						print 'RIGHT' #Debug
 						current_chart_index += 1
 						if current_chart_index >= max_chart_index:
 							current_chart_index = max_chart_index
 						chart_name = chart_list[current_chart_index]
 						display(chart_name)
-					elif each_event.dict['key'] == 274:
-						print 'DOWN' # Debug
+					elif each_event.dict['key'] == 276:		# Left Arrow Prev. Chart
+						print 'LEFT' # Debug
 						current_chart_index -= 1
 						if current_chart_index <= 0:
 							current_chart_index = 0
 						chart_name = chart_list[current_chart_index]
 						display(chart_name)
+					elif each_event.dict['key'] == 273:		# Up Arrow Scroll Up
+						print 'UP' # Debug
+						moveUp()
+						
+					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
+						print 'DOWN' # Debug
+						moveDown()
 						# Add additional key presses here...
 				if each_event.type == QUIT:
 					exit()
@@ -309,13 +418,15 @@ def main():
 	# Calculate the vertical dpi.
 	width_px, height_px = screen.get_size()
 	XMAX = width_px
+	YMAX = height_px
 	print height_px #DEBUG
 	print monitor_vert_size
 	dpi = height_px / monitor_vert_size
 	print 'dpi:', dpi
 	
 	# Show the first chart.
-	display(chart_name)
+	#display(chart_name)
+	disp2(chart_name)
 	
 	# Call the control loop
 	mainLoop()
