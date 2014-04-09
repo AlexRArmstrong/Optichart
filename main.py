@@ -199,7 +199,7 @@ def main():
 		#total_size = [total_chart_width_px, total_chart_heigh_px]
 		total_size = [XMAX, total_chart_heigh_px]
 		big_surf = pygame.Surface(total_size)
-	#	big_surf.fill(WHITE)
+		big_surf.fill(WHITE)
 		
 		# Now render all the text to the big surface.
 		position = [XMAX / 2, 0]
@@ -215,13 +215,14 @@ def main():
 	#			print 'line size', font.get_linesize()
 	#			print 'font size', font.size('E')
 			position[1] += y_r + line_spacing
-			
+		
+		# This creates mirror writing.
+	#	flip_surf = pygame.transform.flip(big_surf, True, False)
+	#	big_surf.blit(flip_surf, (0, 0))
+		
 		top_left = [0, 0]
 		viewport = pygame.Rect(0, -line_spacing, XMAX, YMAX)
 		screen.blit(big_surf, top_left, viewport)
-			
-	#	flip_surf = pygame.transform.flip(screen, True, False)
-	#	screen.blit(flip_surf, (0, 0))
 		
 		pygame.display.update()
 		
@@ -341,14 +342,14 @@ def main():
 						if current_chart_index >= max_chart_index:
 							current_chart_index = max_chart_index
 						chart_name = chart_list[current_chart_index]
-						display(chart_name)
+						disp2(chart_name)
 					elif each_event.dict['key'] == 276:		# Left Arrow Prev. Chart
 						print 'LEFT' # Debug
 						current_chart_index -= 1
 						if current_chart_index <= 0:
 							current_chart_index = 0
 						chart_name = chart_list[current_chart_index]
-						display(chart_name)
+						disp2(chart_name)
 					elif each_event.dict['key'] == 273:		# Up Arrow Scroll Up
 						print 'UP' # Debug
 						moveUp()
