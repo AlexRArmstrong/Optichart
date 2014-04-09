@@ -48,7 +48,7 @@ def main():
 	YMAX = 1024
 		
 	# Chart array.
-	chart = []
+#	chart = [] -- I had this as a sortof global, I don't think it needs to be.
 	
 	monitor_vert_size = 11.0 # Inches
 	lane_length = 240.0 # Inches
@@ -79,6 +79,8 @@ def main():
 	def readChart(chart_name):
 		'''
 		'''
+		# Chart array.
+		chart = []
 		file_handle = open(chart_name, 'r')
 		for each_line in file_handle:
 			if each_line.startswith('#'):
@@ -166,7 +168,8 @@ def main():
 		# Read the chart and make an array with the data.
 		chart = readChart(chart_name)
 		
-		
+		# TODO: Need to render each letter with space between to make columns
+		# correctly sized.
 		all_rendered_text = []
 		for each_line in chart:
 			# Get the scaling factor and calculate the size in pixels
