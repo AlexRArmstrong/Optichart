@@ -7,10 +7,40 @@
 # Currently we use a Sloan font, this could be 
 # specified as a per file or even a per line item if needed.
 
-20/100 : E | E
-20/70 : NZ | ZN
-20/60 : VLS | SLV
-20/50 : UFVP | PVFU
-20/40 : NSTRF | FRTSN
-20/30 : RCLGTB | BTGLCR
-20/20 : HTVPFRU | URFPVTH
+20/200 : E
+20/100 : FP
+20/70 : TOZ
+20/50 : LPED
+20/40 : PECFD
+20/30 : EDFCZP
+20/25 : FELOPZD
+20/20 : DFFPOTEC
+20/15 : LEFODPCT
+20/13 : FDPLTCEO
+20/10 : PEZOLCFTD
+
+#20/100 : E | 20/20 : U | 20/100 : E
+#20/70 : NZ | 20/20 : U | 20/70 : ZN
+#20/60 : VLS | 20/20 : U | 20/60 : SLV
+#20/50 : UFVP | 20/20 : U | 20/500 : PVFU
+#20/40 : NSTRF | 20/20 : U | 20/40 : FRTSN
+#20/30 : RCLGTB | 20/20 : U | 20/30 : BTGLCR
+#20/20 : HTVPFRU | 20/20 : U | 20/20 : URFPVTH
+
+#Font = Snellen.ttf
+#20/200 : R*D
+#20/100 : Z*VNE
+#20/80 : GTY*D
+#!
+#Font = Sloan.ttf
+#20/60 : R*NZP6 
+#20/40 : GP*FOHR4
+#20/30 : SHNYTZ*U3
+#20/30 : NFCU*VSRU
+#20/25 : YHTP*GN25
+#!
+#20/25 : ZGEVRND*OS
+#20/20 : RDGZUP*NS2
+#20/20 : FSH*DVRGUE
+#20/15 : DHRU*SPEI5
+#20/15 : PSNE*ZUDGP
