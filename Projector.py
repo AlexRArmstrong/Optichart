@@ -16,7 +16,7 @@
 #    Boston, MA  02110-1301, USA.                                       #
 #                                                                       #
 #    ---                                                                #
-#    Copyright (C) 2013, Alex Armstrong <AlexRArmstrong@gmail.com>      #
+#    Copyright (C) 2014, Alex Armstrong <AlexRArmstrong@gmail.com>      #
 #                                                                       #
 #########################################################################
 
