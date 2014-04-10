@@ -26,12 +26,12 @@
 # functionLikeThis
 # variables_like_this
 
+import sys
 import os
 import math
 import pygame
 
 from pygame.locals import KEYDOWN, QUIT
-from sys import exit
 
 SNELLEN_RATIO, TEXT, SCALE_FACTOR = range(3)
 
@@ -44,6 +44,10 @@ def main():
 	
 	BLACK = (0, 0, 0)
 	WHITE = (255, 255, 255)
+	RED = (255, 0, 0)
+	GREEN = (0, 255, 0)
+	BLUE = (0, 0, 255)
+	
 	XMAX = 1248
 	YMAX = 1024
 		
@@ -333,9 +337,9 @@ def main():
 					print each_event.dict # Debugging
 					print each_event # Debugging
 					if each_event.dict['key'] == 27:		# Esc Quits
-						exit()
+						sys.exit()
 					elif each_event.dict['key'] == 113:		# Q Quits
-						exit()
+						sys.exit()
 					elif each_event.dict['key'] == 275:		# Right Arrow Next Chart
 						print 'RIGHT' #Debug
 						current_chart_index += 1
@@ -359,7 +363,7 @@ def main():
 						moveDown()
 						# Add additional key presses here...
 				if each_event.type == QUIT:
-					exit()
+					sys.exit()
 					
 					
 	# Set default directories and files.
@@ -407,6 +411,7 @@ def main():
 	# to be the current size.  We then figure out what dpi we are dealing with
 	# based on a physical measurement entered in the config file and the returned
 	# SDL surface size.
+	# May need (on some systems) to actually specifiy what size we want.
 	
 	# Create a screen.
 	# Calling set_mode with zeros will return a surface the same size as the
