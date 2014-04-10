@@ -45,6 +45,49 @@ BLUE = (0, 0, 255)
 XMAX = 1248
 YMAX = 1024
 
+class Section(object):
+	'''
+	A section of a line.  Consists of a Snellen Ratio and text.  Initilize it
+	by passing a Snellen Ratio and text.  If nothing is passed in, it will 
+	initilize with empty ratio and text fields.
+	'''
+	def __init__(self, ratio = None, text = None):
+		self.snellen_ratio = ratio
+		self.text = text
+	
+	def snellenRatio(self):
+		'''
+		Returns the Snellen Ratio.
+		'''
+		return self.snellen_ratio
+		
+	def text(self):
+		'''
+		Returns the text.
+		'''
+		return self.text
+		
+	def setSnellenRatio(self, ratio):
+		'''
+		Sets the Snellen Ratio.  Takes the ratio to set, eg. 20/100.  Returns
+		True on success, Flase on failure.
+		'''
+		try:
+			self.snellen_ratio = ratio
+			return True
+		except:
+			return False
+		
+	def setText(self, text):
+		'''
+		Sets the sections text.  Returns True on success, False on failure.
+		'''
+		try:
+			self.text = text
+			return True
+		except:
+			return False
+
 class Line(object):
 	'''
 	A record of each line in a chart file.
