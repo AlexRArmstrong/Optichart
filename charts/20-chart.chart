@@ -1,11 +1,21 @@
 # Chart file for Optichart.  
 # We start with the chart named 01 and work our way up.
+# 
 # Use #'s for comments, Blank lines are ignored.
-# By default each line is centered.
-# Each line is of the format:
-# [Snellen Ratio] : [Text]
-# Currently we use a Sloan font, this could be 
-# specified as a per file or even a per line item if needed.
+# 
+# Grammer:
+# # - Comments
+# : - Seperates snellen ration and text
+# * - Indicates default letter to display on centering button press, if not 
+# 		specified the first letter is used.
+# ! - Denotes blocks or pages of text.
+# | - Indicates a column break.
+# '' or "" - Indicates the text to display, only required if spaces are to be used.
+# Font = filename.ttf - Specify a font to use, the program will look in the
+#		current directory, then the font directory.  Can specify a full path name
+#		This stays the current font till over ridden or a new chart is loaded.
+#
+# By default each column is centered based on the number of columns in the line.
 
 20/200 : E
 20/100 : FP
@@ -18,29 +28,3 @@
 20/15 : LEFODPCT
 20/13 : FDPLTCEO
 20/10 : PEZOLCFTD
-
-#20/100 : E | 20/20 : U | 20/100 : E
-#20/70 : NZ | 20/20 : U | 20/70 : ZN
-#20/60 : VLS | 20/20 : U | 20/60 : SLV
-#20/50 : UFVP | 20/20 : U | 20/500 : PVFU
-#20/40 : NSTRF | 20/20 : U | 20/40 : FRTSN
-#20/30 : RCLGTB | 20/20 : U | 20/30 : BTGLCR
-#20/20 : HTVPFRU | 20/20 : U | 20/20 : URFPVTH
-
-#Font = Snellen.ttf
-#20/200 : R*D
-#20/100 : Z*VNE
-#20/80 : GTY*D
-#!
-#Font = Sloan.ttf
-#20/60 : R*NZP6 
-#20/40 : GP*FOHR4
-#20/30 : SHNYTZ*U3
-#20/30 : NFCU*VSRU
-#20/25 : YHTP*GN25
-#!
-#20/25 : ZGEVRND*OS
-#20/20 : RDGZUP*NS2
-#20/20 : FSH*DVRGUE
-#20/15 : DHRU*SPEI5
-#20/15 : PSNE*ZUDGP

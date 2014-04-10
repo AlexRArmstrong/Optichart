@@ -1,11 +1,21 @@
 # Chart file for Optichart.  
 # We start with the chart named 01 and work our way up.
+# 
 # Use #'s for comments, Blank lines are ignored.
-# By default each line is centered.
-# Each line is of the format:
-# [Snellen Ratio] : [Text]
-# Currently we use a Sloan font, this could be 
-# specified as a per file or even a per line item if needed.
+# 
+# Grammer:
+# # - Comments
+# : - Seperates snellen ration and text
+# * - Indicates default letter to display on centering button press, if not 
+# 		specified the first letter is used.
+# ! - Denotes blocks or pages of text.
+# | - Indicates a column break.
+# '' or "" - Indicates the text to display, only required if spaces are to be used.
+# Font = filename.ttf - Specify a font to use, the program will look in the
+#		current directory, then the font directory.  Can specify a full path name
+#		This stays the current font till over ridden or a new chart is loaded.
+#
+# By default each column is centered based on the number of columns in the line.
 
 20/200 : RD
 20/100 : ZVNE
