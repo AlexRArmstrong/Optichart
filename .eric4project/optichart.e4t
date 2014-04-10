@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project optichart -->
-<!-- Saved: 2014-04-03, 19:22:47 -->
+<!-- Saved: 2014-04-09, 03:23:38 -->
 <Tasks version="4.2">
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Need to render each letter with space between to make columns</Summary>
+    <Description></Description>
+    <Created>2014-04-08, 22:39:07</Created>
+    <Resource>
+      <Filename>main.py</Filename>
+      <Linenumber>171</Linenumber>
+    </Resource>
+  </Task>
 </Tasks>
