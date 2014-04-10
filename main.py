@@ -19,7 +19,7 @@
 #    Copyright (C) 2013, Alex Armstrong <AlexRArmstrong@gmail.com>      #
 #                                                                       #
 #########################################################################
-# 
+
 # Naming convention:
 # CONSTANTS
 # ClassesLikeThis
@@ -33,7 +33,17 @@ import pygame
 
 from pygame.locals import KEYDOWN, QUIT
 
+# Define global constants.
 SNELLEN_RATIO, TEXT, SCALE_FACTOR = range(3)
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+	
+XMAX = 1248
+YMAX = 1024
 
 def main():
 	'''
