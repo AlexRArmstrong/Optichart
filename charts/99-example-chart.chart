@@ -14,6 +14,8 @@
 # Font = filename.ttf - Specify a font to use, the program will look in the
 #		current directory, then the font directory.  Can specify a full path name
 #		This stays the current font till over ridden or a new chart is loaded.
+# LineSize = Snellen ratio - Indicates the line spacing to use for the following
+#		lines.  Current till over ridden or new chart is loaded.
 #
 # By default each column is centered based on the number of columns in the line.
 #
