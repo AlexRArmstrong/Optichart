@@ -67,6 +67,19 @@ class Section(object):
 		'''
 		return self.text
 		
+	def scaleFactor(self):
+		'''
+		Returns the decmial scale factor- the inverse of the Snellen ratio.  If
+		no Snellen ratio has been defined returns False.
+		'''
+		if not self.snellen_ratio:
+			return False
+		numerator, denomerator = self.snellen_ratio.split('/')
+		numerator = float(numerator)
+		denomerator = float(denomerator)
+		scale_factor = denomerator / numerator
+		return scale_factor
+		
 	def setSnellenRatio(self, ratio):
 		'''
 		Sets the Snellen Ratio.  Takes the ratio to set, eg. 20/100.  Returns
