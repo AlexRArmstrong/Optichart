@@ -427,5 +427,35 @@ class Projector(object):
 		#mainLoop() - not here, should call this from where class is created.
 		# - this would imideatly take over and that might not be desirable.
 		
+	def readConfig(self):
+		'''
+		Read the configuration file. Should only be called from the init function.
+		'''
+		file_handle = open('config.conf', 'r')
+		for each_line in file_handle:
+			each_line = each_line.strip()
+			if each_line.startswith('#'):
+				continue
+			elif each_line.isspace():
+				continue
+			elif each_line.startswith('MonitorSize'):
+				self.monitor_vert_size = each_line.split('=')[1].strip()
+				self.monitor_vert_size = float(self.monitor_vert_size) / 24.5 # Convert mm to inches.
+			elif each_line.startswith('LaneLength'):
+				self.lane_length = each_line.split('=')[1].strip()
+				self.lane_length = float(self.lane_length) / 24.5 # Convert mm to inches.
+			elif each_line.startswith('ChartDir'):
+				self.chart_dir = each_line.split('=')[1].strip()
+			elif each_line.startswith('FontDir'):
+				self.font_dir = each_line.split('=')[1].strip()
+			elif each_line.startswith('DefaultFont'):
+				self.default_font = each_line.split('=')[1].strip()
+			else:
+				print "I don't know how to handle this line: \n%s" %(each_line)
+				continue
+		
+		
+		
+	def display(self):
 		pass
 		
