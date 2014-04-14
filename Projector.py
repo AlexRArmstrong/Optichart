@@ -350,5 +350,82 @@ class Projector(object):
 	A digital projector.
 	'''
 	def __init__(self):
+		'''
+		Constructor.
+		'''
+		# Set defaults.
+		# These are overwritten by settings in the config file.
+		self.chart_dir = 'charts'
+		
+		self.font_dir = 'fonts'
+		self.default_font = 'Sloan.ttf'
+		
+		self.monitor_vert_size = 287
+		self.lane_length = 6096
+		
+		# Flag for background color - 0 = White, 1 = Red/Green.
+		self.background_flag = 0
+		
+		# Read the config file - possibly overwriting the defaults.
+		readConfig()
+		
+		self.start_dir = os.getcwd()
+		
+		# Set up the default font.
+		self.full_font_name = os.path.join(self.start_dir, self.font_dir, self.default_font)
+		
+		#Find the chart files.
+		full_chart_dir = os.path.join(start_dir, chart_dir)
+		# Change to the chart directory - need to be in this directory or else need
+		# to use full path names and that's annoying.
+		os.chdir(full_chart_dir)
+		self.chart_list = os.listdir(full_chart_dir)
+		self.chart_list.sort()
+		self.current_chart_index = 0
+		self.max_chart_index = len(self.chart_list) - 1 # Need minus one, 'cause count from zero!
+		chart_name = self.chart_list[current_chart_index]
+		
+		# Initilize pygame.
+		pygame.init()
+		
+		# Find DPI
+		# Some versions of xrandr will return a resolution in pixles and a size in mm.
+		# However this dosesn't work on all systems.
+		# So we are going to ask SDL for a full screen window at whatever size happens
+		# to be the current size.  We then figure out what dpi we are dealing with
+		# based on a physical measurement entered in the config file and the returned
+		# SDL surface size.
+		# May need (on some systems) to actually specifiy what size we want.
+		
+		# Create a screen.
+		# Calling set_mode with zeros will return a surface the same size as the
+		# current display.
+		screen = pygame.display.set_mode((0, 0), pygame.NOFRAME)
+	#	screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+	#	screen = pygame.display.set_mode((XMAX, YMAX), pygame.FULLSCREEN)
+	#	screen = pygame.display.set_mode((XMAX, YMAX))
+		
+		# Fill the screen with a while background.
+		screen.fill(WHITE)
+		# Must call update to actually display anything.
+		pygame.display.update()
+		
+		# Calculate the vertical dpi.
+		width_px, height_px = screen.get_size()
+		XMAX = width_px
+		YMAX = height_px
+		print height_px #DEBUG
+		print monitor_vert_size
+		dpi = height_px / monitor_vert_size
+		print 'dpi:', dpi
+		
+		# Show the first chart.
+		#display(chart_name)
+		display(chart_name)
+		
+		# Call the control loop
+		#mainLoop() - not here, should call this from where class is created.
+		# - this would imideatly take over and that might not be desirable.
+		
 		pass
 		
