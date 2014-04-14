@@ -41,6 +41,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
 	
 XMAX = 1248
 YMAX = 1024
@@ -50,7 +51,7 @@ def main():
 	Initilize the program and start the main loop.
 	'''
 	global monitor_vert_size, lane_length, chart, dpi
-	global current_chart_index, chart_list
+	global current_chart_index, chart_list, red_green
 	
 	BLACK = (0, 0, 0)
 	WHITE = (255, 255, 255)
@@ -194,7 +195,8 @@ def main():
 			# Get the text to render.
 			text = each_line[TEXT]
 			# Create a rendered surface.
-			text_surface = font.render(text, True, BLACK, WHITE)
+			text_surface = font.render(text, True, BLACK, YELLOW)
+			text_surface.set_colorkey(YELLOW)
 			# Add the rendered surface to the list of all surfaces.
 			all_rendered_text.append(text_surface)
 		
@@ -254,6 +256,22 @@ def main():
 		jump_dist = -40 # Pix
 		screen.fill(WHITE)
 		viewport = viewport.move(0, jump_dist)
+		screen.blit(big_surf, top_left, viewport)
+		pygame.display.update()
+		
+	def togleRedGreen():
+		global big_surf, top_left, viewport, red_green
+		big_surf.set_colorkey(WHITE)
+		if not red_green:
+			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
+			right_rect = pygame.Rect(XMAX / 2, 0,  XMAX, YMAX)
+			screen.fill(RED, left_rect)
+			screen.fill(GREEN, right_rect)
+			red_green = 1
+		else:
+			screen.fill(WHITE)
+			red_green = 0
+			
 		screen.blit(big_surf, top_left, viewport)
 		pygame.display.update()
 		
@@ -371,6 +389,9 @@ def main():
 					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
 						print 'DOWN' # Debug
 						moveDown()
+						
+					elif each_event.dict['key'] == 114:
+						togleRedGreen()
 						# Add additional key presses here...
 				if each_event.type == QUIT:
 					sys.exit()
@@ -386,6 +407,8 @@ def main():
 	default_font = 'Sloan.ttf'
 	
 	start_dir = os.getcwd()
+	
+	red_green = 0
 	
 	# Read the config file.
 	readConfig()
