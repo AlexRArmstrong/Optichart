@@ -272,7 +272,7 @@ class Chart(object):
 			return False
 		# TODO: Is this a good way to do return values?
 		
-	def readChartFile(file_handle):
+	def readChartFile(self, file_handle):
 		'''
 		Here we do the heavy lifting of parsing the chart file. Should only be
 		called from the constructor, and takes a file handle as argument.
