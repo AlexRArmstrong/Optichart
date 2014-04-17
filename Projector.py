@@ -512,3 +512,7 @@ class Projector(object):
 					sys.exit()
 		
 	
+if __name__ == '__main__':
+	# If we are executed, we start up a projector.
+	projector = Projector()
+	projector.eventLoop()
