@@ -217,7 +217,7 @@ class Chart(object):
 		self.pages = []
 		
 		file_handle = open(self.chart_name, 'r')
-		readChartFile(file_handle)
+		self.readChartFile(file_handle)
 		file_handle.close()
 	
 	def lines(self):
