@@ -313,7 +313,7 @@ class Chart(object):
 				# Check for multiple columns.
 				line_sections = line.split('|')
 				for each_section in line_sections:
-					ratio, text = each_line.split(':')
+					ratio, text = each_section.split(':')
 					ratio = ratio.strip()
 					text = text.strip()
 					if text.startswith('"') or text.startswith("'"):
