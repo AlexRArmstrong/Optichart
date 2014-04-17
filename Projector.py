@@ -468,7 +468,7 @@ class Projector(object):
 	def display(self):
 		pass
 	
-	def EventLoop(self):
+	def eventLoop(self):
 		'''
 		'''
 		global current_chart_index, chart_list
@@ -478,8 +478,10 @@ class Projector(object):
 					print each_event.dict # Debugging
 					print each_event # Debugging
 					if each_event.dict['key'] == 27:		# Esc Quits
+						pygame.quit()
 						sys.exit()
 					elif each_event.dict['key'] == 113:		# Q Quits
+						pygame.quit()
 						sys.exit()
 					elif each_event.dict['key'] == 275:		# Right Arrow Next Chart
 						print 'RIGHT' #Debug
