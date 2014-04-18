@@ -56,7 +56,7 @@ class Section(object):
 	'''
 	def __init__(self, ratio = None, text = None):
 		self.snellen_ratio = ratio
-		self.text = text
+		self._text = text
 	
 	def snellenRatio(self):
 		'''
@@ -68,7 +68,7 @@ class Section(object):
 		'''
 		Returns the text.
 		'''
-		return self.text
+		return self._text
 		
 	def scaleFactor(self):
 		'''
@@ -99,7 +99,7 @@ class Section(object):
 		Sets the sections text.  Returns True on success, False on failure.
 		'''
 		try:
-			self.text = text
+			self._text = text
 			return True
 		except:
 			return False
