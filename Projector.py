@@ -116,7 +116,7 @@ class Line(object):
 	'''
 	def __init__(self, sections = [], def_chr = 0, font = None, line_space = '20/80'):
 		# Sections is a list of all the sections that make up a line.
-		self.sections = sections
+		self._sections = sections
 		
 		# The font for this line, if none should use default font.
 		self.font_name = font
@@ -133,7 +133,7 @@ class Line(object):
 		'''
 		Return the sections that make up the line.
 		'''
-		return self.sections
+		return self._sections
 		
 	def font(self):
 		'''
@@ -194,15 +194,15 @@ class Line(object):
 		'''
 		# TODO: Decide on return value: True/False or the new list?
 		if position:
-			self.sections.insert(position, section)
+			self._sections.insert(position, section)
 		else:
-			self.sections.append(section)
+			self._sections.append(section)
 			
 	def removeSection(self, section_position):
 		'''
 		Remove a ratio:text section at position section_position.
 		'''
-		del self.sections[section_position]
+		del self._sections[section_position]
 		# TODO: Decide on return value: True/False or the new list?
 		
 		
