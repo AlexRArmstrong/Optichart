@@ -29,6 +29,7 @@
 import sys
 import os
 import math
+import copy
 import pygame
 
 from pygame.locals import KEYDOWN, QUIT
@@ -213,8 +214,8 @@ class Chart(object):
 	'''
 	def __init__(self, chart_name):
 		self.chart_name = chart_name
-		self.lines = []
-		self.pages = []
+		self._lines = []
+		self._pages = []
 		
 		file_handle = open(self.chart_name, 'r')
 		self.readChartFile(file_handle)
@@ -224,30 +225,34 @@ class Chart(object):
 		'''
 		Return the lines in the chart.
 		'''
-		return self.lines
+		return self._lines
 		
 	def addLine(self, line, pos = None):
 		'''
 		Adds a line to the list of lines, at optional position, pos.
 		'''
+		# Note use of copy.copy() here.  We want to make sure that each line
+		# item is it's own.  This prevents us from getting a whole chart filled
+		# with lines that reference the same memory location.
+		
 		# TODO: Decide on return value: True/False or the new list?
 		if pos:
-			self.lines.insert(pos, line)
+			self._lines.insert(pos, copy.copy(line))
 		else:
-			self.lines.append(line)
+			self._lines.append(copy.copy(line))
 		
 	def removeLine(self, pos):
 		'''
 		Removes the line at position pos.
 		'''
 		# TODO: Decide on return value: True/False or the new list?
-		del self.lines[pos]
+		del self._lines[pos]
 	
 	def pages(self):
 		'''
 		Return the list of pages in the chart.
 		'''
-		return self.pages
+		return self._pages
 		
 	def addPage(self, pg):
 		'''
@@ -255,7 +260,7 @@ class Chart(object):
 		False otherwise.
 		'''
 		try:
-			self.pages.append(pg)
+			self._pages.append(pg)
 			return True
 		except:
 			return False
@@ -266,7 +271,7 @@ class Chart(object):
 		False otherwise.
 		'''
 		try:
-			del self.pages[pos]
+			del self._pages[pos]
 			return Ture
 		except:
 			return False
