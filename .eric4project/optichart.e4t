@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project optichart -->
-<!-- Saved: 2014-04-09, 03:23:38 -->
+<!-- Saved: 2014-04-18, 23:37:02 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Need to render each letter with space between to make columns</Summary>
     <Description></Description>
-    <Created>2014-04-08, 22:39:07</Created>
+    <Created>2014-04-18, 18:23:20</Created>
     <Resource>
       <Filename>main.py</Filename>
-      <Linenumber>171</Linenumber>
+      <Linenumber>186</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>196</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>207</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>245</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>255</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Is this a good way to do return values?</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>285</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Test the handeling of font pathing.</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>391</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Need to render each letter with space between to make columns</Summary>
+    <Description></Description>
+    <Created>2014-04-18, 18:23:30</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>504</Linenumber>
     </Resource>
   </Task>
 </Tasks>
