@@ -375,8 +375,9 @@ class Projector(object):
 		self.font_dir = 'fonts'
 		self.default_font = 'Sloan.ttf'
 		
-		self.monitor_vert_size = 287
-		self.lane_length = 6096
+		# Dimensions in mm.
+		self.monitor_vert_size = 287.0
+		self.lane_length = 6096.0
 		
 		# Flag for background color - 0 = White, 1 = Red/Green.
 		self.background_flag = 0
@@ -387,6 +388,7 @@ class Projector(object):
 		self.start_dir = os.getcwd()
 		
 		# Set up the default font.
+		# TODO: Test the handeling of font pathing.
 		self.full_font_name = os.path.join(self.start_dir, self.font_dir, self.default_font)
 		
 		#Find the chart files.
