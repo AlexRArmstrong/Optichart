@@ -206,6 +206,13 @@ class Line(object):
 		del self._sections[section_position]
 		# TODO: Decide on return value: True/False or the new list?
 		
+	def clearSections(self):
+		'''
+		Clear the line of ratio/text sections, but perserving the formating,
+		spacing, font and default character.
+		'''
+		self._sections = []
+		
 		
 class Chart(object):
 	'''
