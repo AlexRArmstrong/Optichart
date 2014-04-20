@@ -349,8 +349,11 @@ class Chart(object):
 				# Done parsing line. Now add it to the chart.
 				# Note we do NOT creat a new line, as this would clear the spacing
 				# and font and those are only cleared if specified again or a new
-				# chart file is loaded.
+				# chart file is loaded. BUT we DO clear the line sections - the
+				# text and ratios or else we continue appending and get all sections
+				# is all the lines.
 				self.addLine(current_line)
+				current_line.clearSections()
 				continue
 			else:
 				print "I don't know how to handle this line: \n#%i, %s" %(i, all_lines[i])
