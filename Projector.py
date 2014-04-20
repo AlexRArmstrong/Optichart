@@ -531,5 +531,13 @@ class Projector(object):
 	
 if __name__ == '__main__':
 	# If we are executed, we start up a projector.
-	projector = Projector()
-	projector.eventLoop()
+	#projector = Projector()
+	#projector.eventLoop()
+	cn = '/home/alex/programing/optichart/charts/10-chart.chart'
+	chart = Chart(cn)
+	print chart
+	for el in chart.lines():
+		print el
+		for es in el.sections():
+			print es
+			print es.text()
