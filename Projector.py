@@ -171,7 +171,7 @@ class Line(object):
 		
 	def setFont(self, font):
 		'''
-		Set the font name for the line to font.  Return Ture on success, False
+		Set the font name for the line to font.  Return True on success, False
 		otherwise.
 		'''
 		try:
@@ -293,7 +293,7 @@ class Chart(object):
 		'''
 		try:
 			del self._pages[pos]
-			return Ture
+			return True
 		except:
 			return False
 		# TODO: Is this a good way to do return values?
