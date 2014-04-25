@@ -156,6 +156,19 @@ class Line(object):
 		'''
 		return self.line_spaceing
 		
+	def lineSpaceingScaleFactor(self):
+		'''
+		Returns the decmial scale factor- the inverse of the Snellen ratio.  If
+		no Snellen ratio has been defined returns False.
+		'''
+		if not self.line_spaceing:
+			return False
+		numerator, denomerator = self.line_spaceing.split('/')
+		numerator = float(numerator)
+		denomerator = float(denomerator)
+		scale_factor = denomerator / numerator
+		return scale_factor
+		
 	def setFont(self, font):
 		'''
 		Set the font name for the line to font.  Return Ture on success, False
