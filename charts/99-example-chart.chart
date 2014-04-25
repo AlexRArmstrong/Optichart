@@ -12,7 +12,7 @@
 # | - Indicates a column break.
 # '' or "" - Indicates the text to display, only required if spaces are to be used.
 # Font = filename.ttf - Specify a font to use, the program will look in the
-#		current directory, then the font directory.  Can specify a full path name
+#		font directory.  Can specify a full path name to use as well.
 #		This stays the current font till over ridden or a new chart is loaded.
 # LineSize = Snellen ratio - Indicates the line spacing to use for the following
 #		lines.  Current till over ridden or new chart is loaded.
