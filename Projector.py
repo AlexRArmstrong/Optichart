@@ -138,7 +138,8 @@ class Line(object):
 		
 	def font(self):
 		'''
-		Return the font use for this line, if any.
+		Return the font use for this line.  If no font has been specified,
+		it will return None.
 		'''
 		return self.font_name
 		
@@ -151,7 +152,7 @@ class Line(object):
 		
 	def lineSpaceing(self):
 		'''
-		Return the line spacing ratio.
+		Return the line spacing snellen ratio.
 		'''
 		return self.line_spaceing
 		
