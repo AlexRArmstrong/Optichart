@@ -446,8 +446,7 @@ class Slide(object):
 		line_numbers = range(len(all_lines))
 		slide_width = self.width # the width of the slide display area from config file.
 		
-		for line_i in line_numbers:
-			current_line = all_lines[line_i]
+		for current_line in all_lines:
 			line_font = current_line.font()
 			full_font_name = self.fixFontName(line_font)
 			num_sections = len(current_line.sections())
