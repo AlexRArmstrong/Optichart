@@ -72,6 +72,41 @@ class Slide(object):
 		except:
 			return False
 	
+	def slideWidth(self):
+		'''
+		Returns the slide width in pixels.
+		'''
+		return self._width
+	
+	def setSlideWidth(self, width):
+		'''
+		Set the width for the slide to width (int). This is the
+		number of pixels wide the slide's display area is.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._width = int(width)
+			return True
+		except:
+			return False
+	
+	def slideHeight(self):
+		'''
+		Returns the height of the slide.
+		'''
+		return self._height
+	
+	def setSlideHeight(self, h):
+		'''
+		Set the height of the slides display area.
+		Takes the height in pixels to set.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._height = int(h)
+			return True
+		except:
+			return False
 	def dpi(self):
 		'''
 		Returns the slide's current dpi.
