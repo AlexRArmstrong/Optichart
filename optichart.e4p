@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2014-04-10, 02:16:56 -->
+<!-- Saved: 2014-04-25, 20:29:16 -->
 <!-- Copyright (C) 2014 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
@@ -15,6 +15,10 @@
     <Source>main.py</Source>
     <Source>tt.py</Source>
     <Source>Projector.py</Source>
+    <Source>Section.py</Source>
+    <Source>Line.py</Source>
+    <Source>Chart.py</Source>
+    <Source>Slide.py</Source>
   </Sources>
   <Forms>
   </Forms>
@@ -34,6 +38,7 @@
     <Other>charts/60-chart.chart</Other>
     <Other>config.conf</Other>
     <Other>charts/99-example-chart.chart</Other>
+    <Other>doc</Other>
   </Others>
   <MainScript>main.py</MainScript>
   <Vcs>
@@ -60,6 +65,12 @@
               <list>
                 <unicode></unicode>
               </list>
+            </value>
+            <key>
+              <string>outputDirectory</string>
+            </key>
+            <value>
+              <unicode>doc</unicode>
             </value>
             <key>
               <string>qtHelpEnabled</string>

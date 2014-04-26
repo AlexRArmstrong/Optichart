@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project optichart -->
-<!-- Saved: 2014-04-18, 23:37:02 -->
+<!-- Saved: 2014-04-25, 01:20:20 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Need to render each letter with space between to make columns</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:20</Created>
+    <Created>2014-04-24, 15:48:49</Created>
     <Resource>
       <Filename>main.py</Filename>
       <Linenumber>186</Linenumber>
@@ -15,64 +15,64 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>196</Linenumber>
+      <Linenumber>210</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>207</Linenumber>
+      <Linenumber>221</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>245</Linenumber>
+      <Linenumber>259</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>255</Linenumber>
+      <Linenumber>269</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Is this a good way to do return values?</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>285</Linenumber>
+      <Linenumber>299</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Question? Should this be here or part of a line?</Summary>
+    <Description></Description>
+    <Created>2014-04-24, 20:25:13</Created>
+    <Resource>
+      <Filename>Projector.py</Filename>
+      <Linenumber>417</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Test the handeling of font pathing.</Summary>
     <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
+    <Created>2014-04-24, 20:25:13</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>391</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: Need to render each letter with space between to make columns</Summary>
-    <Description></Description>
-    <Created>2014-04-18, 18:23:30</Created>
-    <Resource>
-      <Filename>Projector.py</Filename>
-      <Linenumber>504</Linenumber>
+      <Linenumber>575</Linenumber>
     </Resource>
   </Task>
 </Tasks>
