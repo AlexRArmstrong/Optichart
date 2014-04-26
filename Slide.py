@@ -179,8 +179,8 @@ class Slide(object):
 		page_numbers = self._chart.pages()
 		line_numbers = range(len(all_lines))
 		slide_width = self._width # the width of the slide display area from config file.
-		lane_length
-		dpi
+		lane_length = self._lane_length
+		dpi = self._dpi
 		
 		for current_line in all_lines:
 			line_font = current_line.font()
