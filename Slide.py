@@ -72,6 +72,12 @@ class Slide(object):
 		except:
 			return False
 	
+	def pageCoordinates(self):
+		'''
+		Return a list of the (x,y) coordinates of the page breakes.
+		'''
+		return self._pages
+	
 	def slideWidth(self):
 		'''
 		Returns the slide width in pixels.
