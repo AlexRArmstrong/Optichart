@@ -61,7 +61,7 @@ class Slide(object):
 		Returns a chart object.
 		'''
 		return self._chart
-		
+	
 	def setChartName(self, chart_name):
 		'''
 		Takes the path to a chart file and creates a chart object.
@@ -71,7 +71,7 @@ class Slide(object):
 			return True
 		except:
 			return False
-		
+	
 	def dpi(self):
 		'''
 		Returns the slide's current dpi.
@@ -89,12 +89,29 @@ class Slide(object):
 		except:
 			return False
 	
+	def laneLength(self):
+		'''
+		Return the length of the lane for this slide.
+		'''
+		return self._lane_length
+	
+	def setLaneLength(self, length):
+		'''
+		Set the lane length for the slide.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._lane_length = int(length)
+			return True
+		except:
+			return False
+	
 	def defaultFont(self):
 		'''
 		Return the default font used by this slide.
 		'''
 		return self._default_font
-		
+	
 	def setDefaultFont(self, font_name):
 		'''
 		Sets the default font to use for this slide.
@@ -105,13 +122,13 @@ class Slide(object):
 			return True
 		except:
 			return False
-			
+	
 	def fontDirectory(self):
 		'''
 		Returns the directory searched for fonts.
 		'''
 		return self._font_dir
-		
+	
 	def setFontDirectory(self, font_dir):
 		'''
 		Sets the directory containing the fonts to 'font_dir'.
@@ -122,7 +139,7 @@ class Slide(object):
 			return True
 		except:
 			return False
-		
+	
 	def fixFontName(self, font_name):
 		'''
 		Takes a font name and fixes the path so it can be used with pygame.
