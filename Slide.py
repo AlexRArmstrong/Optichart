@@ -132,7 +132,7 @@ class Slide(object):
 		all_lines = self._chart.lines()
 		page_numbers = self._chart.pages()
 		line_numbers = range(len(all_lines))
-		slide_width = self.width # the width of the slide display area from config file.
+		slide_width = self._width # the width of the slide display area from config file.
 		lane_length
 		dpi
 		
