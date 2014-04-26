@@ -389,6 +389,8 @@ class Slide(object):
 		self._surface = None
 		self._width = 0
 		self._height = 0
+		self._default_font = ''
+		self._font_dir = ''
 		
 		
 	def chart(self):
@@ -416,6 +418,40 @@ class Slide(object):
 		vertical_inch_size = float(lane_length) * math.tan(math.radians(5.0 / 60.0)) * float(scale_factor)
 		vertical_dpi_size = vertical_inch_size * dpi
 		return vertical_dpi_size	
+		
+	def defaultFont(self):
+		'''
+		Return the default font used by this slide.
+		'''
+		return self._default_font
+		
+	def setDefaultFont(self, font_name):
+		'''
+		Sets the default font to use for this slide.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._default_font = font_name
+			return True
+		except:
+			return False
+			
+	def fontDirectory(self):
+		'''
+		Returns the directory searched for fonts.
+		'''
+		return self._font_dir
+		
+	def setFontDirectory(self, font_dir):
+		'''
+		Sets the directory containing the fonts to 'font_dir'.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._font_dir = font_dir
+			return True
+		except:
+			return False
 		
 	def fixFontName(self, font_name):
 		'''
