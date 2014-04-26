@@ -34,14 +34,26 @@ class Slide(object):
 		'''
 		Constructor.
 		'''
+		# These variables are created in Slide.
+		# The chart object to display.
 		self._chart = None
+		# The coordinates of pages breaks.
 		self._pages = []
+		# TODO: def chrs. ???
 		self._default_characters = []
+		# The text of the chart layed out and rendered.
 		self._surface = None
-		self._width = 0
-		self._height = 0
+		
+		# These variables must be set before calling slide.layout()
+		# The width and height of the slide display surface.
+		self._width = 0 # Pixels
+		self._height = 0 # Pixels
+		# Fonts.
 		self._default_font = ''
 		self._font_dir = ''
+		# Factors for size calculations.
+		self._dpi = 72 # dots/inch
+		self._lane_length = 240 # inches
 		
 		
 	def chart(self):
