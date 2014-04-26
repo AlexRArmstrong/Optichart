@@ -72,6 +72,23 @@ class Slide(object):
 		except:
 			return False
 		
+	def dpi(self):
+		'''
+		Returns the slide's current dpi.
+		'''
+		return self._dpi
+	
+	def setDpi(self, dpi):
+		'''
+		Set the dpi for the slide.
+		Returns True on succes, False otherwise.
+		'''
+		try:
+			self._dpi = dpi
+			return True
+		except:
+			return False
+	
 	def calculateSize(self, lane_length, scale_factor, dpi):
 		'''
 		Calculates the vertical size for a letter with a given scale factor at
