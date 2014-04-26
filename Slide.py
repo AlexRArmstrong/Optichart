@@ -89,16 +89,6 @@ class Slide(object):
 		except:
 			return False
 	
-	def calculateSize(self, lane_length, scale_factor, dpi):
-		'''
-		Calculates the vertical size for a letter with a given scale factor at
-		a distance on a specified resoulation monitor.
-		'''
-		# TODO: Question? Should this be here or part of a line?
-		vertical_inch_size = float(lane_length) * math.tan(math.radians(5.0 / 60.0)) * float(scale_factor)
-		vertical_dpi_size = vertical_inch_size * dpi
-		return vertical_dpi_size	
-		
 	def defaultFont(self):
 		'''
 		Return the default font used by this slide.
@@ -148,6 +138,16 @@ class Slide(object):
 			return os.path.join(self._font_dir, font_name)
 		else:
 			return self._default_font
+	
+	def calculateSize(self, lane_length, scale_factor, dpi):
+		'''
+		Calculates the vertical size for a letter with a given scale factor at
+		a distance on a specified resoulation monitor.
+		'''
+		# TODO: Question? Should this be here or part of a line?
+		vertical_inch_size = float(lane_length) * math.tan(math.radians(5.0 / 60.0)) * float(scale_factor)
+		vertical_dpi_size = vertical_inch_size * dpi
+		return vertical_dpi_size	
 	
 	def layout(self):
 		'''
