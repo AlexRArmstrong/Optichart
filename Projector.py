@@ -443,6 +443,7 @@ class Slide(object):
 
 		all_rendered_lines = []
 		all_lines = self._chart.lines()
+		page_numbers = self._chart.pages()
 		line_numbers = range(len(all_lines))
 		slide_width = self.width # the width of the slide display area from config file.
 		
@@ -506,19 +507,18 @@ class Slide(object):
 		
 		# Now render all the text to the big surface.
 		position = [slide_width / 2, 0]
-		for each_line in all_rendered_text:
+		for line_no, each_line in enumerate(all_rendered_text):
 			x_r, y_r = each_line.get_size()
 			position[0] = position[0] - (x_r / 2)
-			#position[1] = position[1] - (y_r / 2)
-			
 			big_surf.blit(each_line, position)
+			
 			position[0] = slide_width / 2
-	#			print 'sur getsize', y_r
-	#			print 'get ht', font.get_height()
-	#			print 'line size', font.get_linesize()
-	#			print 'font size', font.size('E')
 			position[1] += y_r + line_spaceing
-		
+			if line_no in page_numbers:
+				x = 0
+				y = position[1]
+				pg_coords = [x, y]
+				self._pages.append(pg_coords)
 		
 		
 class Projector(object):
