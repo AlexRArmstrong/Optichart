@@ -45,13 +45,17 @@ class Slide(object):
 	'''
 	The text of a chart layed out and rendered.
 	'''
-	def __init__(self):
+	def __init__(self, chart_name = None):
 		'''
-		Constructor.
+		Initilize a Slide Class. Call Slide([chart-name]) to create a Slide
+		object.  Optionally passing a fully pathed chart name.
 		'''
 		# These variables are created in Slide.
 		# The chart object to display.
 		self._chart = None
+		self._chart_name = ''
+		if chart_name:
+			self.setChartName(chart_name)
 		# The coordinates of pages breaks.
 		self._pages = []
 		# TODO: def chrs. ???
