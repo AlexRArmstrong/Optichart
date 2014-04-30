@@ -26,6 +26,11 @@
 # functionLikeThis
 # variables_like_this
 
+import copy
+
+from Section import Section
+from Line import Line
+
 class Chart(object):
 	'''
 	A model of a chart.  Consists of a series of lines along with data
