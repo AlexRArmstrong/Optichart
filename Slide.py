@@ -250,7 +250,7 @@ class Slide(object):
 			for each_section in current_line:
 				# Get the scaling factor and calculate the size in pixels
 				scale_factor = each_section.scaleFactor()
-				line_size = calculateSize(lane_length, scale_factor, dpi)
+				line_size = self.calculateSize(lane_length, scale_factor, dpi)
 				# Create a font.
 				section_font = pygame.font.Font(full_font_name, int(line_size))
 				# Get the text for this section.
@@ -287,7 +287,7 @@ class Slide(object):
 			ln_width, ln_height = cur_ren_line.get_size()
 			# Calculate the space between each line - varies per line.
 			scale_factor = all_lines[i].lineSpaceingScaleFactor()
-			line_spaceing = calculateSize(lane_length, scale_factor, dpi)
+			line_spaceing = self.calculateSize(lane_length, scale_factor, dpi)
 			total_chart_heigh_px = total_chart_heigh_px + ln_height + line_spaceing
 				
 		# Make a big surface.
