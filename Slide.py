@@ -298,7 +298,7 @@ class Slide(object):
 		
 		# Now render all the text to the big surface.
 		position = [slide_width / 2, 0]
-		for line_no, each_line in enumerate(all_rendered_text):
+		for line_no, each_line in enumerate(all_rendered_lines):
 			x_r, y_r = each_line.get_size()
 			position[0] = position[0] - (x_r / 2)
 			big_surf.blit(each_line, position)
