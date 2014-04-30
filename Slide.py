@@ -93,6 +93,22 @@ class Slide(object):
 		'''
 		return self._pages
 	
+	def defaultCharacters(self):
+		'''
+		Return a list of the default characters and their coordinates.
+		Data Structure:
+		list = [('U', x, y),
+				('T', x, y)]
+		'''
+		return self._default_characters
+	
+	def surface(self):
+		'''
+		Returns the rendered surface.
+		'''
+		return self._surface
+		# TODO: Maybe calling layout() should return the rendered surface?
+	
 	def slideWidth(self):
 		'''
 		Returns the slide width in pixels.
