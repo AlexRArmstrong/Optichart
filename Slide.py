@@ -77,6 +77,12 @@ class Slide(object):
 		'''
 		return self._chart
 	
+	def chartName(self):
+		'''
+		Return the current chart name.
+		'''
+		return self._chart_name
+	
 	def setChartName(self, chart_name):
 		'''
 		Takes the path to a chart file and creates a chart object.
