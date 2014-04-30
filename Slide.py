@@ -85,9 +85,11 @@ class Slide(object):
 	
 	def setChartName(self, chart_name):
 		'''
-		Takes the path to a chart file and creates a chart object.
+		Takes the path to a chart file and creates a chart object. Additionally
+		sets the chart name variable.
 		'''
 		try:
+			self._chart_name = chart_name
 			self._chart = Chart(chart_name)
 			return True
 		except:
