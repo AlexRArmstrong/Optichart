@@ -123,9 +123,9 @@ class Slide(object):
 	
 	def slideWidth(self):
 		'''
-		Returns the slide width in pixels.
+		Returns the slide width in inches.
 		'''
-		return self._width
+		return self._width / self._dpi
 	
 	def setSlideWidth(self, w):
 		'''
@@ -145,7 +145,7 @@ class Slide(object):
 		'''
 		Returns the height of the slide.
 		'''
-		return self._height
+		return self._height / self._dpi
 	
 	def setSlideHeight(self, h):
 		'''
