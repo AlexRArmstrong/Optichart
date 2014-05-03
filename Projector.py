@@ -204,28 +204,28 @@ class Projector(object):
 						sys.exit()
 					elif each_event.dict['key'] == 275:		# Right Arrow Next Chart
 						print 'RIGHT' #Debug
-						current_chart_index += 1
-						if current_chart_index >= max_chart_index:
-							current_chart_index = max_chart_index
-						chart_name = chart_list[current_chart_index]
-						disp2(chart_name)
+						self.current_chart_index += 1
+						if self.current_chart_index >= self.max_chart_index:
+							self.current_chart_index = self.max_chart_index
+						chart_name = self.chart_list[self.current_chart_index]
+						self.display(chart_name)
 					elif each_event.dict['key'] == 276:		# Left Arrow Prev. Chart
 						print 'LEFT' # Debug
-						current_chart_index -= 1
-						if current_chart_index <= 0:
-							current_chart_index = 0
-						chart_name = chart_list[current_chart_index]
-						disp2(chart_name)
+						self.current_chart_index -= 1
+						if self.current_chart_index <= 0:
+							self.current_chart_index = 0
+						chart_name = self.chart_list[self.current_chart_index]
+						self.display(chart_name)
 					elif each_event.dict['key'] == 273:		# Up Arrow Scroll Up
 						print 'UP' # Debug
-						moveUp()
+						self.moveUp()
 						
 					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
 						print 'DOWN' # Debug
-						moveDown()
+						self.moveDown()
 						
 					elif each_event.dict['key'] == 114:
-						togleRedGreen()
+						self.toggleRedGreen()
 						# Add additional key presses here...
 				if each_event.type == QUIT:
 					sys.exit()
