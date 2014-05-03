@@ -51,6 +51,9 @@ class Line(object):
 		# The distance between this and the next line.
 		self.line_spaceing = line_space
 		
+	def __getitem__(self, offset):
+		return self._sections[offset]
+		
 	def sections(self):
 		'''
 		Return the sections that make up the line.
