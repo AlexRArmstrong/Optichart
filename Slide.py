@@ -324,15 +324,15 @@ class Slide(object):
 		# Make a big surface.
 		#total_size = [total_chart_width_px, total_chart_heigh_px]
 		total_size = [slide_width, total_chart_heigh_px]
-		big_surf = pygame.Surface(total_size)
-		big_surf.fill(WHITE)
+		self._surface = pygame.Surface(total_size)
+		self._surface.fill(WHITE)
 		
 		# Now render all the text to the big surface.
 		position = [slide_width / 2, 0]
 		for line_no, each_line in enumerate(all_rendered_lines):
 			x_r, y_r = each_line.get_size()
 			position[0] = position[0] - (x_r / 2)
-			big_surf.blit(each_line, position)
+			self._surface.blit(each_line, position)
 			
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing
