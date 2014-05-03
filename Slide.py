@@ -127,14 +127,16 @@ class Slide(object):
 		'''
 		return self._width
 	
-	def setSlideWidth(self, width):
+	def setSlideWidth(self, w):
 		'''
-		Set the width for the slide to width (int). This is the
-		number of pixels wide the slide's display area is.
+		Set the width for the slide to w. This is the
+		slide's display area in inches.  If using a custom dpi,
+		Must call setDpi first - else will have the default 72 dpi.
 		Returns True on succes, False otherwise.
 		'''
 		try:
-			self._width = int(width)
+			w_px = w * self._dpi
+			self._width = int(w_px)
 			return True
 		except:
 			return False
