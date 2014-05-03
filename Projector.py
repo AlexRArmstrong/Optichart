@@ -72,7 +72,7 @@ class Projector(object):
 		self.background_flag = 0
 		
 		# Read the config file - possibly overwriting the defaults.
-		readConfig()
+		self.readConfig()
 		
 		self.start_dir = os.getcwd()
 		
@@ -81,7 +81,7 @@ class Projector(object):
 		self.full_font_name = os.path.join(self.start_dir, self.font_dir, self.default_font)
 		
 		#Find the chart files.
-		full_chart_dir = os.path.join(start_dir, chart_dir)
+		full_chart_dir = os.path.join(self.start_dir, self.chart_dir)
 		# Change to the chart directory - need to be in this directory or else need
 		# to use full path names and that's annoying.
 		os.chdir(full_chart_dir)
@@ -121,8 +121,8 @@ class Projector(object):
 		XMAX = width_px
 		YMAX = height_px
 		print height_px #DEBUG
-		print monitor_vert_size
-		dpi = height_px / monitor_vert_size
+		print self.monitor_vert_size
+		dpi = height_px / self.monitor_vert_size
 		print 'dpi:', dpi
 		
 		# Show the first chart.
