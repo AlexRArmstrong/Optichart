@@ -179,7 +179,7 @@ class Projector(object):
 			elif each_line.startswith('DefaultFont'):
 				self.default_font = each_line.split('=')[1].strip()
 			else:
-				print "I don't know how to handle this line: \n%s" %(each_line)
+				print "I don't know how to handle this Config. line: \n%s" %(each_line)
 				continue
 		
 		
