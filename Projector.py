@@ -174,7 +174,7 @@ class Projector(object):
 	def display(self):
 		pass
 	
-	def eventLoop(self):
+	def startEventLoop(self):
 		'''
 		'''
 		global current_chart_index, chart_list
@@ -221,7 +221,7 @@ class Projector(object):
 if __name__ == '__main__':
 	# If we are executed, we start up a projector.
 	#projector = Projector()
-	#projector.eventLoop()
+	#projector.startEventLoop()
 	cn = '/home/alex/programing/optichart/charts/10-chart.chart'
 	chart = Chart(cn)
 	print chart
