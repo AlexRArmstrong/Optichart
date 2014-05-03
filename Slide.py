@@ -149,12 +149,13 @@ class Slide(object):
 	
 	def setSlideHeight(self, h):
 		'''
-		Set the height of the slides display area.
-		Takes the height in pixels to set.
+		Set the height of the slides display area to h.
+		Takes the height in inches to set.
 		Returns True on succes, False otherwise.
 		'''
 		try:
-			self._height = int(h)
+			h_px = h * self._dpi
+			self._height = int(h_px)
 			return True
 		except:
 			return False
