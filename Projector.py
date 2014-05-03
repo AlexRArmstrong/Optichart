@@ -91,7 +91,7 @@ class Projector(object):
 		self.chart_list.sort()
 		self.current_chart_index = 0
 		self.max_chart_index = len(self.chart_list) - 1 # Need minus one, 'cause count from zero!
-		chart_name = self.chart_list[current_chart_index]
+		chart_name = self.chart_list[self.current_chart_index]
 		
 		# Initilize pygame.
 		pygame.init()
