@@ -34,6 +34,8 @@ import pygame
 
 from pygame.locals import KEYDOWN, QUIT
 
+from Slide import Slide
+
 # Define global constants.
 SNELLEN_RATIO, TEXT, SCALE_FACTOR = range(3)
 
@@ -125,9 +127,20 @@ class Projector(object):
 		dpi = height_px / self.monitor_vert_size
 		print 'dpi:', dpi
 		
-		# Show the first chart.
-		#display(chart_name)
-		display(chart_name)
+		# Create a slide of the chart.
+		self.slide = Slide(chart_name)
+		self.slide.setDefaultFont(self.default_font)
+		self.slide.setFontDirectory(self.font_dir)
+		self.slide.setDpi(dpi)
+		self.slide.setLaneLength(self.lane_length)
+		self.slide.setSlideHeight(self.chart_vert_size) # FIXME: This is in INCHES and will cause a problem.
+		self.slide.setSlideWidth(self.chart_horz_size)
+		
+		self.slide.layout()
+		
+		self.slide_surface = self.slide.surface()
+		
+		self.display()
 		
 		# Call the control loop
 		#mainLoop() - not here, should call this from where class is created.
