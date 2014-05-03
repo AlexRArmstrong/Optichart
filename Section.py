@@ -29,7 +29,7 @@
 class Section(object):
 	'''
 	A section of a line.  Consists of a Snellen Ratio and text.  Initilize it
-	by passing a Snellen Ratio and text.  If nothing is passed in, it will 
+	by passing a Snellen Ratio and text.  If nothing is passed in, it will
 	initilize with empty ratio and text fields.
 	'''
 	def __init__(self, ratio = None, text = None):
@@ -71,7 +71,7 @@ class Section(object):
 			return True
 		except:
 			return False
-		
+	
 	def setText(self, text):
 		'''
 		Sets the sections text.  Returns True on success, False on failure.
