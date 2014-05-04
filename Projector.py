@@ -178,6 +178,14 @@ class Projector(object):
 		
 		
 	def display(self):
+
+	def moveUp(self):
+		pass
+		
+	def moveDown(self):
+		pass
+	
+	def toggleRedGreen(self):
 		pass
 	
 	def startEventLoop(self):
