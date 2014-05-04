@@ -113,6 +113,8 @@ class Projector(object):
 	#	screen = pygame.display.set_mode((XMAX, YMAX), pygame.FULLSCREEN)
 	#	screen = pygame.display.set_mode((XMAX, YMAX))
 		
+		# Flag for red/green
+		self.red_green = 0
 		# Fill the screen with a while background.
 		self.screen.fill(WHITE)
 		# Must call update to actually display anything.
@@ -216,7 +218,19 @@ class Projector(object):
 		pygame.display.update()
 	
 	def toggleRedGreen(self):
-		pass
+		self.slide_surface.set_colorkey(WHITE)
+		if not self.red_green:
+			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
+			right_rect = pygame.Rect(XMAX / 2, 0,  XMAX, YMAX)
+			self.screen.fill(RED, left_rect)
+			self.screen.fill(GREEN, right_rect)
+			self.red_green = 1
+		else:
+			self.screen.fill(WHITE)
+			self.red_green = 0
+			
+		self.screen.blit(self.slide_surface, [0, 0], self.viewport)
+		pygame.display.update()
 	
 	def startEventLoop(self):
 		'''
