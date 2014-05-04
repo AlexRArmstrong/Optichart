@@ -288,8 +288,10 @@ class Slide(object):
 				text = each_section.text()
 				num_chrs = len(text)
 				text_width, text_height = section_font.size(text)
-				space_width = (slide_width - text_width) / (num_chrs + 1.0)
+				chr_width = text_width / num_chrs
+				space_width = (section_width - text_width) / (num_chrs + 1.0)
 				section_surface = pygame.Surface([section_width, text_height])
+				section_surface.fill(MAGENTA)
 				if text_height > line_height:
 					line_height = text_height
 				x_pos = 0
@@ -300,7 +302,7 @@ class Slide(object):
 					chr_surface.set_colorkey(YELLOW)
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
-					x_pos += space_width
+					x_pos = x_pos + chr_width + space_width
 				all_rendered_sections.append(section_surface)
 			line_surface = pygame.Surface([slide_width, line_height])
 			for each_sect_surf in all_rendered_sections:
