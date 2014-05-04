@@ -36,9 +36,11 @@ class Line(object):
 	and a font name.  All are optional,	and if omitted the class will 
 	return an empty line.
 	'''
-	def __init__(self, sections = [], def_chr = 0, font = None, line_space = '20/80'):
+	def __init__(self, sections = None, def_chr = 0, font = None, line_space = '20/80'):
 		# Sections is a list of all the sections that make up a line.
-		self._sections = sections
+		self._sections = []
+		if sections:
+			self._sections = sections
 		
 		# The font for this line, if none should use default font.
 		self.font_name = font
