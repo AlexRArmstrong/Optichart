@@ -6,8 +6,8 @@
 # Grammer:
 # # - Comments
 # : - Seperates snellen ration and text
-# * - Indicates default letter to display on centering button press, if not 
-# 		specified the first letter is used.
+# ~ - Indicates that the next letter is the default letter to display 
+#		on centering button press, if not specified the first letter is used.
 # ! - Denotes blocks or pages of text.
 # | - Indicates a column break.
 # '' or "" - Indicates the text to display, only required if spaces are to be used.
@@ -45,19 +45,19 @@
 
 # A chart with 2 fonts and default letters seperated into 3 pages or screens.
 #Font = Snellen.ttf
-#20/200 : R*D
-#20/100 : Z*VNE
-#20/80 : GTY*D
+#20/200 : R~D
+#20/100 : Z~VNE
+#20/80 : GTY~D
 #!
 #Font = Sloan.ttf
-#20/60 : R*NZP6 
-#20/40 : GP*FOHR4
-#20/30 : SHNYTZ*U3
-#20/30 : NFCU*VSRU
-#20/25 : YHTP*GN25
+#20/60 : R~NZP6 
+#20/40 : GP~FOHR4
+#20/30 : SHNYTZ~U3
+#20/30 : NFCU~VSRU
+#20/25 : YHTP~GN25
 #!
-#20/25 : ZGEVRND*OS
-#20/20 : RDGZUP*NS2
-#20/20 : FSH*DVRGUE
-#20/15 : DHRU*SPEI5
-#20/15 : PSNE*ZUDGP
+#20/25 : ZGEVRND~OS
+#20/20 : RDGZUP~NS2
+#20/20 : FSH~DVRGUE
+#20/15 : DHRU~SPEI5
+#20/15 : PSNE~ZUDGP
