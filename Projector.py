@@ -232,6 +232,12 @@ class Projector(object):
 		self.screen.blit(self.slide_surface, [0, 0], self.viewport)
 		pygame.display.update()
 	
+	def pageUp(self):
+		pass
+	
+	def pageDown(self):
+		pass
+	
 	def startEventLoop(self):
 		'''
 		'''
