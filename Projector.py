@@ -185,9 +185,11 @@ class Projector(object):
 		self.slide.layout()
 		self.slide_surface = self.slide.surface()
 		
+		# Clear the screen.
+		self.screen.fill(BLUE)
+		
 		# This creates mirror writing.
 	#	flip_surf = pygame.transform.flip(big_surf, True, False)
-	#	big_surf.blit(flip_surf, (0, 0))
 		
 		top_left = [0, 0]
 		#self.viewport = pygame.Rect(0, -line_spaceing, XMAX, YMAX)
