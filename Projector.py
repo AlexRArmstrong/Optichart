@@ -177,7 +177,25 @@ class Projector(object):
 		
 		
 		
-	def display(self):
+	def display(self, chart_name):
+		'''
+		Takes a chart name, loads and displays it.
+		'''
+		self.slide.setChartName(chart_name)
+		self.slide.layout()
+		self.slide_surface = self.slide.surface()
+		
+		# This creates mirror writing.
+	#	flip_surf = pygame.transform.flip(big_surf, True, False)
+	#	big_surf.blit(flip_surf, (0, 0))
+		
+		top_left = [0, 0]
+		#self.viewport = pygame.Rect(0, -line_spaceing, XMAX, YMAX)
+		self.viewport = pygame.Rect(0, -80, XMAX, YMAX)
+		self.screen.blit(self.slide_surface, top_left, self.viewport)
+		
+		pygame.display.update()
+		
 
 	def moveUp(self):
 		top_left = [0, 0]
