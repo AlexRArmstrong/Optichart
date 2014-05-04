@@ -147,14 +147,12 @@ class Chart(object):
 					text = text.strip()
 					if text.startswith('"') or text.startswith("'"):
 						text = text.strip('"\'')
-					# Add a section to the current line.
-					a_section = Section(ratio, text)
-					current_line.addSection(a_section)
 					# Check for default character
 					default_chr_pos = 0
 					num_chrs = range(len(text))
 					for n in num_chrs:
 						if text[n] == '~':
+							text = text.replace('~', '', 1)
 							default_chr_pos = n + 1
 							if default_chr_pos >= len(text):
 								default_chr_pos = len(text) - 1
@@ -163,6 +161,9 @@ class Chart(object):
 						else:
 							current_line.setDefaultCharacter(default_chr_pos)
 							continue
+					# Add a section to the current line.
+					a_section = Section(ratio, text)
+					current_line.addSection(a_section)
 				# Done parsing line. Now add it to the chart.
 				# Note we do NOT creat a new line, as this would clear the spacing
 				# and font and those are only cleared if specified again or a new
