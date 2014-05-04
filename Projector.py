@@ -129,7 +129,7 @@ class Projector(object):
 		
 		# Create a slide of the chart.
 		self.slide = Slide(chart_name)
-		self.slide.setDefaultFont(self.default_font)
+		self.slide.setDefaultFont(self.full_font_name)
 		self.slide.setFontDirectory(self.font_dir)
 		self.slide.setDpi(dpi)
 		self.slide.setLaneLength(self.lane_length)
