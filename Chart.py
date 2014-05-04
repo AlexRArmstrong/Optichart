@@ -154,7 +154,7 @@ class Chart(object):
 					default_chr_pos = 0
 					num_chrs = range(len(text))
 					for n in num_chrs:
-						if text[n] == '*':
+						if text[n] == '~':
 							default_chr_pos = n + 1
 							if default_chr_pos >= len(text):
 								default_chr_pos = len(text) - 1
