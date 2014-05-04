@@ -191,7 +191,6 @@ class Projector(object):
 	def startEventLoop(self):
 		'''
 		'''
-		global current_chart_index, chart_list
 		while True:
 			for each_event in pygame.event.get():
 				if each_event.type == KEYDOWN:
