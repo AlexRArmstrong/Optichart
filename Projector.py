@@ -108,18 +108,18 @@ class Projector(object):
 		# Create a screen.
 		# Calling set_mode with zeros will return a surface the same size as the
 		# current display.
-		screen = pygame.display.set_mode((0, 0), pygame.NOFRAME)
+		self.screen = pygame.display.set_mode((0, 0), pygame.NOFRAME)
 	#	screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 	#	screen = pygame.display.set_mode((XMAX, YMAX), pygame.FULLSCREEN)
 	#	screen = pygame.display.set_mode((XMAX, YMAX))
 		
 		# Fill the screen with a while background.
-		screen.fill(WHITE)
+		self.screen.fill(WHITE)
 		# Must call update to actually display anything.
 		pygame.display.update()
 		
 		# Calculate the vertical dpi.
-		width_px, height_px = screen.get_size()
+		width_px, height_px = self.screen.get_size()
 		XMAX = width_px
 		YMAX = height_px
 		print height_px #DEBUG
