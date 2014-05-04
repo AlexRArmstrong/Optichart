@@ -152,19 +152,19 @@ class Projector(object):
 				continue
 			elif each_line.startswith('MonitorVSize'):
 				self.monitor_vert_size = each_line.split('=')[1].strip()
-				self.monitor_vert_size = float(self.monitor_vert_size) / 24.5 # Convert mm to inches.
+				self.monitor_vert_size = float(self.monitor_vert_size) / 25.4 # Convert mm to inches.
 			elif each_line.startswith('MonitorHSize'):
 				self.monitor_horz_size = each_line.split('=')[1].strip()
-				self.monitor_horz_size = float(self.monitor_horz_size) / 24.5 # Convert mm to inches.
+				self.monitor_horz_size = float(self.monitor_horz_size) / 25.4 # Convert mm to inches.
 			elif each_line.startswith('ChartVSize'):
 				self.chart_vert_size = each_line.split('=')[1].strip()
-				self.chart_vert_size = float(self.chart_vert_size) / 24.5 # Convert mm to inches.
+				self.chart_vert_size = float(self.chart_vert_size) / 25.4 # Convert mm to inches.
 			elif each_line.startswith('ChartHSize'):
 				self.chart_horz_size = each_line.split('=')[1].strip()
-				self.chart_horz_size = float(self.chart_horz_size) / 24.5 # Convert mm to inches.
+				self.chart_horz_size = float(self.chart_horz_size) / 25.4 # Convert mm to inches.
 			elif each_line.startswith('LaneLength'):
 				self.lane_length = each_line.split('=')[1].strip()
-				self.lane_length = float(self.lane_length) / 24.5 # Convert mm to inches.
+				self.lane_length = float(self.lane_length) / 25.4 # Convert mm to inches.
 			elif each_line.startswith('ChartDir'):
 				self.chart_dir = each_line.split('=')[1].strip()
 			elif each_line.startswith('FontDir'):
