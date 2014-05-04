@@ -128,23 +128,16 @@ class Projector(object):
 		print 'dpi:', dpi
 		
 		# Create a slide of the chart.
-		self.slide = Slide(chart_name)
+		self.slide = Slide()
 		self.slide.setDefaultFont(self.full_font_name)
 		self.slide.setFontDirectory(self.font_dir)
 		self.slide.setDpi(dpi)
 		self.slide.setLaneLength(self.lane_length)
-		self.slide.setSlideHeight(self.chart_vert_size) # FIXME: This is in INCHES and will cause a problem.
+		self.slide.setSlideHeight(self.chart_vert_size)
 		self.slide.setSlideWidth(self.chart_horz_size)
 		
-		self.slide.layout()
+		self.display(chart_name)
 		
-		self.slide_surface = self.slide.surface()
-		
-		self.display()
-		
-		# Call the control loop
-		#mainLoop() - not here, should call this from where class is created.
-		# - this would imideatly take over and that might not be desirable.
 		
 	def readConfig(self):
 		'''
