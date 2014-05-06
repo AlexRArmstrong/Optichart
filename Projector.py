@@ -200,7 +200,12 @@ class Projector(object):
 		
 		pygame.display.update()
 		
-
+	def update(self):
+		'''
+		Update the screen.
+		'''
+		pass
+	
 	def moveUp(self):
 		top_left = [0, 0]
 		jump_dist = 40 # Pix
