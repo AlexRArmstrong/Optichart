@@ -191,7 +191,7 @@ class Projector(object):
 		self.slide.setChartName(chart_name)
 		self.slide.layout()
 		self.slide_surface = self.slide.surface()
-		
+		self.slide_surface.set_colorkey(WHITE)
 		# Clear the screen.
 	#	self.screen.fill(BLUE)
 		
@@ -238,7 +238,6 @@ class Projector(object):
 		self.update()
 	
 	def toggleRedGreen(self):
-		self.slide_surface.set_colorkey(WHITE)
 		if not self.red_green:
 			self.red_green = 1
 			self.update()
