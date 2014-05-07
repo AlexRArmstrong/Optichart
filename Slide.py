@@ -33,6 +33,7 @@ from Chart import Chart
 
 # Define global constants.
 BLACK = (0, 0, 0)
+NOTBLACK = (1, 1, 1)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -291,20 +292,21 @@ class Slide(object):
 				chr_width = text_width / num_chrs
 				space_width = (section_width - text_width) / (num_chrs + 1.0)
 				section_surface = pygame.Surface([section_width, text_height])
-				section_surface.fill(MAGENTA)
+				section_surface.fill(WHITE)
 				if text_height > line_height:
 					line_height = text_height
 				x_pos = 0
 				y_pos = 0
 				x_pos += space_width
 				for each_chr in text:
-					chr_surface = section_font.render(each_chr, True, BLACK, YELLOW)
-					chr_surface.set_colorkey(YELLOW)
+					chr_surface = section_font.render(each_chr, True, BLACK, NOTBLACK)
+					chr_surface.set_colorkey(NOTBLACK)
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
 					x_pos = x_pos + chr_width + space_width
 				all_rendered_sections.append(section_surface)
 			line_surface = pygame.Surface([slide_width, line_height])
+			line_surface.fill(WHITE)
 			for each_sect_surf in all_rendered_sections:
 				section_position = [sect_x, sect_y]
 				line_surface.blit(each_sect_surf, section_position)
