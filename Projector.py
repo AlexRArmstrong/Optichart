@@ -233,12 +233,9 @@ class Projector(object):
 		self.update()
 		
 	def moveDown(self):
-		top_left = [0, 0]
 		jump_dist = -40 # Pix
-		self.screen.fill(WHITE)
 		self.viewport = self.viewport.move(0, jump_dist)
-		self.screen.blit(self.slide_surface, top_left, self.viewport)
-		pygame.display.update()
+		self.update()
 	
 	def toggleRedGreen(self):
 		self.slide_surface.set_colorkey(WHITE)
