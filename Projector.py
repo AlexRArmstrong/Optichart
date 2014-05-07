@@ -240,17 +240,11 @@ class Projector(object):
 	def toggleRedGreen(self):
 		self.slide_surface.set_colorkey(WHITE)
 		if not self.red_green:
-			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
-			right_rect = pygame.Rect(XMAX / 2, 0,  XMAX, YMAX)
-			self.screen.fill(RED, left_rect)
-			self.screen.fill(GREEN, right_rect)
 			self.red_green = 1
+			self.update()
 		else:
-			self.screen.fill(WHITE)
 			self.red_green = 0
-			
-		self.screen.blit(self.slide_surface, [0, 0], self.viewport)
-		pygame.display.update()
+			self.update()
 	
 	def pageUp(self):
 		pass
