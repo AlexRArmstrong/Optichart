@@ -279,7 +279,7 @@ class Slide(object):
 			sect_y = 0
 			all_rendered_sections = []
 			line_height = 0
-			for each_section in current_line:
+			for each_section in current_line.sections():
 				# Get the scaling factor and calculate the size in pixels
 				scale_factor = each_section.scaleFactor()
 				line_size = self.calculateSize(lane_length, scale_factor, dpi)
