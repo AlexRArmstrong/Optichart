@@ -59,6 +59,7 @@ class Projector(object):
 		'''
 		Constructor.
 		'''
+		global XMAX, YMAX
 		# Set defaults.
 		# These are overwritten by settings in the config file.
 		self.chart_dir = 'charts'
