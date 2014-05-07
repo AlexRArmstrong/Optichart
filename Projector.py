@@ -204,7 +204,28 @@ class Projector(object):
 		'''
 		Update the screen.
 		'''
-		pass
+		# First need to define what we're using.
+		xc = (self.screen.get_width() - self.slide_surface.get_width()) / 2
+		top_left = [xc, 0]
+		background = pygame.Surface((XMAX, YMAX))
+		letters = pygame.Surface((XMAX, YMAX))
+		letters.blit(self.slide_surface, top_left, self.viewport)
+		# Now fix the background for the chart - white or red/green.
+		if self.red_green:
+			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
+			right_rect = pygame.Rect(XMAX / 2, 0,  XMAX, YMAX)
+			background.fill(RED, left_rect)
+			background.fill(GREEN, right_rect)
+		else:
+			background.fill(WHITE)
+		# Put the letters on the background.
+		background.blit(self.slide_surface, top_left, self.viewport)
+		# Put the mask (if any) on the letters.
+	#	background.blit(mask)
+		# Put the whole works on the screen.
+		self.screen.blit(background, [0, 0])
+		# Update the display.
+		pygame.display.update()
 	
 	def moveUp(self):
 		top_left = [0, 0]
