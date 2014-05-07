@@ -139,6 +139,10 @@ class Projector(object):
 		self.slide.setSlideHeight(self.chart_vert_size)
 		self.slide.setSlideWidth(self.chart_horz_size)
 		
+		# Create the default viewport window. Move this to display if need
+		# slides to reset to the default view when switching.
+		self.viewport = pygame.Rect(0, -80, XMAX, YMAX)
+		
 		self.display(chart_name)
 		
 		
@@ -193,8 +197,6 @@ class Projector(object):
 		
 		# This creates mirror writing.
 	#	self.slide_surface = pygame.transform.flip(self.slide_surface, True, False)
-		
-		self.viewport = pygame.Rect(0, -80, XMAX, YMAX) #TODO: If want viewport to stay same across slides move this.
 		
 		self.update()
 		
