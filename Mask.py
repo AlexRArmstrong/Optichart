@@ -47,6 +47,7 @@ class Mask(object):
 		self._background_surface = pygame.Surface(r) #TODO: May need to pull out coords.
 		self._background_surface.set_colorkey(WHITE)
 		self._aperture = pygame.Rect((0, 0), r)
+		self._slit = pygame.Rect((0, 0), r)
 		self._max_size_rect = r
 	
 	def surface(self):
@@ -54,8 +55,11 @@ class Mask(object):
 		Returns the masking surface.
 		This is a surface with the supplied size that has part of it occluded.
 		'''
+		# Clip the vertical mask to be inside the horizontal mask.
+		mask_rect = self._slit.clip(self._aperture)
+		# Fill first with black to clear the old mask. Then paint the new mask.
 		self._background_surface.fill(BLACK)
-		self._background_surface.fill(WHITE, self._aperture)
+		self._background_surface.fill(WHITE, mask_rect)
 		return self._background_surface
 	
 	def clear(self):
