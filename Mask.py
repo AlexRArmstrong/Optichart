@@ -99,31 +99,31 @@ class Mask(object):
 		'''
 		Remove the vertical slit.
 		'''
-		pass
+		self._slit = self._max_size_rect
 	
 	def moveSlitRight(self):
 		'''
 		Move the vertical slit right.
 		'''
-		pass
+		self._slit = self._slit.move(40, 0)
 	
 	def moveSlitLeft(self):
 		'''
 		Move the vertical slit left.
 		'''
-		pass
+		self._slit = self._slit.move(-40, 0)
 	
 	def increaseSlitWidth(self):
 		'''
 		Make the vertical slit wider.
 		'''
-		pass
+		self._slit = self._slit.inflate(40, 0)
 	
 	def decreaseSlitWidth(self):
 		'''
 		Make the vertical slit narower.
 		'''
-		pass
+		self._slit = self._slit.inflate(-40, 0)
 	
 	def showSpot(self):
 		'''
