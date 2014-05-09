@@ -85,6 +85,42 @@ class Mask(object):
 		# self._aperture.height(s)
 		# TODO: Should s be a pixel size or snellen ratio?
 	
+	def showSlit(self):
+		'''
+		Show a vertical slit of letters.
+		'''
+		pass
+	
+	def clearSlit(self):
+		'''
+		Remove the vertical slit.
+		'''
+		pass
+	
+	def moveSlitRight(self):
+		'''
+		Move the vertical slit right.
+		'''
+		pass
+	
+	def moveSlitLeft(self):
+		'''
+		Move the vertical slit left.
+		'''
+		pass
+	
+	def increaseSlitWidth(self):
+		'''
+		Make the vertical slit wider.
+		'''
+		pass
+	
+	def decreaseSlitWidth(self):
+		'''
+		Make the vertical slit narower.
+		'''
+		pass
+	
 	def showSpot(self):
 		'''
 		Shows a spot of ??/?? size.
