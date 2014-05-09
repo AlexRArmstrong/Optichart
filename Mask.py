@@ -44,7 +44,7 @@ class Mask(object):
 		Initilize a new mask of size r where r is a pygame.Rect object 
 		the max size the mask should cover.
 		'''
-		self._background_surface = pygame.Surface(r) #TODO: May need to pull out coords.
+		self._background_surface = pygame.Surface(r)
 		self._background_surface.set_colorkey(WHITE)
 		self._aperture = pygame.Rect((0, 0), r)
 		self._slit = pygame.Rect((0, 0), r)
