@@ -35,6 +35,7 @@ import pygame
 from pygame.locals import KEYDOWN, QUIT
 
 from Slide import Slide
+from Mask import Mask
 
 # Define global constants.
 SNELLEN_RATIO, TEXT, SCALE_FACTOR = range(3)
@@ -139,6 +140,8 @@ class Projector(object):
 		self.slide.setSlideHeight(self.chart_vert_size)
 		self.slide.setSlideWidth(self.chart_horz_size)
 		
+		self.mask = Mask(size)
+		
 		# Create the default viewport window. Move this to display if need
 		# slides to reset to the default view when switching.
 		self.viewport = pygame.Rect(0, -80, XMAX, YMAX)
@@ -221,7 +224,8 @@ class Projector(object):
 		# Put the letters on the background.
 		background.blit(self.slide_surface, top_left, self.viewport)
 		# Put the mask (if any) on the letters.
-	#	background.blit(mask)
+		mask_surface = self.mask.surface()
+		background.blit(mask_surface, [0, 0])
 		# Put the whole works on the screen.
 		self.screen.blit(background, [0, 0])
 		# Update the display.
@@ -282,13 +286,18 @@ class Projector(object):
 					elif each_event.dict['key'] == 273:		# Up Arrow Scroll Up
 						print 'UP' # Debug
 						self.moveUp()
-						
 					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
 						print 'DOWN' # Debug
 						self.moveDown()
 						
-					elif each_event.dict['key'] == 114:
+					elif each_event.dict['key'] == 114:		# r Toggles Red/Green
 						self.toggleRedGreen()
+					elif each_event.dict['key'] == 263:		# 7 - Bigger Horz. aperture
+						self.mask.increaseAperture()
+						self.update()
+					elif each_event.dict['key'] == 257:		# 1 - Smaller Horz. aperture
+						self.mask.decreaseAperture()
+						self.update()
 						# Add additional key presses here...
 				if each_event.type == QUIT:
 					sys.exit()
