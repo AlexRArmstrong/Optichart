@@ -33,6 +33,7 @@ import pygame
 # Define global constants.
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+JUMP = 40
 
 class Mask(object):
 	'''
@@ -73,13 +74,13 @@ class Mask(object):
 		'''
 		Increase the aperture size - make more text visible.
 		'''
-		self._aperture = self._aperture.inflate(0, 40)
+		self._aperture = self._aperture.inflate(0, JUMP)
 	
 	def decreaseAperture(self):
 		'''
 		Decrease the aperture size - make less text visible.
 		'''
-		self._aperture = self._aperture.inflate(0, -40)
+		self._aperture = self._aperture.inflate(0, -JUMP)
 	
 	def showLine(self, s):
 		'''
@@ -107,25 +108,25 @@ class Mask(object):
 		'''
 		Move the vertical slit right.
 		'''
-		self._slit = self._slit.move(40, 0)
+		self._slit = self._slit.move(JUMP, 0)
 	
 	def moveSlitLeft(self):
 		'''
 		Move the vertical slit left.
 		'''
-		self._slit = self._slit.move(-40, 0)
+		self._slit = self._slit.move(-JUMP, 0)
 	
 	def increaseSlitWidth(self):
 		'''
 		Make the vertical slit wider.
 		'''
-		self._slit = self._slit.inflate(40, 0)
+		self._slit = self._slit.inflate(JUMP, 0)
 	
 	def decreaseSlitWidth(self):
 		'''
 		Make the vertical slit narower.
 		'''
-		self._slit = self._slit.inflate(-40, 0)
+		self._slit = self._slit.inflate(-JUMP, 0)
 	
 	def showSpot(self):
 		'''
