@@ -301,17 +301,3 @@ class Projector(object):
 						# Add additional key presses here...
 				if each_event.type == QUIT:
 					sys.exit()
-		
-	
-if __name__ == '__main__':
-	# If we are executed, we start up a projector.
-	#projector = Projector()
-	#projector.startEventLoop()
-	cn = '/home/alex/programing/optichart/charts/10-chart.chart'
-	chart = Chart(cn)
-	print chart
-	for el in chart.lines():
-		print el
-		for es in el.sections():
-			print es
-			print es.text()
