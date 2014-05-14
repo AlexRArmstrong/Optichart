@@ -298,6 +298,22 @@ class Projector(object):
 					elif each_event.dict['key'] == 257:		# 1 - Smaller Horz. aperture
 						self.mask.decreaseAperture()
 						self.update()
-						# Add additional key presses here...
+					elif each_event.dict['key'] == 265:		# 9 - Bigger Vert. slit
+						self.mask.increaseSlitWidth()
+						self.update()
+					elif each_event.dict['key'] == 259:		# 3 - Smaller Vert. slit
+						self.mask.decreaseSlitWidth()
+						self.update()
+					elif each_event.dict['key'] == 260:		# 4 - Move Vert. slit left
+						self.mask.moveSlitLeft()
+						self.update()
+					elif each_event.dict['key'] == 262:		# 6 - Move Vert. slit right
+						self.mask.moveSlitRight()
+						self.update()
+					elif each_event.dict['key'] == 13:		# Enter is center btn.
+						size = self.slide.calculateSize(self.lane_length, (100/20), self.slide.dpi())
+						self.mask.showLine(size)
+						self.update()
+					# Add additional key presses here...
 				if each_event.type == QUIT:
 					sys.exit()
