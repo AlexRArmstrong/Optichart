@@ -263,6 +263,8 @@ class Projector(object):
 		'''
 		while True:
 			for each_event in pygame.event.get():
+				if each_event.type == QUIT:
+					sys.exit()
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
@@ -318,5 +320,3 @@ class Projector(object):
 						self.mask.showLine(size)
 						self.update()
 					# Add additional key presses here...
-				if each_event.type == QUIT:
-					sys.exit()
