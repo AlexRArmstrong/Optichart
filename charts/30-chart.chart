@@ -1,16 +1,15 @@
-# Chart file for Optichart.  Use #'s for comments, !'s for commands
-# referencing the formating of the next line. By default strings are
-# centered.  We start with the chart named 01 and work our way up.
-# 
-# s:size
-#
-! s:576
-ZGEVRNDOS
-! s:576
-RDGZUPNS2
-! s:576
-FSHDVRGUE
-! s:576
-DHRUSPEI5
-! s:576
-PSNEZUDGP
+# Chart file for Optichart.  
+# A chart with three columns
+
+LineSize = 20/30
+20/100 : E | 20/20 : U | 20/100 : E
+20/70 : NZ | 20/20 : T | 20/70 : ZN
+20/60 : VLS | 20/20 : Y | 20/60 : SLV
+20/50 : UFVP | 20/20 : V | 20/50 : PVFU
+20/40 : NSTRF | 20/20 : P | 20/40 : FRTSN
+20/30 : RCLGTB | 20/20 : E | 20/30 : BTGLCR
+20/20 : HTVPFRU | 20/20 : N | 20/20 : URFPVTH
+#S
+#B
+# TODO: Need to center vertically, and horizontally
+# such that smaller letters only take up space they need.
