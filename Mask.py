@@ -69,6 +69,7 @@ class Mask(object):
 		Sets the aperture to be the size of the chart, thus clearing the masking.
 		'''
 		self._aperture = pygame.Rect((0, 0), self._max_size_rect)
+		self._slit = pygame.Rect((0, 0), self._max_size_rect)
 	
 	def increaseAperture(self):
 		'''
