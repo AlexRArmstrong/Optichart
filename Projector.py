@@ -98,6 +98,9 @@ class Projector(object):
 		# Initilize pygame.
 		pygame.init()
 		
+		# Set keyboard repeat (delay, interval).
+		pygame.key.set_repeat(200, 10)
+		
 		# Find DPI
 		# Some versions of xrandr will return a resolution in pixles and a size in mm.
 		# However this dosesn't work on all systems.
