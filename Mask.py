@@ -83,11 +83,13 @@ class Mask(object):
 	
 	def showLine(self, s):
 		'''
-		Show only a single line of size s.
+		Show only a single line of size s pixels centered in the screen.
 		'''
-		pass
-		# self._aperture.height(s)
-		# TODO: Should s be a pixel size or snellen ratio?
+		# Calculate size of black border.
+		# Include a fudge factor, so that text will have space on either side.
+		y = self._aperture.height - (s + 20)
+		self._aperture = self._aperture.inflate(0, -y)
+		# Could use a Snellen ratio, but then would have to account for dpi etc.
 	
 	def showSlit(self):
 		'''
