@@ -1,20 +1,20 @@
-# Chart file for Optichart.  Use #'s for comments, !'s for commands
-# referencing the formating of the next line. By default strings are
-# centered.  We start with the chart named 01 and work our way up.
-# 
-# s:size
-#
-! s:576
-E
-! s:576
-NZ
-! s:576
-VLS
-! s:576
-UFVP
-! s:576
-NSTRF
-! s:576
-RCLGTB
-! s:576
-HTVPFRU
+# Chart file for Optichart.
+# A chart with 2 fonts and default letters seperated into 3 pages or screens.
+
+#Font = Snellen.ttf
+20/200 : R~D
+20/100 : Z~VNE
+20/80 : GTY~D
+!
+#Font = Sloan.ttf
+20/60 : R~NZP6
+20/40 : GP~FOHR4
+20/30 : SHNYTZ~U3
+20/30 : NFCU~VSRU
+20/25 : YHTP~GN25
+!
+20/25 : ZGEVRND~OS
+20/20 : RDGZUP~NS2
+20/20 : FSH~DVRGUE
+20/15 : DHRU~SPEI5
+20/15 : PSNE~ZUDGP
