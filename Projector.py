@@ -235,12 +235,12 @@ class Projector(object):
 		pygame.display.update()
 	
 	def moveUp(self):
-		jump_dist = 40 # Pix
+		jump_dist = 20 # Pix
 		self.viewport = self.viewport.move(0, jump_dist)
 		self.update()
 		
 	def moveDown(self):
-		jump_dist = -40 # Pix
+		jump_dist = -20 # Pix
 		self.viewport = self.viewport.move(0, jump_dist)
 		self.update()
 	
