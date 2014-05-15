@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2014-04-25, 20:29:16 -->
+<!-- Saved: 2014-05-07, 01:33:55 -->
 <!-- Copyright (C) 2014 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
@@ -19,6 +19,7 @@
     <Source>Line.py</Source>
     <Source>Chart.py</Source>
     <Source>Slide.py</Source>
+    <Source>Mask.py</Source>
   </Sources>
   <Forms>
   </Forms>
@@ -53,6 +54,35 @@
   <Documentation>
     <DocumentationParams>
       <dict>
+        <key>
+          <string>ERIC4API</string>
+        </key>
+        <value>
+          <dict>
+            <key>
+              <string>ignoreFilePatterns</string>
+            </key>
+            <value>
+              <list>
+                <unicode></unicode>
+              </list>
+            </value>
+            <key>
+              <string>languages</string>
+            </key>
+            <value>
+              <list>
+                <unicode>Python</unicode>
+              </list>
+            </value>
+            <key>
+              <string>outputFile</string>
+            </key>
+            <value>
+              <unicode>doc/tt</unicode>
+            </value>
+          </dict>
+        </value>
         <key>
           <string>ERIC4DOC</string>
         </key>
