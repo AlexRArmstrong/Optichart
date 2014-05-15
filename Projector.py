@@ -120,6 +120,9 @@ class Projector(object):
 		
 		# Flag for red/green
 		self.red_green = 0
+		# Flag for center/Enter button
+		self.enter = 0
+		
 		# Fill the screen with a while background.
 		self.screen.fill(WHITE)
 		# Must call update to actually display anything.
@@ -316,7 +319,17 @@ class Projector(object):
 						self.mask.moveSlitRight()
 						self.update()
 					elif each_event.dict['key'] == 13:		# Enter is center btn.
-						size = self.slide.calculateSize(self.lane_length, (100/20), self.slide.dpi())
-						self.mask.showLine(size)
+						self.enter += 1
+						if self.enter == 1:
+							size = self.slide.calculateSize(self.lane_length, (100/20), self.slide.dpi())
+							self.mask.showLine(size)
+							# Need to center closest line.
+						elif self.enter == 2:
+							pass
+							# Here we need to figure out which letter to isolate.
+						else:
+							self.enter = 0
+							self.mask.clear()
 						self.update()
 					# Add additional key presses here...
+				
