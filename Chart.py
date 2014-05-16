@@ -139,6 +139,17 @@ class Chart(object):
 			# If we have a data line...
 			elif all_lines[i].upper().startswith('20'):
 				line = all_lines[i]
+				
+				# Check for default character
+				default_chr_pos = 0
+				for i, chr in enumerate(line):
+					if chr == '~':
+						default_chr_pos = i + 1
+						line = line.replace('~', '', 1)
+				if default_chr_pos >= len(line):
+					default_chr_pos = len(line) - 1
+				current_line.setDefaultCharacter(default_chr_pos)
+				
 				# Check for multiple columns.
 				line_sections = line.split('|')
 				for each_section in line_sections:
@@ -147,20 +158,6 @@ class Chart(object):
 					text = text.strip()
 					if text.startswith('"') or text.startswith("'"):
 						text = text.strip('"\'')
-					# Check for default character
-					default_chr_pos = 0
-					num_chrs = range(len(text))
-					for n in num_chrs:
-						if text[n] == '~':
-							text = text.replace('~', '', 1)
-							default_chr_pos = n + 1
-							if default_chr_pos >= len(text):
-								default_chr_pos = len(text) - 1
-							current_line.setDefaultCharacter(default_chr_pos)
-							break
-						else:
-							current_line.setDefaultCharacter(default_chr_pos)
-							continue
 					# Add a section to the current line.
 					a_section = Section(ratio, text)
 					current_line.addSection(a_section)
