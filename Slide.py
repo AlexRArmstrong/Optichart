@@ -287,14 +287,18 @@ class Slide(object):
 				section_font = pygame.font.Font(full_font_name, int(line_size))
 				# Get the text for this section.
 				text = each_section.text()
+				# Calculate the spacing of the letters for this section.
 				num_chrs = len(text)
 				text_width, text_height = section_font.size(text)
 				chr_width = text_width / num_chrs
 				space_width = (section_width - text_width) / (num_chrs + 1.0)
+				# Create a surface for this section.
 				section_surface = pygame.Surface([section_width, text_height])
 				section_surface.fill(WHITE)
+				# Keep track of how big the line is - different sections will change this.
 				if text_height > line_height:
 					line_height = text_height
+				# Render each character onto a surface at the correctly spaced position.
 				x_pos = 0
 				y_pos = 0
 				x_pos += space_width
@@ -305,6 +309,7 @@ class Slide(object):
 					section_surface.blit(chr_surface, chr_position)
 					x_pos = x_pos + chr_width + space_width
 				all_rendered_sections.append(section_surface)
+			# Now blit all the section surfaces onto a line surface.
 			line_surface = pygame.Surface([slide_width, line_height])
 			line_surface.fill(WHITE)
 			for each_sect_surf in all_rendered_sections:
@@ -325,7 +330,7 @@ class Slide(object):
 			line_spaceing = self.calculateSize(lane_length, scale_factor, dpi)
 			total_chart_heigh_px = total_chart_heigh_px + ln_height + line_spaceing
 				
-		# Make a big surface.
+		# Make a big surface to hold all the lines.
 		#total_size = [total_chart_width_px, total_chart_heigh_px]
 		total_size = [slide_width, total_chart_heigh_px]
 		self._surface = pygame.Surface(total_size)
@@ -337,7 +342,7 @@ class Slide(object):
 			x_r, y_r = each_line.get_size()
 			position[0] = position[0] - (x_r / 2)
 			self._surface.blit(each_line, position)
-			
+			# Figure out the coordinates for the page breaks.
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing
 			if line_no in page_numbers:
