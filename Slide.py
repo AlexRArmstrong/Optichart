@@ -265,12 +265,11 @@ class Slide(object):
 		all_rendered_lines = []
 		all_lines = self._chart.lines()
 		page_numbers = self._chart.pages()
-		line_numbers = range(len(all_lines))
 		slide_width = self._width # the width of the slide display area from config file.
 		lane_length = self._lane_length
 		dpi = self._dpi
 		
-		for current_line in all_lines:
+		for line_no, current_line in enumerate(all_lines):
 			line_font = current_line.font()
 			full_font_name = self.fixFontName(line_font)
 			num_sections = len(current_line.sections())
