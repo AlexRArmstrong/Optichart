@@ -320,7 +320,7 @@ class Slide(object):
 		for i in num_lines:
 			cur_ren_line = all_rendered_lines[i]
 			ln_width, ln_height = cur_ren_line.get_size()
-			# Calculate the space between each line - varies per line.
+			# Calculate the space between each line - can vary per line.
 			scale_factor = all_lines[i].lineSpaceingScaleFactor()
 			line_spaceing = self.calculateSize(lane_length, scale_factor, dpi)
 			total_chart_heigh_px = total_chart_heigh_px + ln_height + line_spaceing
