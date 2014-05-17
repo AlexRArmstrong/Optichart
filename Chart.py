@@ -139,23 +139,27 @@ class Chart(object):
 			# If we have a data line...
 			elif all_lines[i].upper().startswith('20'):
 				line = all_lines[i]
-				
-				# Check for default character
+				# Set the default character to 0.
 				default_chr_pos = 0
-				for i, chr in enumerate(line):
-					if chr == '~':
-						default_chr_pos = i + 1
-						line = line.replace('~', '', 1)
-				if default_chr_pos >= len(line):
-					default_chr_pos = len(line) - 1
 				current_line.setDefaultCharacter(default_chr_pos)
-				
 				# Check for multiple columns.
 				line_sections = line.split('|')
 				for each_section in line_sections:
 					ratio, text = each_section.split(':')
 					ratio = ratio.strip()
 					text = text.strip()
+					# Check for default character markers.
+					for chr in text:
+						if chr == '~':
+							text = text.replace('~', '', 1)
+							# Sanity check for position.
+							if default_chr_pos >= len(line):
+								default_chr_pos = len(line) - 1
+							current_line.setDefaultCharacter(default_chr_pos)
+							break
+						else:
+							default_chr_pos += 1
+					# Strip out any quote marks.
 					if text.startswith('"') or text.startswith("'"):
 						text = text.strip('"\'')
 					# Add a section to the current line.
