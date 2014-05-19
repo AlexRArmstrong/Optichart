@@ -262,6 +262,7 @@ class Slide(object):
 		checks for pages and default characters while doing this.
 		'''
 
+		self._default_characters = []
 		all_rendered_lines = []
 		all_lines = self._chart.lines()
 		page_numbers = self._chart.pages()
@@ -278,6 +279,7 @@ class Slide(object):
 			sect_y = 0
 			all_rendered_sections = []
 			line_height = 0
+			default_chr_position = 0
 			for each_section in current_line.sections():
 				# Get the scaling factor and calculate the size in pixels
 				scale_factor = each_section.scaleFactor()
@@ -306,7 +308,10 @@ class Slide(object):
 					chr_surface.set_colorkey(NOTBLACK)
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
+					if default_chr_position == current_line.defaultCharacterPosition():
+						self._default_characters.append([x_pos, y_pos, scale_factor])
 					x_pos = x_pos + chr_width + space_width
+					default_chr_position += 1
 				all_rendered_sections.append(section_surface)
 			# Now blit all the section surfaces onto a line surface.
 			line_surface = pygame.Surface([slide_width, line_height])
@@ -341,6 +346,8 @@ class Slide(object):
 			x_r, y_r = each_line.get_size()
 			position[0] = position[0] - (x_r / 2)
 			self._surface.blit(each_line, position)
+			# Y for def chrs.
+			self._default_characters[line_no][1] = position[1]
 			# Figure out the coordinates for the page breaks.
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing
