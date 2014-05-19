@@ -261,8 +261,11 @@ class Slide(object):
 		Does display layout and renders the text onto a big surface.  Also
 		checks for pages and default characters while doing this.
 		'''
-
+#		# Clear per slide/chart variables.
+		self._pages = [[0, 0]]
 		self._default_characters = []
+		self._surface = None
+		
 		all_rendered_lines = []
 		all_lines = self._chart.lines()
 		page_numbers = self._chart.pages()
