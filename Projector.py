@@ -321,12 +321,35 @@ class Projector(object):
 					elif each_event.dict['key'] == 13:		# Enter is center btn.
 						self.enter += 1
 						if self.enter == 1:
-							size = self.slide.calculateSize(self.lane_length, (100/20), self.slide.dpi())
+							# Find the closest line.
+							view_center_y = self.viewport.centery
+							def_chrs = self.slide.defaultCharacters()
+							all_y_diffs = []
+							for i, each_chr_position in enumerate(def_chrs):
+								y_diff = math.fabs(view_center_y - each_chr_position[1])
+								all_y_diffs.append([y_diff, i])
+							closest_line = min(all_y_diffs)
+							# Calculate mask size and apply mask.
+							scale_factor = def_chrs[closest_line[1]][2]
+							size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
 							self.mask.showLine(size)
 							# Need to center closest line.
+							y_jump = def_chrs[closest_line[1]][1] + (size / 2.0) - view_center_y
+							self.viewport = self.viewport.move(0, y_jump)
 						elif self.enter == 2:
-							pass
-							# Here we need to figure out which letter to isolate.
+							# Need to find the closest line, 
+							view_center_y = self.viewport.centery
+							def_chrs = self.slide.defaultCharacters()
+							all_y_diffs = []
+							for i, each_chr_position in enumerate(def_chrs):
+								y_diff = math.fabs(view_center_y - each_chr_position[1])
+								all_y_diffs.append([y_diff, i])
+							closest_line = min(all_y_diffs)
+							# Calculate size and apply mask.
+							scale_factor = def_chrs[closest_line[1]][2]
+							size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+							position = (self.viewport.width - self.slide.surface().get_width()) / 2 + def_chrs[closest_line[1]][0]
+							self.mask.showSlit(size, position)
 						else:
 							self.enter = 0
 							self.mask.clear()
