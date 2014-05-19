@@ -108,10 +108,10 @@ class Slide(object):
 	
 	def defaultCharacters(self):
 		'''
-		Return a list of the default characters and their coordinates.
+		Return a list of the default characters coordinates, and size.
 		Data Structure:
-		list = [('U', x, y),
-				('T', x, y)]
+		list = [[x, y, size],
+				[x, y, size]]
 		'''
 		return self._default_characters
 	
