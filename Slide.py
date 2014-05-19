@@ -58,7 +58,7 @@ class Slide(object):
 		if chart_name:
 			self.setChartName(chart_name)
 		# The coordinates of pages breaks.
-		self._pages = []
+		self._pages = [[0, 0]]
 		# TODO: def chrs. ???
 		self._default_characters = []
 		# The text of the chart layed out and rendered.
