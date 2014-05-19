@@ -112,6 +112,8 @@ class Chart(object):
 		line_numbers = range(len(all_lines))
 		# Create a line.
 		current_line = Line()
+		# Variable for tracking data lines.
+		data_line = 0
 		# Now read the lines.
 		for i in line_numbers:
 			# Ignore comments.
@@ -122,7 +124,7 @@ class Chart(object):
 				continue
 			# When we find ! set that line in the pages array.
 			elif all_lines[i].startswith('!'):
-				self.addPage(i)
+				self.addPage(data_line)
 				continue
 			# If we find a Font, set the line font.
 			elif all_lines[i].upper().startswith('FONT'):
@@ -139,6 +141,8 @@ class Chart(object):
 			# If we have a data line...
 			elif all_lines[i].upper().startswith('20'):
 				line = all_lines[i]
+				# Increment the number of data lines.
+				data_line += 1
 				# Set the default character to 0.
 				default_chr_pos = 0
 				current_line.setDefaultCharacter(default_chr_pos)
