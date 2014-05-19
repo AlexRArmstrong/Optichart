@@ -349,12 +349,16 @@ class Slide(object):
 			# Y for def chrs.
 			self._default_characters[line_no][1] = position[1]
 			# Figure out the coordinates for the page breaks.
-			position[0] = slide_width / 2
-			position[1] += y_r + line_spaceing
 			if line_no in page_numbers:
 				x = 0
 				y = position[1]
 				pg_coords = [x, y]
 				self._pages.append(pg_coords)
-		
-		
+			# Incriment the position for the next line.
+			position[0] = slide_width / 2
+			position[1] += y_r + line_spaceing
+			
+		# Add an end coordinate to the pages.
+		max_y = self._surface.get_height()
+		chart_end = [0, max_y]
+		self._pages.append(chart_end)
