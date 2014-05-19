@@ -93,11 +93,14 @@ class Mask(object):
 		self._aperture = self._aperture.inflate(0, -y)
 		# Could use a Snellen ratio, but then would have to account for dpi etc.
 	
-	def showSlit(self):
+	def showSlit(self, size, position):
 		'''
 		Show a vertical slit of letters.
+		Takes the horizontal size of the slit in pixels and the pixel location
+		of the left edge - the top is always at the top of the screen.
 		'''
-		pass
+		self._slit.width = size + 25
+		self._slit.left = position
 	
 	def clearSlit(self):
 		'''
