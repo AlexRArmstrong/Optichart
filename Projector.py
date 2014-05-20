@@ -256,10 +256,46 @@ class Projector(object):
 			self.update()
 	
 	def pageUp(self):
-		pass
+		page_coordinates = self.slide.pageCoordinates()
+		view_top_y = self.viewport.top
+		# All page markers should be closer than the end of the slide.
+		min_diff = self.slide_surface.get_height()
+		closest_marker = None
+		# Find the closest page marker, 
+		for i, each_pair in enumerate(page_coordinates):
+			diff = view_top_y - each_pair[1]
+			if diff < 51:
+				continue
+				# If a marker is within a few pixels, we ignore it,
+				# also ignore markers where the diff is negative - they are 
+				# page down markers (note that we reverse the diff code for pg dwn.
+			if diff < min_diff:
+				min_diff = diff
+				closest_marker = i
+		
+		if closest_marker is not None:
+			y_jump = page_coordinates[closest_marker][1] - 50
+			self.viewport.top = y_jump
+		
+		self.update()
+		
 	
 	def pageDown(self):
-		pass
+		page_coordinates = self.slide.pageCoordinates()
+		view_top_y = self.viewport.top
+		min_diff = self.slide_surface.get_height()
+		closest_marker = None
+		for i, each_pair in enumerate(page_coordinates):
+			diff = each_pair[1] - view_top_y
+			if diff < 51:
+				continue
+			if diff < min_diff:
+				min_diff = diff
+				closest_marker = i
+		if closest_marker is not None:
+			y_jump = page_coordinates[closest_marker][1] - 50
+			self.viewport.top = y_jump
+		self.update()
 	
 	def startEventLoop(self):
 		'''
@@ -297,7 +333,10 @@ class Projector(object):
 					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
 						print 'DOWN' # Debug
 						self.moveDown()
-						
+					elif each_event.dict['key'] == 264:		# 8 - Page up
+						self.pageUp()
+					elif each_event.dict['key'] == 258:		# 2 - Page down
+						self.pageDown()
 					elif each_event.dict['key'] == 114:		# r Toggles Red/Green
 						self.toggleRedGreen()
 					elif each_event.dict['key'] == 263:		# 7 - Bigger Horz. aperture
