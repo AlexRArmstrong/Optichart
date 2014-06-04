@@ -223,9 +223,20 @@ class Projector(object):
 		# Fill the screen background with black - creates a black border when
 		# showing charts that don't fill up the whole screen.
 		self.screen.fill(BLACK)
-
-		xc = (self.screen.get_width() - self.slide_surface.get_width()) / 2
-		top_left = [xc, 0]
+		
+		# Calculate the top left coordinates for positioning the slide.
+		monitor_height_px = self.screen.get_height()
+		monitor_width_px = self.screen.get_width()
+		slide_display_height =  self.slide.slideHeight()
+		slide_display_width = self.slide.slideWidth()
+		
+		chart_projection_x = (monitor_width_px - slide_display_width) / 2
+		chart_projection_y = (monitor_height_px - slide_display_height) / 2
+		
+		top_left = [chart_projection_x, chart_projection_y]
+		
+		virt_char_size = pygame.Rect(chart_projection_x, chart_projection_y, self.slide.slideWidth(), self.slide.slideHeight())
+		
 		background = pygame.Surface((XMAX, YMAX))
 		letters = pygame.Surface((XMAX, YMAX))
 		letters.blit(self.slide_surface, top_left, self.viewport)
@@ -243,7 +254,7 @@ class Projector(object):
 		mask_surface = self.mask.surface()
 		background.blit(mask_surface, [0, 0])
 		# Put the whole works on the screen.
-		self.screen.blit(background, [0, 0])
+		self.screen.blit(background, top_left, virt_char_size)
 		# Update the display.
 		pygame.display.update()
 	
