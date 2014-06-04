@@ -134,12 +134,13 @@ class Projector(object):
 		
 		# Calculate the vertical dpi.
 		width_px, height_px = self.screen.get_size()
-		XMAX = width_px
-		YMAX = height_px
-		print height_px #DEBUG
 		print self.monitor_vert_size
 		dpi = height_px / self.monitor_vert_size
 		print 'dpi:', dpi
+		
+		# Asign screen x & y size values to global XMAX and YMAX.
+		XMAX = width_px
+		YMAX = height_px
 		
 		# Create a slide of the chart.
 		self.slide = Slide()
