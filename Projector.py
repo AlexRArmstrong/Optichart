@@ -69,6 +69,7 @@ class Projector(object):
 		self.default_font = 'Sloan.ttf'
 		
 		# Dimensions in mm.
+		# Builtin monitor and lane sizes.
 		self.monitor_vert_size = 287.0
 		self.lane_length = 6096.0
 		
