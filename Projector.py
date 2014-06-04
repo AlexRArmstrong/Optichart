@@ -219,6 +219,11 @@ class Projector(object):
 		Update the screen.
 		'''
 		# First need to define what we're using.
+		
+		# Fill the screen background with black - creates a black border when
+		# showing charts that don't fill up the whole screen.
+		self.screen.fill(BLACK)
+
 		xc = (self.screen.get_width() - self.slide_surface.get_width()) / 2
 		top_left = [xc, 0]
 		background = pygame.Surface((XMAX, YMAX))
