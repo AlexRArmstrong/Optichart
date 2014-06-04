@@ -153,8 +153,8 @@ class Projector(object):
 		
 		self.mask = Mask(size)
 		
-		# Create the default viewport window. Move this to display if need
-		# slides to reset to the default view when switching.
+		# Create the default viewport window. Move this to display() function
+		# if need slides to reset to the default view when switching.
 		self.viewport = pygame.Rect(0, -80, XMAX, YMAX)
 		
 		self.display(chart_name)
