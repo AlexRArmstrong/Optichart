@@ -237,9 +237,9 @@ class Projector(object):
 		
 		virt_char_size = pygame.Rect(chart_projection_x, chart_projection_y, self.slide.slideWidth(), self.slide.slideHeight())
 		
+		# Create the background surface for the letters.
 		background = pygame.Surface((XMAX, YMAX))
-		letters = pygame.Surface((XMAX, YMAX))
-		letters.blit(self.slide_surface, top_left, self.viewport)
+		
 		# Now fix the background for the chart - white or red/green.
 		if self.red_green:
 			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
