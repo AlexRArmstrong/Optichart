@@ -400,8 +400,10 @@ class Projector(object):
 						else:
 							self.enter = 0
 							self.mask.clear()
-					# Add additional key presses here...
-				# After the screen status is changed by the key press we
-				# call update() to draw the screen.
-				self.update()
-				
+						# Add additional key presses here...
+					# After the screen status is changed by the key press we
+					# call update() to draw the screen. At the current indentation
+					# level it is only called once per key-press event. If we move
+					# it out a level it will be called once per get-event call.
+					self.update()
+
