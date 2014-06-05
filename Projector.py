@@ -263,20 +263,16 @@ class Projector(object):
 	def moveUp(self):
 		jump_dist = 20 # Pix
 		self.viewport = self.viewport.move(0, jump_dist)
-		self.update()
 		
 	def moveDown(self):
 		jump_dist = -20 # Pix
 		self.viewport = self.viewport.move(0, jump_dist)
-		self.update()
 	
 	def toggleRedGreen(self):
 		if not self.red_green:
 			self.red_green = 1
-			self.update()
 		else:
 			self.red_green = 0
-			self.update()
 	
 	def pageUp(self):
 		page_coordinates = self.slide.pageCoordinates()
@@ -300,7 +296,6 @@ class Projector(object):
 			y_jump = page_coordinates[closest_marker][1] - 50
 			self.viewport.top = y_jump
 		
-		self.update()
 		
 	
 	def pageDown(self):
@@ -318,7 +313,6 @@ class Projector(object):
 		if closest_marker is not None:
 			y_jump = page_coordinates[closest_marker][1] - 50
 			self.viewport.top = y_jump
-		self.update()
 	
 	def startEventLoop(self):
 		'''
@@ -360,22 +354,16 @@ class Projector(object):
 						self.toggleRedGreen()
 					elif each_event.key == K_7:				# 7 - Bigger Horz. aperture
 						self.mask.increaseAperture()
-						self.update()
 					elif each_event.key == K_1:				# 1 - Smaller Horz. aperture
 						self.mask.decreaseAperture()
-						self.update()
 					elif each_event.key == K_9:				# 9 - Bigger Vert. slit
 						self.mask.increaseSlitWidth()
-						self.update()
 					elif each_event.key == K_3:				# 3 - Smaller Vert. slit
 						self.mask.decreaseSlitWidth()
-						self.update()
 					elif each_event.key == K_4:				# 4 - Move Vert. slit left
 						self.mask.moveSlitLeft()
-						self.update()
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
 						self.mask.moveSlitRight()
-						self.update()
 					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.enter += 1
 						if self.enter == 1 or self.enter == 3:
@@ -412,6 +400,8 @@ class Projector(object):
 						else:
 							self.enter = 0
 							self.mask.clear()
-						self.update()
 					# Add additional key presses here...
+				# After the screen status is changed by the key press we
+				# call update() to draw the screen.
+				self.update()
 				
