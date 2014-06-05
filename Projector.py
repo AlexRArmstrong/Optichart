@@ -157,7 +157,11 @@ class Projector(object):
 		
 		# Create the default viewport window. Move this to display() function
 		# if need slides to reset to the default view when switching.
-		self.viewport = pygame.Rect(0, -80, XMAX, YMAX)
+		# The viewport is the same size as the virtual chart projections size.
+		self.viewport = pygame.Rect(0, 0, self.slide.slideWidth(), self.slide.slideHeight())
+		# Move the viewport to show the top of the letters surface.
+		self.viewport.left = 0
+		self.viewport.top = -30
 		
 		self.display(chart_name)
 		
