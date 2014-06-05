@@ -153,8 +153,6 @@ class Projector(object):
 		self.slide.setSlideHeight(self.chart_vert_size)
 		self.slide.setSlideWidth(self.chart_horz_size)
 		
-		self.mask = Mask(size)
-		
 		# Create the default viewport window. Move this to display() function
 		# if need slides to reset to the default view when switching.
 		# The viewport is the same size as the virtual chart projections size.
@@ -162,6 +160,10 @@ class Projector(object):
 		# Move the viewport to show the top of the letters surface.
 		self.viewport.left = 0
 		self.viewport.top = -30
+		
+		# Creat a mask the same size as the viewport.  This means it only has
+		# to mask what is visible, rather than the whole screen.
+		self.mask = Mask(self.viewport.size)
 		
 		self.display(chart_name)
 		
@@ -258,7 +260,7 @@ class Projector(object):
 		background.blit(self.slide_surface, top_left, self.viewport)
 		# Put the mask (if any) on the letters.
 		mask_surface = self.mask.surface()
-		background.blit(mask_surface, [0, 0])
+		background.blit(mask_surface, top_left)
 		# Put the whole works on the screen.
 		self.screen.blit(background, top_left, virt_char_size)
 		# Update the display.
@@ -399,7 +401,7 @@ class Projector(object):
 							# Calculate size and apply mask.
 							scale_factor = def_chrs[closest_line[1]][2]
 							size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
-							position = (self.viewport.width - self.slide.surface().get_width()) / 2 + def_chrs[closest_line[1]][0]
+							position = def_chrs[closest_line[1]][0]
 							self.mask.showSlit(size, position)
 						else:
 							self.enter = 0
