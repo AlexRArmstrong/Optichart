@@ -33,6 +33,8 @@ import copy
 import pygame
 
 from pygame.locals import KEYDOWN, QUIT
+from pygame.locals import K_q, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT
+from pygame.locals import K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
 
 from Slide import Slide
 from Mask import Mask
@@ -328,57 +330,53 @@ class Projector(object):
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
-					if each_event.dict['key'] == 27:		# Esc Quits
+					if each_event.dict['key'] == 27:		# Esc./Setup Quits
 						pygame.quit()
 						sys.exit()
-					elif each_event.dict['key'] == 113:		# Q Quits
+					elif each_event.key == K_q:				# Q Quits
 						pygame.quit()
 						sys.exit()
-					elif each_event.dict['key'] == 275:		# Right Arrow Next Chart
-						print 'RIGHT' #Debug
+					elif each_event.key == K_RIGHT:			# Right Arrow Next Chart
 						self.current_chart_index += 1
 						if self.current_chart_index >= self.max_chart_index:
 							self.current_chart_index = self.max_chart_index
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
-					elif each_event.dict['key'] == 276:		# Left Arrow Prev. Chart
-						print 'LEFT' # Debug
+					elif each_event.key == K_LEFT:			# Left Arrow Prev. Chart
 						self.current_chart_index -= 1
 						if self.current_chart_index <= 0:
 							self.current_chart_index = 0
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
-					elif each_event.dict['key'] == 273:		# Up Arrow Scroll Up
-						print 'UP' # Debug
+					elif each_event.key == K_UP:			# Up Arrow Scroll Up
 						self.moveUp()
-					elif each_event.dict['key'] == 274:		# Down Arrow Scroll Down
-						print 'DOWN' # Debug
+					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
 						self.moveDown()
-					elif each_event.dict['key'] == 264:		# 8 - Page up
+					elif each_event.key == K_8:				# 8 - Page up
 						self.pageUp()
-					elif each_event.dict['key'] == 258:		# 2 - Page down
+					elif each_event.key == K_2:				# 2 - Page down
 						self.pageDown()
-					elif each_event.dict['key'] == 114:		# r Toggles Red/Green
+					elif each_event.dict['key'] == 120:		# Stop/Mode Toggles Red/Green
 						self.toggleRedGreen()
-					elif each_event.dict['key'] == 263:		# 7 - Bigger Horz. aperture
+					elif each_event.key == K_7:				# 7 - Bigger Horz. aperture
 						self.mask.increaseAperture()
 						self.update()
-					elif each_event.dict['key'] == 257:		# 1 - Smaller Horz. aperture
+					elif each_event.key == K_1:				# 1 - Smaller Horz. aperture
 						self.mask.decreaseAperture()
 						self.update()
-					elif each_event.dict['key'] == 265:		# 9 - Bigger Vert. slit
+					elif each_event.key == K_9:				# 9 - Bigger Vert. slit
 						self.mask.increaseSlitWidth()
 						self.update()
-					elif each_event.dict['key'] == 259:		# 3 - Smaller Vert. slit
+					elif each_event.key == K_3:				# 3 - Smaller Vert. slit
 						self.mask.decreaseSlitWidth()
 						self.update()
-					elif each_event.dict['key'] == 260:		# 4 - Move Vert. slit left
+					elif each_event.key == K_4:				# 4 - Move Vert. slit left
 						self.mask.moveSlitLeft()
 						self.update()
-					elif each_event.dict['key'] == 262:		# 6 - Move Vert. slit right
+					elif each_event.key == K_6:				# 6 - Move Vert. slit right
 						self.mask.moveSlitRight()
 						self.update()
-					elif each_event.dict['key'] == 13:		# Enter is center btn.
+					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.enter += 1
 						if self.enter == 1 or self.enter == 3:
 							# Find the closest line.
