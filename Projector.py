@@ -268,11 +268,22 @@ class Projector(object):
 	
 	def moveUp(self):
 		jump_dist = 20 # Pix
-		self.viewport = self.viewport.move(0, jump_dist)
+		view_top_y = self.viewport.top
+		slide_height = self.slide_surface.get_height()
+		# Check for top of page - scroll stops.
+		if (view_top_y + jump_dist) > (slide_height - 200):
+			pass
+		else:
+			self.viewport = self.viewport.move(0, jump_dist)
 		
 	def moveDown(self):
 		jump_dist = -20 # Pix
-		self.viewport = self.viewport.move(0, jump_dist)
+		view_top_y = self.viewport.bottom
+		# Check for scorll stop.
+		if (view_top_y + jump_dist) < 10:
+			pass
+		else:
+			self.viewport = self.viewport.move(0, jump_dist)
 	
 	def toggleRedGreen(self):
 		if not self.red_green:
