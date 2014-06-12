@@ -100,7 +100,7 @@ class Mask(object):
 		Takes the horizontal size of the slit in pixels and the pixel location
 		of the left edge - the top is always at the top of the screen.
 		'''
-		self._slit.width = size + 25
+		self._slit.width = size
 		self._slit.left = position
 	
 	def clearSlit(self):
