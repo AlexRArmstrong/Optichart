@@ -373,6 +373,7 @@ class Projector(object):
 					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.enter += 1
 						if self.enter == 1 or self.enter == 3:
+							# Isolate just a single line.
 							# Find the closest line.
 							view_center_y = self.viewport.centery
 							def_chrs = self.slide.defaultCharacters()
