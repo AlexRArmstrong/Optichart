@@ -88,8 +88,9 @@ class Mask(object):
 		Show only a single line of size s pixels centered in the screen.
 		'''
 		# Calculate size of black border.
-		# Include a fudge factor, so that text will have space on either side.
-		y = self._aperture.height - (s + 20)
+		# Could include a fudge factor, so that text will have space on either side,
+		# but we calculate a much larger size when calling this so don't need it.
+		y = self._aperture.height - s
 		self._aperture = self._aperture.inflate(0, -y)
 		# Could use a Snellen ratio, but then would have to account for dpi etc.
 	
