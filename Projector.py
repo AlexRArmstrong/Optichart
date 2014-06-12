@@ -383,11 +383,12 @@ class Projector(object):
 							closest_line = min(all_y_diffs)
 							# Calculate mask size and apply mask.
 							scale_factor = def_chrs[closest_line[1]][2]
-							size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+							# The mask window should be twice the line size.
+							size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
 							self.mask.clear()
 							self.mask.showLine(size)
 							# Need to center closest line.
-							y_jump = def_chrs[closest_line[1]][1] + (size / 2.0) - view_center_y
+							y_jump = def_chrs[closest_line[1]][1] + (size / 4.0) - view_center_y
 							self.viewport = self.viewport.move(0, y_jump)
 						elif self.enter == 2:
 							# Need to find the closest line, 
