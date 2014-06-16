@@ -108,7 +108,8 @@ class Slide(object):
 	
 	def defaultCharacters(self):
 		'''
-		Return a list of the default characters coordinates, and size.
+		Return a list of the default characters coordinates, and size as a scale
+		factor (ie. 1.25 - the Snellen ratio divided out).
 		Data Structure:
 		list = [[x, y, size],
 				[x, y, size]]
