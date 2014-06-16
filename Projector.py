@@ -85,6 +85,7 @@ class Projector(object):
 		
 		# Set up the default font.
 		# TODO: Test the handeling of font pathing.
+		# FIXME: Need to have full path.
 		self.full_font_name = os.path.join(self.start_dir, self.font_dir, self.default_font)
 		
 		#Find the chart files.
@@ -233,6 +234,8 @@ class Projector(object):
 		self.screen.fill(BLACK)
 		
 		# Calculate the top left coordinates for positioning the slide.
+		# An optimazation might be to have this as an instance variable rather
+		# than compute it every time - depends on processor vs. memory tradeoff.
 		monitor_height_px = self.screen.get_height()
 		monitor_width_px = self.screen.get_width()
 		slide_display_height =  self.slide.slideHeight()
@@ -308,7 +311,7 @@ class Projector(object):
 			if diff < min_diff:
 				min_diff = diff
 				closest_marker = i
-		
+	#Maybe can compare cloest marker to top coords and if same continue.??	
 		if closest_marker is not None:
 			y_jump = page_coordinates[closest_marker][1] - 50
 			self.viewport.top = y_jump
