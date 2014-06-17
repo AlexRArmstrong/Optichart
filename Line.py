@@ -62,6 +62,16 @@ class Line(object):
 		'''
 		return self._sections
 		
+	def text(self):
+		'''
+		Return the full text of a line.
+		This is the concatnated text of each section and is read only.
+		'''
+		all_line_text = ''
+		for each_section in self._sections:
+			all_line_text = all_line_text + each_section.text()
+		return all_line_text
+		
 	def font(self):
 		'''
 		Return the font use for this line.  If no font has been specified,
