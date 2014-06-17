@@ -237,13 +237,13 @@ class Slide(object):
 		import os.path
 		# First check to see if we have a font specified or should use default.
 		if not font_name:
-			return self._default_font
+			return os.path.join(self._font_dir, self._default_font)
 		elif os.path.isabs(font_name):
 			return font_name
 		elif os.path.exists(os.path.join(self._font_dir, font_name)):
 			return os.path.join(self._font_dir, font_name)
 		else:
-			return self._default_font
+			return os.path.join(self._font_dir, self._default_font)
 	
 	def calculateSize(self, lane_length, scale_factor, dpi):
 		'''
