@@ -230,7 +230,7 @@ class Projector(object):
 		# First need to define what we're using.
 		
 		# Fill the screen background with black - creates a black border when
-		# showing charts that don't fill up the whole screen.
+		# showing views that don't fill up the whole screen.
 		self.screen.fill(BLACK)
 		
 		# Calculate the top left coordinates for positioning the slide.
@@ -241,31 +241,33 @@ class Projector(object):
 		slide_display_height =  self.slide.slideHeight()
 		slide_display_width = self.slide.slideWidth()
 		
-		chart_projection_x = (monitor_width_px - slide_display_width) / 2
-		chart_projection_y = (monitor_height_px - slide_display_height) / 2
+		chart_projection_x = (monitor_width_px - self.viewport.width) / 2
+		chart_projection_y = (monitor_height_px - self.viewport.height) / 2
 		
 		top_left = [chart_projection_x, chart_projection_y]
 		
-		virt_char_size = pygame.Rect(chart_projection_x, chart_projection_y, self.slide.slideWidth(), self.slide.slideHeight())
+		virt_char_size = pygame.Rect(chart_projection_x, chart_projection_y, \
+		                             self.slide.slideWidth(), self.slide.slideHeight())
 		
 		# Create the background surface for the letters.
-		background = pygame.Surface((XMAX, YMAX))
+		background = pygame.Surface(self.viewport.size)
 		
 		# Now fix the background for the chart - white or red/green.
 		if self.red_green:
-			left_rect = pygame.Rect(0, 0, XMAX / 2, YMAX)
-			right_rect = pygame.Rect(XMAX / 2, 0,  XMAX, YMAX)
+			left_rect = pygame.Rect(0, 0, self.viewport.width / 2, self.viewport.height)
+			right_rect = pygame.Rect(self.viewport.width / 2, 0,  self.viewport.width, self.viewport.height)
 			background.fill(RED, left_rect)
 			background.fill(GREEN, right_rect)
 		else:
 			background.fill(WHITE)
-		# Put the letters on the background.
-		background.blit(self.slide_surface, top_left, self.viewport)
-		# Put the mask (if any) on the letters.
-		mask_surface = self.mask.surface()
-		background.blit(mask_surface, top_left)
+		
+		# Put the letters on the background. Only the letters in the viewport will
+		# be shown - the viewport acts as a mask.
+		background.blit(self.slide_surface, (0, 0), self.viewport)
+
 		# Put the whole works on the screen.
-		self.screen.blit(background, top_left, virt_char_size)
+		self.screen.blit(background, top_left)
+		
 		# Update the display.
 		pygame.display.update()
 	
