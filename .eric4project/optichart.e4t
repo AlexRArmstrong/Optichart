@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project optichart -->
-<!-- Saved: 2014-05-14, 01:45:10 -->
+<!-- Saved: 2014-06-13, 00:01:07 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Summary>TODO: Does this need to be round?</Summary>
     <Description></Description>
-    <Created>2014-05-04, 15:45:56</Created>
+    <Created>2014-06-04, 19:46:42</Created>
     <Resource>
-      <Filename>Line.py</Filename>
-      <Linenumber>136</Linenumber>
+      <Filename>Mask.py</Filename>
+      <Linenumber>140</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-05-04, 15:45:56</Created>
+    <Created>2014-06-04, 19:47:00</Created>
     <Resource>
       <Filename>Line.py</Filename>
-      <Linenumber>147</Linenumber>
+      <Linenumber>146</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-05-04, 15:52:30</Created>
+    <Created>2014-06-04, 19:47:00</Created>
+    <Resource>
+      <Filename>Line.py</Filename>
+      <Linenumber>157</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
+    <Description></Description>
+    <Created>2014-06-04, 19:47:03</Created>
     <Resource>
       <Filename>Chart.py</Filename>
       <Linenumber>62</Linenumber>
@@ -33,7 +42,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Decide on return value: True/False or the new list?</Summary>
     <Description></Description>
-    <Created>2014-05-04, 15:52:30</Created>
+    <Created>2014-06-04, 19:47:03</Created>
     <Resource>
       <Filename>Chart.py</Filename>
       <Linenumber>72</Linenumber>
@@ -42,7 +51,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Is this a good way to do return values?</Summary>
     <Description></Description>
-    <Created>2014-05-04, 15:52:30</Created>
+    <Created>2014-06-04, 19:47:03</Created>
     <Resource>
       <Filename>Chart.py</Filename>
       <Linenumber>102</Linenumber>
@@ -51,7 +60,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: def chrs. ???</Summary>
     <Description></Description>
-    <Created>2014-05-13, 21:15:59</Created>
+    <Created>2014-06-04, 19:47:05</Created>
     <Resource>
       <Filename>Slide.py</Filename>
       <Linenumber>62</Linenumber>
@@ -60,7 +69,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Maybe calling layout() should return the rendered surface?</Summary>
     <Description></Description>
-    <Created>2014-05-13, 21:15:59</Created>
+    <Created>2014-06-04, 19:47:05</Created>
     <Resource>
       <Filename>Slide.py</Filename>
       <Linenumber>123</Linenumber>
@@ -69,46 +78,28 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Question? Should this be here or part of a line?</Summary>
     <Description></Description>
-    <Created>2014-05-13, 21:15:59</Created>
+    <Created>2014-06-04, 19:47:05</Created>
     <Resource>
       <Filename>Slide.py</Filename>
       <Linenumber>252</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: def chrs. ???</Summary>
-    <Description></Description>
-    <Created>2014-05-13, 21:15:59</Created>
-    <Resource>
-      <Filename>Slide.py</Filename>
-      <Linenumber>266</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO: Does this need to be round?</Summary>
-    <Description></Description>
-    <Created>2014-05-14, 01:38:55</Created>
-    <Resource>
-      <Filename>Mask.py</Filename>
-      <Linenumber>135</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Test the handeling of font pathing.</Summary>
     <Description></Description>
-    <Created>2014-05-14, 01:43:33</Created>
+    <Created>2014-06-12, 13:38:34</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>84</Linenumber>
+      <Linenumber>87</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: Need to have full path.</Summary>
     <Description></Description>
-    <Created>2014-05-14, 01:43:33</Created>
+    <Created>2014-06-12, 13:38:34</Created>
     <Resource>
       <Filename>Projector.py</Filename>
-      <Linenumber>85</Linenumber>
+      <Linenumber>88</Linenumber>
     </Resource>
   </Task>
 </Tasks>
