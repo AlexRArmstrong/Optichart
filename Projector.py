@@ -389,7 +389,7 @@ class Projector(object):
 						self.mask.moveSlitRight()
 					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.enter += 1
-						if self.enter == 1 or self.enter == 3:
+						if self.enter == 1:
 							# Isolate just a single line.
 							# Find the closest line.
 							view_center_y = self.viewport.centery
@@ -399,15 +399,17 @@ class Projector(object):
 								y_diff = math.fabs(view_center_y - each_chr_position[1])
 								all_y_diffs.append([y_diff, i])
 							closest_line = min(all_y_diffs)
-							# Calculate mask size and apply mask.
+							# Calculate mask size.
 							scale_factor = def_chrs[closest_line[1]][2]
 							# The mask window should be twice the line size.
 							size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
-							self.mask.clear()
-							self.mask.showLine(size)
 							# Need to center closest line.
 							y_jump = def_chrs[closest_line[1]][1] + (size / 4.0) - view_center_y
 							self.viewport = self.viewport.move(0, y_jump)
+							# Now that full view is centered, we shrink it down to
+							# the size we want, but keeping the same center point.
+							y = self.slide.slideHeight() - size
+							self.viewport.inflate_ip(0, -y)
 						elif self.enter == 2:
 							# Isolate a single letter.
 							# Need to find the closest line - this might be advoided if we kept an
@@ -419,17 +421,29 @@ class Projector(object):
 								y_diff = math.fabs(view_center_y - each_chr_position[1])
 								all_y_diffs.append([y_diff, i])
 							closest_line = min(all_y_diffs)
-							# Calculate size and apply mask - window is 2x line size.
+							# Calculate size - window is 2x line size.
 							scale_factor = def_chrs[closest_line[1]][2]
 							mask_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
-							# Center the window on the letter.
+							# Need to make the viewport the correct size first.
+							x = self.slide.slideWidth() - mask_size
+							self.viewport.inflate_ip(-x, 0)
+							# Now center the window on the letter. We do this after
+							# the window is the correct size.
 							chr_x = def_chrs[closest_line[1]][0]
 							chr_width = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
 							gap = (mask_size - chr_width) / 2.0
 							position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
-							self.mask.showSlit(mask_size, position_x)
+							self.viewport.left = position_x
+						elif self.enter == 3:
+							# Return to viewing a full line.
+							self.viewport.width = self.slide.slideWidth()
+							self.viewport.left = 0
 						else:
 							self.enter = 0
+							y = self.slide.slideHeight() - self.viewport.height
+							self.viewport.inflate_ip(0, y)
+							# We clear any mask that has been applied - this allows
+							# for a 'return to defalut screen' ability.
 							self.mask.clear()
 						# Add additional key presses here...
 					# After the screen status is changed by the key press we
