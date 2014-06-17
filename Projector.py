@@ -336,6 +336,7 @@ class Projector(object):
 	
 	def startEventLoop(self):
 		'''
+		The main key handeling event loop.
 		'''
 		while True:
 			for each_event in pygame.event.get():
