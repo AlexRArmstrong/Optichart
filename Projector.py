@@ -272,23 +272,115 @@ class Projector(object):
 		pygame.display.update()
 	
 	def moveUp(self):
-		jump_dist = 20 # Pix
-		view_top_y = self.viewport.top
-		slide_height = self.slide_surface.get_height()
-		# Check for top of page - scroll stops.
-		if (view_top_y + jump_dist) > (slide_height - 200):
-			pass
+		'''
+		Scroll up by one line.
+		'''
+		# If we are showing a single line or character.
+		if self.enter in (1, 2, 3):
+			X = 0; Y = 1; SIZE = 2
+			view_height = self.viewport.height
+			current_coordinates = self.viewport.topleft
+			all_coordinates_list = self.slide.defaultCharacters()
+			all_y_diffs = []
+			# Find the closest line.
+			for i, each_coord_set in enumerate(all_coordinates_list):
+				y_diff = each_coord_set[Y] - current_coordinates[Y]
+				if y_diff < 0:
+					continue
+				all_y_diffs.append([y_diff, i])
+			# Check for end of lines. Always have the current line in the diffs.
+			if len(all_y_diffs) == 1:
+				return
+			all_y_diffs.sort()
+			next_top_line = all_coordinates_list[all_y_diffs[1][1]]
+			
+			# Calculate the new line size.
+			scale_factor = next_top_line[SIZE]
+			next_line_size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+			
+			# Center the next line.
+			gap = (view_height - next_line_size) / 2.0
+			new_view_y = next_top_line[Y] - gap
+			self.viewport.top = new_view_y
+			
+			# Resize the viewport.
+			new_view_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
+			delta_size  = view_height - new_view_size
+			self.viewport = self.viewport.inflate(0, -delta_size)
+			
+			# Check for single letter isolation.
+			if self.enter == 2:
+				# We need to shrink the width of the viewport as well.
+				self.viewport = self.viewport.inflate(-delta_size, 0)
+				# And need to ensure centering is correct.
+				chr_x = next_top_line[X]
+				gap = (new_view_size - next_line_size) / 2.0
+				position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
+				self.viewport.left = position_x
+				
 		else:
-			self.viewport = self.viewport.move(0, jump_dist)
+			jump_dist = 20 # Pix
+			view_top_y = self.viewport.top
+			slide_height = self.slide_surface.get_height()
+			# Check for top of page - scroll stops.
+			if (view_top_y + jump_dist) > (slide_height - 200):
+				pass
+			else:
+				self.viewport = self.viewport.move(0, jump_dist)
+		
+		
 		
 	def moveDown(self):
-		jump_dist = -20 # Pix
-		view_top_y = self.viewport.bottom
-		# Check for scorll stop.
-		if (view_top_y + jump_dist) < 10:
-			pass
+		# If we are showing a single line or character.
+		if self.enter in (1, 2, 3):
+			X = 0; Y = 1; SIZE = 2
+			view_height = self.viewport.height
+			current_coordinates = self.viewport.topleft
+			all_coordinates_list = self.slide.defaultCharacters()
+			all_y_diffs = []
+			# Find the closest line.
+			for i, each_coord_set in enumerate(all_coordinates_list):
+				y_diff = current_coordinates[Y] - each_coord_set[Y]
+				if y_diff < 0:
+					continue
+				all_y_diffs.append([y_diff, i])
+			# Check for end of lines. Current line is negative so not here.
+			if len(all_y_diffs) == 0 :
+				return
+			all_y_diffs.sort()
+			next_top_line = all_coordinates_list[all_y_diffs[0][1]]
+			
+			# Calculate the new line size.
+			scale_factor = next_top_line[SIZE]
+			next_line_size = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+			
+			# Center the next line.
+			gap = (view_height - next_line_size) / 2.0
+			new_view_y = next_top_line[Y] - gap
+			self.viewport.top = new_view_y
+			
+			# Resize the viewport.
+			new_view_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
+			delta_size  = view_height - new_view_size
+			self.viewport = self.viewport.inflate(0, -delta_size)
+			
+			# Check for single letter isolation.
+			if self.enter == 2:
+				# We need to shrink the width of the viewport as well.
+				self.viewport = self.viewport.inflate(-delta_size, 0)
+				# And need to ensure centering is correct.
+				chr_x = next_top_line[X]
+				gap = (new_view_size - next_line_size) / 2.0
+				position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
+				self.viewport.left = position_x
 		else:
-			self.viewport = self.viewport.move(0, jump_dist)
+			jump_dist = -20 # Pix
+			view_top_y = self.viewport.bottom
+			# Check for scorll stop.
+			if (view_top_y + jump_dist) < 10:
+				pass
+			else:
+				self.viewport = self.viewport.move(0, jump_dist)
 	
 	def toggleRedGreen(self):
 		if not self.red_green:
