@@ -108,11 +108,12 @@ class Slide(object):
 	
 	def defaultCharacters(self):
 		'''
-		Return a list of the default characters coordinates, and size as a scale
-		factor (ie. 1.25 - the Snellen ratio divided out).
+		Return a list of the default characters coordinates and size information.
+		The line scale factor (ie. 1.25 - the Snellen ratio divided out). Also 
+		included is the width of a character and the space between characters on that line.
 		Data Structure:
-		list = [[x, y, size],
-				[x, y, size]]
+		list = [[x, y, line scale factor, character width, space width],
+				[x, y, scale factor, chr width, space width]]
 		'''
 		return self._default_characters
 	
@@ -313,7 +314,7 @@ class Slide(object):
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
 					if default_chr_position == current_line.defaultCharacterPosition():
-						self._default_characters.append([x_pos, y_pos, scale_factor])
+						self._default_characters.append([x_pos, y_pos, scale_factor, chr_width, space_width])
 					x_pos = x_pos + chr_width + space_width
 					default_chr_position += 1
 				all_rendered_sections.append(section_surface)
