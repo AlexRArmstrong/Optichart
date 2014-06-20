@@ -458,9 +458,9 @@ class Projector(object):
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
 					elif each_event.key == K_UP:			# Up Arrow Scroll Up
-						self.moveUp()
-					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
 						self.moveDown()
+					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
+						self.moveUp()
 					elif each_event.key == K_8:				# 8 - Page up
 						self.pageUp()
 					elif each_event.key == K_2:				# 2 - Page down
