@@ -376,7 +376,7 @@ class Projector(object):
 		else:
 			jump_dist = -20 # Pix
 			view_top_y = self.viewport.bottom
-			# Check for scorll stop.
+			# Check for scroll stop.
 			if (view_top_y + jump_dist) < 10:
 				pass
 			else:
