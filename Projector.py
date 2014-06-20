@@ -426,7 +426,7 @@ class Projector(object):
 		'''
 		Returns the index of the closest line in the default characters array.
 		'''
-		X = 0; Y = 1;
+		X = 0; Y = 1
 		current_coordinates = self.viewport.topleft
 		default_characters_list = self.slide.defaultCharacters()
 		all_y_diffs = []
