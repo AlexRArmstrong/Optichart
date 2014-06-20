@@ -51,6 +51,8 @@ YELLOW = (255, 255, 0)
 MAGENTA = (255, 0, 255)
 CYAN = (0, 255, 255)
 
+JUMP = 40
+
 XMAX = 1248
 YMAX = 1024
 
@@ -526,17 +528,17 @@ class Projector(object):
 					elif each_event.dict['key'] == 120:		# Stop/Mode Toggles Red/Green
 						self.toggleRedGreen()
 					elif each_event.key == K_7:				# 7 - Bigger Horz. aperture
-						self.mask.increaseAperture()
+						self.viewport.inflate_ip(0, JUMP)
 					elif each_event.key == K_1:				# 1 - Smaller Horz. aperture
-						self.mask.decreaseAperture()
+						self.viewport.inflate_ip(0, -JUMP)
 					elif each_event.key == K_9:				# 9 - Bigger Vert. slit
-						self.mask.increaseSlitWidth()
+						self.viewport.inflate_ip(JUMP, 0)
 					elif each_event.key == K_3:				# 3 - Smaller Vert. slit
-						self.mask.decreaseSlitWidth()
+						self.viewport.inflate_ip(-JUMP, 0)
 					elif each_event.key == K_4:				# 4 - Move Vert. slit left
-						self.mask.moveSlitLeft()
+						self.viewport.move_ip(-JUMP, 0)
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
-						self.mask.moveSlitRight()
+						self.viewport.move_ip(JUMP, 0)
 					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.enter += 1
 						if self.enter == 1:
