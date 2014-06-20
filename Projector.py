@@ -445,13 +445,13 @@ class Projector(object):
 					elif each_event.key == K_q:				# Q Quits
 						pygame.quit()
 						sys.exit()
-					elif each_event.key == K_RIGHT:			# Right Arrow Next Chart
+					elif each_event.dict['key'] == 61:		# '+' - Next Chart
 						self.current_chart_index += 1
 						if self.current_chart_index >= self.max_chart_index:
 							self.current_chart_index = self.max_chart_index
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
-					elif each_event.key == K_LEFT:			# Left Arrow Prev. Chart
+					elif each_event.dict['key'] == 45:		# '-' - Prev. Chart
 						self.current_chart_index -= 1
 						if self.current_chart_index <= 0:
 							self.current_chart_index = 0
