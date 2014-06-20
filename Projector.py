@@ -384,6 +384,20 @@ class Projector(object):
 			else:
 				self.viewport = self.viewport.move(0, jump_dist)
 	
+	def findClosestLine(self):
+		'''
+		Returns the index of the closest line in the default characters array.
+		'''
+		X = 0; Y = 1;
+		current_coordinates = self.viewport.topleft
+		default_characters_list = self.slide.defaultCharacters()
+		all_y_diffs = []
+		for i, each_set in enumerate(default_characters_list):
+			y_diff = math.fabs(current_coordinates[Y] - each_set[Y])
+			all_y_diffs.append([y_diff, i])
+		closest_line = min(all_y_diffs)
+		return closest_line[1]
+	
 	def toggleRedGreen(self):
 		if not self.red_green:
 			self.red_green = 1
