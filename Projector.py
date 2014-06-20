@@ -384,6 +384,44 @@ class Projector(object):
 			else:
 				self.viewport = self.viewport.move(0, jump_dist)
 	
+	def moveRight(self):
+		'''
+		Move the viewport right. Moves on a per character basis if a mask is
+		active, otherwise moves on a per pixel basis.
+		'''
+		# If a mask is active:
+		if self.viewport.width < self.slide.slideWidth():
+			# Move on a per character basis.
+			current_line_index = self.findClosestLine()
+			default_characters_list = self.slide.defaultCharacters()
+			current_line = default_characters_list[current_line_index]
+			chr_width = current_line[3]
+			space_size = current_line[4]
+			JUMP = chr_width + space_size
+			self.viewport.move_ip(-JUMP, 0)
+		else:
+			JUMP = 40
+			self.viewport.move_ip(-JUMP, 0)
+	
+	def moveLeft(self):
+		'''
+		Move the viewport left. Moves on a per character basis if a mask is
+		active, otherwise moves on a per pixel basis.
+		'''
+		# If a mask is active:
+		if self.viewport.width < self.slide.slideWidth():
+			# Move on a per character basis.
+			current_line_index = self.findClosestLine()
+			default_characters_list = self.slide.defaultCharacters()
+			current_line = default_characters_list[current_line_index]
+			chr_width = current_line[3]
+			space_size = current_line[4]
+			JUMP = chr_width + space_size
+			self.viewport.move_ip(JUMP, 0)
+		else:
+			JUMP = 40
+			self.viewport.move_ip(JUMP, 0)
+			
 	def findClosestLine(self):
 		'''
 		Returns the index of the closest line in the default characters array.
@@ -473,6 +511,10 @@ class Projector(object):
 							self.current_chart_index = 0
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
+					elif each_event.key == K_RIGHT:			# Right Arrow Move Right
+						self.moveRight()
+					elif each_event.key == K_LEFT:			# Left Arrow Move Left
+						self.moveLeft()
 					elif each_event.key == K_UP:			# Up Arrow Scroll Up
 						self.moveDown()
 					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
