@@ -314,8 +314,9 @@ class Projector(object):
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
 				chr_x = next_top_line[X]
-				gap = (new_view_size - next_line_size) / 2.0
-				position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
+				chr_width = next_top_line[3]
+				gap = (new_view_size - chr_width) / 2.0
+				position_x = chr_x - gap
 				self.viewport.left = position_x
 				
 		else:
@@ -370,8 +371,9 @@ class Projector(object):
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
 				chr_x = next_top_line[X]
-				gap = (new_view_size - next_line_size) / 2.0
-				position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
+				chr_width = next_top_line[3]
+				gap = (new_view_size - chr_width) / 2.0
+				position_x = chr_x - gap
 				self.viewport.left = position_x
 		else:
 			jump_dist = -20 # Pix
@@ -522,9 +524,9 @@ class Projector(object):
 							# Now center the window on the letter. We do this after
 							# the window is the correct size.
 							chr_x = def_chrs[closest_line[1]][0]
-							chr_width = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+							chr_width = def_chrs[closest_line[1]][3]
 							gap = (mask_size - chr_width) / 2.0
-							position_x = chr_x - gap / 1.25 # I need the 1.25 to offset for inaccuracys in rendering.
+							position_x = chr_x - gap
 							self.viewport.left = position_x
 						elif self.enter == 3:
 							# Return to viewing a full line.
