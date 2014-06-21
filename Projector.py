@@ -402,6 +402,7 @@ class Projector(object):
 			JUMP = chr_width + space_size
 			self.viewport.move_ip(-JUMP, 0)
 		else:
+			JUMP = 40
 			self.viewport.move_ip(-JUMP, 0)
 	
 	def moveLeft(self):
@@ -420,6 +421,7 @@ class Projector(object):
 			JUMP = chr_width + space_size
 			self.viewport.move_ip(JUMP, 0)
 		else:
+			JUMP = 40
 			self.viewport.move_ip(JUMP, 0)
 			
 	def findClosestLine(self):
