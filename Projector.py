@@ -481,7 +481,7 @@ class Projector(object):
 				min_diff = diff
 				closest_marker = i
 		if closest_marker is not None:
-			y_jump = page_coordinates[closest_marker][1] - 50
+			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
 	
 	def startEventLoop(self):
