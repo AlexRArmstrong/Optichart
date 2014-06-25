@@ -1,20 +1,18 @@
 # Chart file for Optichart.
-# A chart with 2 fonts and default letters seperated into 3 pages or screens.
+#
 
-#Font = Snellen.ttf
-20/200 : R~D
-20/100 : Z~VNE
-20/80 : GTY~D
+20/200 : >?
+20/100 : ?</>
+20/80 : <?/>
 !
-#Font = Sloan.ttf
-20/60 : R~NZP6
-20/40 : GP~FOHR4
-20/30 : SHNYTZ~U3
-20/30 : NFCU~VSRU
-20/25 : YHTP~GN25
+20/60 : >?</<
+20/40 : />?/<>?
+20/30 : ?/</<?><
+20/30 : /?<>?>/<
+20/25 : ?</?</><
 !
-20/25 : ZGEVRND~OS
-20/20 : RDGZUP~NS2
-20/20 : FSH~DVRGUE
-20/15 : DHRU~SPEI5
-20/15 : PSNE~ZUDGP
+20/25 : <>?/?/><>
+20/20 : ?</><?>/?
+20/20 : /<?</>?><
+20/15 : ?<>/</?>/
+20/15 : >?</?></?
