@@ -1,15 +1,20 @@
-# Chart file for Optichart.  
-# A chart with three columns
+# Chart file for Optichart.
+# The astigmastic dial.
 
-LineSize = 20/30
-20/100 : E | 20/20 : U | 20/100 : E
-20/80 : NZ | 20/20 : T | 20/80 : ZN
-20/60 : VLS | 20/20 : Y | 20/60 : SLV
-20/40 : UFVP | 20/20 : V | 20/40 : PVFU
-20/30 : NSTRF | 20/20 : P | 20/30 : FRTSN
-20/20 : RCLGTB | 20/20 : E | 20/20 : BTGLCR
-20/15 : HTVPFRU | 20/20 : N | 20/15 : URFPVTH
-#S
-#B
-# TODO: Need to center vertically, and horizontally
-# such that smaller letters only take up space they need.
+20/500 : +
+# LineSize = Snellen ratio
+20/200 : !#
+20/100 : #%!&
+20/80 : %!&#
+!
+20/60 : &%##!
+20/40 : #%!&%#&
+20/30 : !##&%!&%
+20/30 : &%#!&#%&
+20/25 : &%&!#&#%
+!
+20/25 : !##%&%!#&
+20/20 : %!&##%!#&
+20/20 : #&!%&&!#%
+20/15 : &%#!%#&!#
+20/15 : #%!&%#!%#
