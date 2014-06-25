@@ -1,21 +1,18 @@
-# Chart file for Optichart.  Use #'s for comments, !'s for commands
-# referencing the formating of the next line. By default strings are
-# centered.  We start with the chart named 01 and work our way up.
-# 
-# ! s:25
-#
-! s:96
-E
-! s:64
-FP
-! s:32
-TOZ
-LPED
-PECFD
-EDFCZP
-FELOPZD
-DFFPOTEC
-LEFODPCT
-FDPLTCEO
-PE2OLCFTD
+# Chart file for Optichart.  
+# A simple Baush & Lome Chart
 
+20/200 : R~D
+20/100 : ZVNE
+20/80 : GTY~D
+!
+20/60 : RNZP6 
+20/40 : GPF~OHR4
+20/30 : SHN~YTZU3
+20/30 : NFC~UVSRU
+20/25 : YHTP~GN25
+!
+20/25 : ZGEVRN~DOS
+20/20 : R~DGZUPNS2
+20/20 : FSHDVR~GUE
+20/15 : DHR~USPEI5
+20/15 : PSNEZU~DGP

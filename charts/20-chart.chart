@@ -1,14 +1,14 @@
-# Chart file for Optichart.  
+# Chart file for Optichart.
 # A simple American Optical chart.
 
-20/200 : E
-20/100 : FP
-20/70 : TOZ
-20/50 : LPED
-20/40 : PECFD
-20/30 : EDFCZP
-20/25 : FELOPZD
-20/20 : DFFPOTEC
-20/15 : LEFODPCT
-20/13 : FDPLTCEO
-20/10 : PEZOLCFTD
+20/200 : e
+20/100 : fp
+20/70 : toz
+20/50 : lped
+20/40 : pecfd
+20/30 : edfczp
+20/25 : felopzd
+20/20 : dffpotec
+20/15 : lefodpct
+20/13 : fdpltceo
+20/10 : pezolcftd
