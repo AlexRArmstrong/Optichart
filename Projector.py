@@ -463,7 +463,7 @@ class Projector(object):
 				closest_marker = i
 	#Maybe can compare cloest marker to top coords and if same continue.??	
 		if closest_marker is not None:
-			y_jump = page_coordinates[closest_marker][1] - 50
+			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
 		
 		
