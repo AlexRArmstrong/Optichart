@@ -521,9 +521,9 @@ class Projector(object):
 						self.moveDown()
 					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
 						self.moveUp()
-					elif each_event.key == K_8:				# 8 - Page up
+					elif each_event.key == K_2:				# 2 - Page up
 						self.pageUp()
-					elif each_event.key == K_2:				# 2 - Page down
+					elif each_event.key == K_8:				# 8 - Page down
 						self.pageDown()
 					elif each_event.dict['key'] == 120:		# Stop/Mode Toggles Red/Green
 						self.toggleRedGreen()
