@@ -400,9 +400,17 @@ class Projector(object):
 			chr_width = current_line[3]
 			space_size = current_line[4]
 			JUMP = chr_width + space_size
-			self.viewport.move_ip(-JUMP, 0)
 		else:
 			JUMP = 40
+		# Check for edge of slide.
+		# If the viewport will be off the slide area we want to prevent it from
+		# moving any further.  Note that the signs (+/-) for the algebra are
+		# reversed between left and right, so the behavior is what the user
+		# expects.
+		if (self.viewport.left + self.viewport.width) - JUMP <= 0:
+			print 'degug right'
+			return
+		else:
 			self.viewport.move_ip(-JUMP, 0)
 	
 	def moveLeft(self):
@@ -419,9 +427,13 @@ class Projector(object):
 			chr_width = current_line[3]
 			space_size = current_line[4]
 			JUMP = chr_width + space_size
-			self.viewport.move_ip(JUMP, 0)
 		else:
 			JUMP = 40
+		# Check for edge of screen.
+		if (self.viewport.left + JUMP) >= self.slide_surface.get_width():
+			print 'debug left'
+			return
+		else:
 			self.viewport.move_ip(JUMP, 0)
 			
 	def findClosestLine(self):
