@@ -182,6 +182,8 @@ class Projector(object):
 				continue
 			elif each_line.isspace():
 				continue
+			elif each_line == '':
+				continue
 			elif each_line.startswith('MonitorVSize'):
 				self.monitor_vert_size = each_line.split('=')[1].strip()
 				self.monitor_vert_size = float(self.monitor_vert_size) / 25.4 # Convert mm to inches.
