@@ -572,7 +572,7 @@ class Projector(object):
 							self.viewport = self.viewport.move(0, y_jump)
 							# Now that full view is centered, we shrink it down to
 							# the size we want, but keeping the same center point.
-							y = self.slide.slideHeight() - size
+							y = self.viewport.height - size
 							self.viewport.inflate_ip(0, -y)
 						elif self.enter == 2:
 							# Isolate a single letter.
@@ -589,7 +589,7 @@ class Projector(object):
 							scale_factor = def_chrs[closest_line[1]][2]
 							mask_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
 							# Need to make the viewport the correct size first.
-							x = self.slide.slideWidth() - mask_size
+							x = self.viewport.width - mask_size
 							self.viewport.inflate_ip(-x, 0)
 							# Now center the window on the letter. We do this after
 							# the window is the correct size.
