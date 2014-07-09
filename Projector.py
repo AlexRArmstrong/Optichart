@@ -543,10 +543,14 @@ class Projector(object):
 						self.viewport.inflate_ip(0, JUMP)
 					elif each_event.key == K_1:				# 1 - Smaller Horz. aperture
 						self.viewport.inflate_ip(0, -JUMP)
+						if self.viewport.height < 0:
+							self.viewport.height = 0
 					elif each_event.key == K_9:				# 9 - Bigger Vert. slit
 						self.viewport.inflate_ip(JUMP, 0)
 					elif each_event.key == K_3:				# 3 - Smaller Vert. slit
 						self.viewport.inflate_ip(-JUMP, 0)
+						if self.viewport.width < 0:
+							self.viewport.width = 0
 					elif each_event.key == K_4:				# 4 - Move Vert. slit left
 						self.viewport.move_ip(-JUMP, 0)
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
