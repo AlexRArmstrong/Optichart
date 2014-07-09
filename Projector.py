@@ -607,7 +607,7 @@ class Projector(object):
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
 							# We clear any mask that has been applied - this allows
-							# for a 'return to defalut screen' ability.
+							# for a 'return to default screen' ability.
 							self.mask.clear()
 						# Add additional key presses here...
 					# After the screen status is changed by the key press we
