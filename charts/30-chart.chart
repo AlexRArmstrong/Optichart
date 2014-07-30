@@ -1,7 +1,6 @@
 # Chart file for Optichart.
-# The astigmastic dial.
+# Landolt C's
 
-20/500 : +
 # LineSize = Snellen ratio
 !
 20/200 : !#
