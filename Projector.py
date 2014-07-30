@@ -509,10 +509,7 @@ class Projector(object):
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
-					if each_event.dict['key'] == 27:		# Esc./Setup Quits
-						pygame.quit()
-						sys.exit()
-					elif each_event.key == K_q:				# Q Quits
+					if each_event.key == K_q:				# Q Quits
 						pygame.quit()
 						sys.exit()
 					elif each_event.dict['key'] == 61:		# '+' - Next Chart
