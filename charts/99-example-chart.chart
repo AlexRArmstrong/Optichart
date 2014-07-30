@@ -14,11 +14,16 @@
 # Font = filename.ttf - Specify a font to use, the program will look in the
 #		font directory.  Can specify a full path name to use as well.
 #		This stays the current font till over ridden or a new chart is loaded.
+# *Note that default Sloan font uses UPPERCASE letters for normal writing and
+# 		lowercase letters for mirror writing.
 # LineSize = Snellen ratio - Indicates the line spacing to use for the following
 #		lines.  Current till over ridden or new chart is loaded.
 #
 # By default each column is centered based on the number of columns in the line.
 #
+20/60 : EXAMPLE
+20/40 : CHART
+20/20 : FILE
 # Examples follow
 #
 # A simple chart.
