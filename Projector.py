@@ -33,11 +33,19 @@ import copy
 import pygame
 
 from pygame.locals import KEYDOWN, QUIT
-from pygame.locals import K_q, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT
-from pygame.locals import K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
+from pygame.locals import K_x, K_q, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT
+from pygame.locals import K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
+from pygame.locals import K_PLUS, K_MINUS
 
 from Slide import Slide
 from Mask import Mask
+
+# Check if we have an IR Remote Control
+try:
+	import pylirc
+	LIRC_ENABLED = True
+except ImportError:
+	LIRC_ENABLED = False
 
 # Define global constants.
 SNELLEN_RATIO, TEXT, SCALE_FACTOR = range(3)
@@ -101,6 +109,11 @@ class Projector(object):
 		self.max_chart_index = len(self.chart_list) - 1 # Need minus one, 'cause count from zero!
 		chart_name = self.chart_list[self.current_chart_index]
 		
+		# Initilize lirc if avialble, and register optichart as the client.
+		if LIRC_ENABLED:
+			ret_val = pylirc.init('optichart')
+			if ret_val <= 0:
+				print 'Error with lirc!', ret_val
 		# Initilize pygame.
 		pygame.init()
 		
@@ -498,11 +511,47 @@ class Projector(object):
 			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
 	
+	def pollLircEvents(self):
+		'''
+		Create pygame events from lirc events.
+		'''
+		ir_key_map = {
+				'Up' : K_UP,
+				'Down' : K_DOWN,
+				'Left' : K_LEFT,
+				'Right' : K_RIGHT,
+				'Enter' : K_RETURN,
+				'Last' :  K_x,
+				'Next' : K_PLUS,
+				'Previous' : K_MINUS,
+				'0' : K_0,
+				'1' : K_1,
+				'2' : K_2,
+				'3' : K_3,
+				'4' : K_4,
+				'5' : K_5,
+				'6' : K_6,
+				'7' : K_7,
+				'8' : K_8,
+				'9' : K_9,
+				'\27' : K_q
+				}
+		
+		if not LIRC_ENABLED:
+			return
+		code_list = pylirc.nextcode()
+		if code_list:
+			for each_code in code_list:
+				key_dict = ir_key_map[each_code]
+				new_event = pygame.event.Event(pygame.KEYDOWN, key_dict)
+				pygame.event.post(new_event)
+		
 	def startEventLoop(self):
 		'''
 		The main key handeling event loop.
 		'''
 		while True:
+			self.pollLircEvents()
 			for each_event in pygame.event.get():
 				if each_event.type == QUIT:
 					sys.exit()
@@ -510,6 +559,8 @@ class Projector(object):
 					print each_event.dict # Debugging
 					print each_event # Debugging
 					if each_event.key == K_q:				# Q Quits
+						if LIRC_ENABLED:
+							pylirc.exit()
 						pygame.quit()
 						sys.exit()
 					elif each_event.dict['key'] == 61:		# '+' - Next Chart
