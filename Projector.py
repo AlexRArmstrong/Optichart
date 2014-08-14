@@ -534,7 +534,7 @@ class Projector(object):
 				'7' : K_7,
 				'8' : K_8,
 				'9' : K_9,
-				'\27' : K_q
+				'\x1b' : K_q
 				}
 		
 		if not LIRC_ENABLED:
@@ -542,7 +542,7 @@ class Projector(object):
 		code_list = pylirc.nextcode()
 		if code_list:
 			for each_code in code_list:
-				key_dict = ir_key_map[each_code]
+				key_dict = {'key' : ir_key_map[each_code]}
 				new_event = pygame.event.Event(pygame.KEYDOWN, key_dict)
 				pygame.event.post(new_event)
 		
