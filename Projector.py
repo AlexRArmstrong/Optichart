@@ -35,7 +35,7 @@ import pygame
 from pygame.locals import KEYDOWN, QUIT
 from pygame.locals import K_x, K_q, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT
 from pygame.locals import K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
-from pygame.locals import K_PLUS, K_MINUS
+from pygame.locals import K_EQUALS, K_MINUS
 
 from Slide import Slide
 from Mask import Mask
@@ -522,7 +522,7 @@ class Projector(object):
 				'Right' : K_RIGHT,
 				'Enter' : K_RETURN,
 				'Last' :  K_x,
-				'Next' : K_PLUS,
+				'Next' : K_EQUALS,
 				'Previous' : K_MINUS,
 				'0' : K_0,
 				'1' : K_1,
@@ -558,18 +558,18 @@ class Projector(object):
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
-					if each_event.key == K_q:				# Q Quits
+					if each_event.key == K_q:				# q Quits
 						if LIRC_ENABLED:
 							pylirc.exit()
 						pygame.quit()
 						sys.exit()
-					elif each_event.dict['key'] == 61:		# '+' - Next Chart
+					elif each_event.key == K_EQUALS:		# '=' - Next Chart
 						self.current_chart_index += 1
 						if self.current_chart_index >= self.max_chart_index:
 							self.current_chart_index = self.max_chart_index
 						chart_name = self.chart_list[self.current_chart_index]
 						self.display(chart_name)
-					elif each_event.dict['key'] == 45:		# '-' - Prev. Chart
+					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
 						self.current_chart_index -= 1
 						if self.current_chart_index <= 0:
 							self.current_chart_index = 0
@@ -587,7 +587,7 @@ class Projector(object):
 						self.pageUp()
 					elif each_event.key == K_8:				# 8 - Page down
 						self.pageDown()
-					elif each_event.dict['key'] == 120:		# Stop/Mode Toggles Red/Green
+					elif each_event.key == K_x:				# x Toggles Red/Green
 						self.toggleRedGreen()
 					elif each_event.key == K_7:				# 7 - Bigger Horz. aperture
 						self.viewport.inflate_ip(0, JUMP)
