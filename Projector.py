@@ -44,6 +44,27 @@ from Mask import Mask
 try:
 	import pylirc
 	LIRC_ENABLED = True
+	ir_key_map = {
+				'Up' : K_UP,
+				'Down' : K_DOWN,
+				'Left' : K_LEFT,
+				'Right' : K_RIGHT,
+				'Enter' : K_RETURN,
+				'Last' :  K_x,
+				'Next' : K_EQUALS,
+				'Previous' : K_MINUS,
+				'0' : K_0,
+				'1' : K_1,
+				'2' : K_2,
+				'3' : K_3,
+				'4' : K_4,
+				'5' : K_5,
+				'6' : K_6,
+				'7' : K_7,
+				'8' : K_8,
+				'9' : K_9,
+				'\x1b' : K_q
+				}
 except ImportError:
 	LIRC_ENABLED = False
 
@@ -114,6 +135,9 @@ class Projector(object):
 			ret_val = pylirc.init('optichart')
 			if ret_val <= 0:
 				print 'Error with lirc!', ret_val
+			# Ensure that pylirc does not block.
+			ret_val = pylirc.blocking(0)
+			
 		# Initilize pygame.
 		pygame.init()
 		
@@ -142,8 +166,15 @@ class Projector(object):
 		
 		# Flag for red/green
 		self.red_green = 0
-		# Flag for center/Enter button
-		self.enter = 0
+		
+		# Flag for Enter Button
+		# We incriment this when changing from full screen to line mode to
+		# character mode. So:
+		# 0 - Full Screen.
+		# 1 - Line Mode - first time.
+		# 2 - Character Mode.
+		# 3 - Line Mode - second time.
+		self.mode = 0
 		
 		# Fill the screen with a while background.
 		self.screen.fill(WHITE)
@@ -293,7 +324,7 @@ class Projector(object):
 		Scroll up by one line.
 		'''
 		# If we are showing a single line or character.
-		if self.enter in (1, 2, 3):
+		if self.mode in (1, 2, 3):
 			X = 0; Y = 1; SIZE = 2
 			view_height = self.viewport.height
 			current_coordinates = self.viewport.topleft
@@ -326,7 +357,7 @@ class Projector(object):
 			self.viewport = self.viewport.inflate(0, -delta_size)
 			
 			# Check for single letter isolation.
-			if self.enter == 2:
+			if self.mode == 2:
 				# We need to shrink the width of the viewport as well.
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
@@ -335,22 +366,14 @@ class Projector(object):
 				gap = (new_view_size - chr_width) / 2.0
 				position_x = chr_x - gap
 				self.viewport.left = position_x
-				
+		
+		# Else we will be in full screen mode and jump page wise.
 		else:
-			jump_dist = 20 # Pix
-			view_top_y = self.viewport.top
-			slide_height = self.slide_surface.get_height()
-			# Check for top of page - scroll stops.
-			if (view_top_y + jump_dist) > (slide_height - 200):
-				pass
-			else:
-				self.viewport = self.viewport.move(0, jump_dist)
-		
-		
+			self.pageDown()
 		
 	def moveDown(self):
 		# If we are showing a single line or character.
-		if self.enter in (1, 2, 3):
+		if self.mode in (1, 2, 3):
 			X = 0; Y = 1; SIZE = 2
 			view_height = self.viewport.height
 			current_coordinates = self.viewport.topleft
@@ -383,7 +406,7 @@ class Projector(object):
 			self.viewport = self.viewport.inflate(0, -delta_size)
 			
 			# Check for single letter isolation.
-			if self.enter == 2:
+			if self.mode == 2:
 				# We need to shrink the width of the viewport as well.
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
@@ -392,20 +415,20 @@ class Projector(object):
 				gap = (new_view_size - chr_width) / 2.0
 				position_x = chr_x - gap
 				self.viewport.left = position_x
+		
+		# Else we will be in full screen mode and jump page wise.
 		else:
-			jump_dist = -20 # Pix
-			view_top_y = self.viewport.bottom
-			# Check for scroll stop.
-			if (view_top_y + jump_dist) < 10:
-				pass
-			else:
-				self.viewport = self.viewport.move(0, jump_dist)
+			self.pageUp()
 	
 	def moveRight(self):
 		'''
 		Move the viewport right. Moves on a per character basis if a mask is
-		active, otherwise moves on a per pixel basis.
+		active, but in full screen and line modes changes charts.
 		'''
+		# If in full or line modes, go to next chart.
+		if self.mode in (0, 1, 3):
+			self.nextChart()
+			return
 		# If a mask is active:
 		if self.viewport.width < self.slide.slideWidth():
 			# Move on a per character basis.
@@ -431,8 +454,12 @@ class Projector(object):
 	def moveLeft(self):
 		'''
 		Move the viewport left. Moves on a per character basis if a mask is
-		active, otherwise moves on a per pixel basis.
+		active, but in full screen and line modes changes charts.
 		'''
+		# If in full or line modes, go to previous chart.
+		if self.mode in (0, 1, 3):
+			self.previousChart()
+			return
 		# If a mask is active:
 		if self.viewport.width < self.slide.slideWidth():
 			# Move on a per character basis.
@@ -511,32 +538,30 @@ class Projector(object):
 			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
 	
+	def nextChart(self):
+		'''
+		Move to the next chart in sequence.
+		'''
+		self.current_chart_index += 1
+		if self.current_chart_index >= self.max_chart_index:
+			self.current_chart_index = self.max_chart_index
+		chart_name = self.chart_list[self.current_chart_index]
+		self.display(chart_name)
+	
+	def previousChart(self):
+		'''
+		Move to the previous chart in sequence.
+		'''
+		self.current_chart_index -= 1
+		if self.current_chart_index <= 0:
+			self.current_chart_index = 0
+		chart_name = self.chart_list[self.current_chart_index]
+		self.display(chart_name)
+	
 	def pollLircEvents(self):
 		'''
 		Create pygame events from lirc events.
 		'''
-		ir_key_map = {
-				'Up' : K_UP,
-				'Down' : K_DOWN,
-				'Left' : K_LEFT,
-				'Right' : K_RIGHT,
-				'Enter' : K_RETURN,
-				'Last' :  K_x,
-				'Next' : K_EQUALS,
-				'Previous' : K_MINUS,
-				'0' : K_0,
-				'1' : K_1,
-				'2' : K_2,
-				'3' : K_3,
-				'4' : K_4,
-				'5' : K_5,
-				'6' : K_6,
-				'7' : K_7,
-				'8' : K_8,
-				'9' : K_9,
-				'\x1b' : K_q
-				}
-		
 		if not LIRC_ENABLED:
 			return
 		code_list = pylirc.nextcode()
@@ -564,17 +589,9 @@ class Projector(object):
 						pygame.quit()
 						sys.exit()
 					elif each_event.key == K_EQUALS:		# '=' - Next Chart
-						self.current_chart_index += 1
-						if self.current_chart_index >= self.max_chart_index:
-							self.current_chart_index = self.max_chart_index
-						chart_name = self.chart_list[self.current_chart_index]
-						self.display(chart_name)
+						self.nextChart()
 					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
-						self.current_chart_index -= 1
-						if self.current_chart_index <= 0:
-							self.current_chart_index = 0
-						chart_name = self.chart_list[self.current_chart_index]
-						self.display(chart_name)
+						self.previousChart()
 					elif each_event.key == K_RIGHT:			# Right Arrow Move Right
 						self.moveRight()
 					elif each_event.key == K_LEFT:			# Left Arrow Move Left
@@ -606,8 +623,8 @@ class Projector(object):
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
 						self.viewport.move_ip(JUMP, 0)
 					elif each_event.key == K_RETURN:		# Enter is center btn.
-						self.enter += 1
-						if self.enter == 1:
+						self.mode += 1
+						if self.mode == 1:
 							# Isolate just a single line.
 							# Find the closest line.
 							view_center_y = self.viewport.centery
@@ -628,7 +645,7 @@ class Projector(object):
 							# the size we want, but keeping the same center point.
 							y = self.viewport.height - size
 							self.viewport.inflate_ip(0, -y)
-						elif self.enter == 2:
+						elif self.mode == 2:
 							# Isolate a single letter.
 							# Need to find the closest line - this might be advoided if we kept an
 							# instance variable for which line is in the center of the screen.
@@ -652,12 +669,12 @@ class Projector(object):
 							gap = (mask_size - chr_width) / 2.0
 							position_x = chr_x - gap
 							self.viewport.left = position_x
-						elif self.enter == 3:
+						elif self.mode == 3:
 							# Return to viewing a full line.
 							self.viewport.width = self.slide.slideWidth()
 							self.viewport.left = 0
 						else:
-							self.enter = 0
+							self.mode = 0
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
 							# We clear any mask that has been applied - this allows
