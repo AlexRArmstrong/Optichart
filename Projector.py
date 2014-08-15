@@ -535,6 +535,26 @@ class Projector(object):
 			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
 	
+	def nextChart(self):
+		'''
+		Move to the next chart in sequence.
+		'''
+		self.current_chart_index += 1
+		if self.current_chart_index >= self.max_chart_index:
+			self.current_chart_index = self.max_chart_index
+		chart_name = self.chart_list[self.current_chart_index]
+		self.display(chart_name)
+	
+	def previousChart(self):
+		'''
+		Move to the previous chart in sequence.
+		'''
+		self.current_chart_index -= 1
+		if self.current_chart_index <= 0:
+			self.current_chart_index = 0
+		chart_name = self.chart_list[self.current_chart_index]
+		self.display(chart_name)
+	
 	def pollLircEvents(self):
 		'''
 		Create pygame events from lirc events.
@@ -566,17 +586,9 @@ class Projector(object):
 						pygame.quit()
 						sys.exit()
 					elif each_event.key == K_EQUALS:		# '=' - Next Chart
-						self.current_chart_index += 1
-						if self.current_chart_index >= self.max_chart_index:
-							self.current_chart_index = self.max_chart_index
-						chart_name = self.chart_list[self.current_chart_index]
-						self.display(chart_name)
+						self.nextChart()
 					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
-						self.current_chart_index -= 1
-						if self.current_chart_index <= 0:
-							self.current_chart_index = 0
-						chart_name = self.chart_list[self.current_chart_index]
-						self.display(chart_name)
+						self.previousChart()
 					elif each_event.key == K_RIGHT:			# Right Arrow Move Right
 						self.moveRight()
 					elif each_event.key == K_LEFT:			# Left Arrow Move Left
