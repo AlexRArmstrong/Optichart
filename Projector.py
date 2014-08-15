@@ -44,6 +44,27 @@ from Mask import Mask
 try:
 	import pylirc
 	LIRC_ENABLED = True
+	ir_key_map = {
+				'Up' : K_UP,
+				'Down' : K_DOWN,
+				'Left' : K_LEFT,
+				'Right' : K_RIGHT,
+				'Enter' : K_RETURN,
+				'Last' :  K_x,
+				'Next' : K_EQUALS,
+				'Previous' : K_MINUS,
+				'0' : K_0,
+				'1' : K_1,
+				'2' : K_2,
+				'3' : K_3,
+				'4' : K_4,
+				'5' : K_5,
+				'6' : K_6,
+				'7' : K_7,
+				'8' : K_8,
+				'9' : K_9,
+				'\x1b' : K_q
+				}
 except ImportError:
 	LIRC_ENABLED = False
 
@@ -114,6 +135,9 @@ class Projector(object):
 			ret_val = pylirc.init('optichart')
 			if ret_val <= 0:
 				print 'Error with lirc!', ret_val
+			# Ensure that pylirc does not block.
+			ret_val = pylirc.blocking(0)
+			
 		# Initilize pygame.
 		pygame.init()
 		
@@ -515,28 +539,6 @@ class Projector(object):
 		'''
 		Create pygame events from lirc events.
 		'''
-		ir_key_map = {
-				'Up' : K_UP,
-				'Down' : K_DOWN,
-				'Left' : K_LEFT,
-				'Right' : K_RIGHT,
-				'Enter' : K_RETURN,
-				'Last' :  K_x,
-				'Next' : K_EQUALS,
-				'Previous' : K_MINUS,
-				'0' : K_0,
-				'1' : K_1,
-				'2' : K_2,
-				'3' : K_3,
-				'4' : K_4,
-				'5' : K_5,
-				'6' : K_6,
-				'7' : K_7,
-				'8' : K_8,
-				'9' : K_9,
-				'\x1b' : K_q
-				}
-		
 		if not LIRC_ENABLED:
 			return
 		code_list = pylirc.nextcode()
