@@ -166,8 +166,15 @@ class Projector(object):
 		
 		# Flag for red/green
 		self.red_green = 0
-		# Flag for center/Enter button
-		self.enter = 0
+		
+		# Flag for Enter Button
+		# We incriment this when changing from full screen to line mode to
+		# character mode. So:
+		# 0 - Full Screen.
+		# 1 - Line Mode - first time.
+		# 2 - Character Mode.
+		# 3 - Line Mode - second time.
+		self.mode = 0
 		
 		# Fill the screen with a while background.
 		self.screen.fill(WHITE)
@@ -317,7 +324,7 @@ class Projector(object):
 		Scroll up by one line.
 		'''
 		# If we are showing a single line or character.
-		if self.enter in (1, 2, 3):
+		if self.mode in (1, 2, 3):
 			X = 0; Y = 1; SIZE = 2
 			view_height = self.viewport.height
 			current_coordinates = self.viewport.topleft
@@ -350,7 +357,7 @@ class Projector(object):
 			self.viewport = self.viewport.inflate(0, -delta_size)
 			
 			# Check for single letter isolation.
-			if self.enter == 2:
+			if self.mode == 2:
 				# We need to shrink the width of the viewport as well.
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
@@ -374,7 +381,7 @@ class Projector(object):
 		
 	def moveDown(self):
 		# If we are showing a single line or character.
-		if self.enter in (1, 2, 3):
+		if self.mode in (1, 2, 3):
 			X = 0; Y = 1; SIZE = 2
 			view_height = self.viewport.height
 			current_coordinates = self.viewport.topleft
@@ -407,7 +414,7 @@ class Projector(object):
 			self.viewport = self.viewport.inflate(0, -delta_size)
 			
 			# Check for single letter isolation.
-			if self.enter == 2:
+			if self.mode == 2:
 				# We need to shrink the width of the viewport as well.
 				self.viewport = self.viewport.inflate(-delta_size, 0)
 				# And need to ensure centering is correct.
@@ -620,8 +627,8 @@ class Projector(object):
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
 						self.viewport.move_ip(JUMP, 0)
 					elif each_event.key == K_RETURN:		# Enter is center btn.
-						self.enter += 1
-						if self.enter == 1:
+						self.mode += 1
+						if self.mode == 1:
 							# Isolate just a single line.
 							# Find the closest line.
 							view_center_y = self.viewport.centery
@@ -642,7 +649,7 @@ class Projector(object):
 							# the size we want, but keeping the same center point.
 							y = self.viewport.height - size
 							self.viewport.inflate_ip(0, -y)
-						elif self.enter == 2:
+						elif self.mode == 2:
 							# Isolate a single letter.
 							# Need to find the closest line - this might be advoided if we kept an
 							# instance variable for which line is in the center of the screen.
@@ -666,12 +673,12 @@ class Projector(object):
 							gap = (mask_size - chr_width) / 2.0
 							position_x = chr_x - gap
 							self.viewport.left = position_x
-						elif self.enter == 3:
+						elif self.mode == 3:
 							# Return to viewing a full line.
 							self.viewport.width = self.slide.slideWidth()
 							self.viewport.left = 0
 						else:
-							self.enter = 0
+							self.mode = 0
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
 							# We clear any mask that has been applied - this allows
