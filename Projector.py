@@ -423,8 +423,12 @@ class Projector(object):
 	def moveRight(self):
 		'''
 		Move the viewport right. Moves on a per character basis if a mask is
-		active, otherwise moves on a per pixel basis.
+		active, but in full screen and line modes changes charts.
 		'''
+		# If in full or line modes, go to next chart.
+		if self.mode in (0, 1, 3):
+			self.nextChart()
+			return
 		# If a mask is active:
 		if self.viewport.width < self.slide.slideWidth():
 			# Move on a per character basis.
@@ -450,8 +454,12 @@ class Projector(object):
 	def moveLeft(self):
 		'''
 		Move the viewport left. Moves on a per character basis if a mask is
-		active, otherwise moves on a per pixel basis.
+		active, but in full screen and line modes changes charts.
 		'''
+		# If in full or line modes, go to previous chart.
+		if self.mode in (0, 1, 3):
+			self.previousChart()
+			return
 		# If a mask is active:
 		if self.viewport.width < self.slide.slideWidth():
 			# Move on a per character basis.
