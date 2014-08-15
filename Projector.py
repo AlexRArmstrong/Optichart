@@ -366,18 +366,10 @@ class Projector(object):
 				gap = (new_view_size - chr_width) / 2.0
 				position_x = chr_x - gap
 				self.viewport.left = position_x
-				
+		
+		# Else we will be in full screen mode and jump page wise.
 		else:
-			jump_dist = 20 # Pix
-			view_top_y = self.viewport.top
-			slide_height = self.slide_surface.get_height()
-			# Check for top of page - scroll stops.
-			if (view_top_y + jump_dist) > (slide_height - 200):
-				pass
-			else:
-				self.viewport = self.viewport.move(0, jump_dist)
-		
-		
+			self.pageDown()
 		
 	def moveDown(self):
 		# If we are showing a single line or character.
@@ -423,14 +415,10 @@ class Projector(object):
 				gap = (new_view_size - chr_width) / 2.0
 				position_x = chr_x - gap
 				self.viewport.left = position_x
+		
+		# Else we will be in full screen mode and jump page wise.
 		else:
-			jump_dist = -20 # Pix
-			view_top_y = self.viewport.bottom
-			# Check for scroll stop.
-			if (view_top_y + jump_dist) < 10:
-				pass
-			else:
-				self.viewport = self.viewport.move(0, jump_dist)
+			self.pageUp()
 	
 	def moveRight(self):
 		'''
