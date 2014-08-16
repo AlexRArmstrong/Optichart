@@ -445,7 +445,7 @@ class Projector(object):
 		# moving any further.  Note that the signs (+/-) for the algebra are
 		# reversed between left and right, so the behavior is what the user
 		# expects.
-		if (self.viewport.left + self.viewport.width) - JUMP <= 0:
+		if self.viewport.centerx - JUMP <= 0:
 			print 'degug right'
 			return
 		else:
@@ -472,7 +472,7 @@ class Projector(object):
 		else:
 			JUMP = 40
 		# Check for edge of screen.
-		if (self.viewport.left + JUMP) >= self.slide_surface.get_width():
+		if (self.viewport.centerx + JUMP) >= self.slide_surface.get_width():
 			print 'debug left'
 			return
 		else:
