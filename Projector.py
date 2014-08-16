@@ -570,7 +570,16 @@ class Projector(object):
 				key_dict = {'key' : ir_key_map[each_code]}
 				new_event = pygame.event.Event(pygame.KEYDOWN, key_dict)
 				pygame.event.post(new_event)
-		
+	
+	def exit(self):
+		'''
+		Code to clean up before exit.
+		'''
+		if LIRC_ENABLED:
+			pylirc.exit()
+		pygame.quit()
+		sys.exit()
+	
 	def startEventLoop(self):
 		'''
 		The main key handeling event loop.
@@ -579,15 +588,12 @@ class Projector(object):
 			self.pollLircEvents()
 			for each_event in pygame.event.get():
 				if each_event.type == QUIT:
-					sys.exit()
+					self.exit()
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
 					if each_event.key == K_q:				# q Quits
-						if LIRC_ENABLED:
-							pylirc.exit()
-						pygame.quit()
-						sys.exit()
+						self.exit()
 					elif each_event.key == K_EQUALS:		# '=' - Next Chart
 						self.nextChart()
 					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
