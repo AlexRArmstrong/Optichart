@@ -363,7 +363,3 @@ class Slide(object):
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing
 			
-		# Add an end coordinate to the pages.
-		max_y = self._surface.get_height()
-		chart_end = [0, max_y]
-		self._pages.append(chart_end)
