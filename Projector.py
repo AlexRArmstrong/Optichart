@@ -480,7 +480,8 @@ class Projector(object):
 			
 	def findClosestLine(self):
 		'''
-		Returns the index of the closest line in the default characters array.
+		Returns the index, in the default characters array, of the line 
+		closest to the top of the viewport.
 		'''
 		X = 0; Y = 1
 		current_coordinates = self.viewport.topleft
