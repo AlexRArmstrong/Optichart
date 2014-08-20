@@ -493,6 +493,52 @@ class Projector(object):
 		closest_line = min(all_y_diffs)
 		return closest_line[1]
 	
+	def checkVerticalCentering(self):
+		'''
+		Here we check that the current lines displayed are centered in the view.
+		This ensures that none of them are cut off. Another way to think of it is
+		that we check that the viewport displays only full lines.
+		'''
+		# Get the current top line.
+		default_characters_list = self.slide.defaultCharacters()
+		top_line_index = self.findClosestLine()
+		top_line_data = default_characters_list[top_line_index]
+		line_y = top_line_data[1]
+		scale_factor = top_line_data[2]
+		line_height = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+		# Check to see how much ot top line is visible.
+		amount_visible = (line_y + line_height) - self.viewport.top
+		line_half = line_height / 2.0
+		if amount_visible >= line_half:
+			top_line_y = top_line_data[1]
+		else:
+			# If less than half the top line is showing we want to use the next
+			# line as the top line.
+			top_line_index += 1
+			top_line_data = default_characters_list[top_line_index]
+			top_line_y = top_line_data[1]
+		# Find the bottom-most fully visible line.
+		characters_after_current_line = default_characters_list[top_line_index:]
+		for i, each_set in enumerate(characters_after_current_line):
+			line_y = each_set[1]
+			scale_factor = each_set[2]
+			line_height = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+			page_bottom = line_y + line_height
+			page_height = page_bottom - top_line_y
+			if page_height < self.viewport.height:
+				bottom_line_index = i
+				bottom_line_lower_y = page_bottom
+				continue
+			else:
+				break
+		page_height = bottom_line_lower_y - top_line_y
+		# Calculate total page height compared to viewport and vertical margins.
+		top_margin = (self.viewport.height - page_height) / 2.0
+		top_position = top_line_y - top_margin
+		# Move viewport to correct position.
+		self.viewport.top = top_position
+		# Remember to call self.update() to actually display the changes.
+		
 	def toggleRedGreen(self):
 		if not self.red_green:
 			self.red_green = 1
