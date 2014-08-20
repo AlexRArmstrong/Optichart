@@ -204,15 +204,17 @@ class Projector(object):
 		# if need slides to reset to the default view when switching.
 		# The viewport is the same size as the virtual chart projections size.
 		self.viewport = pygame.Rect(0, 0, self.slide.slideWidth(), self.slide.slideHeight())
-		# Move the viewport to show the top of the letters surface.
+		# Set the viewport to the top of the screen.
 		self.viewport.left = 0
-		self.viewport.top = -30
+		self.viewport.top = 0
 		
 		# Creat a mask the same size as the viewport.  This means it only has
 		# to mask what is visible, rather than the whole screen.
 		self.mask = Mask(self.viewport.size)
 		
 		self.display(chart_name)
+		self.checkVerticalCentering()
+		self.update()
 		
 		
 	def readConfig(self):
@@ -257,7 +259,10 @@ class Projector(object):
 		
 	def display(self, chart_name):
 		'''
-		Takes a chart name, loads and displays it.
+		Takes a chart name, loads it and creates a slide surface.
+		
+		Must call self.update() after this function to draw the slide on
+		the screen.
 		'''
 		self.slide.setChartName(chart_name)
 		self.slide.layout()
@@ -268,8 +273,6 @@ class Projector(object):
 		
 		# This creates mirror writing.
 	#	self.slide_surface = pygame.transform.flip(self.slide_surface, True, False)
-		
-		self.update()
 		
 	def update(self):
 		'''
@@ -480,7 +483,8 @@ class Projector(object):
 			
 	def findClosestLine(self):
 		'''
-		Returns the index of the closest line in the default characters array.
+		Returns the index, in the default characters array, of the line 
+		closest to the top of the viewport.
 		'''
 		X = 0; Y = 1
 		current_coordinates = self.viewport.topleft
@@ -492,6 +496,112 @@ class Projector(object):
 		closest_line = min(all_y_diffs)
 		return closest_line[1]
 	
+	def findCenterLine(self):
+		'''
+		Returns the index, in the default characters array, of the line closest
+		to the center of the viewport.
+		'''
+		view_center_y = self.viewport.centery
+		def_chrs = self.slide.defaultCharacters()
+		all_y_diffs = []
+		for i, each_chr_position in enumerate(def_chrs):
+			y_diff = math.fabs(view_center_y - each_chr_position[1])
+			all_y_diffs.append([y_diff, i])
+		closest_line = min(all_y_diffs)
+		return closest_line[1]
+		
+	def checkVerticalCentering(self):
+		'''
+		Here we check that the current lines displayed are centered in the view.
+		This ensures that none of them are cut off. Another way to think of it is
+		that we check that the viewport displays only full lines.
+		'''
+		# Get the current top line.
+		default_characters_list = self.slide.defaultCharacters()
+		max_line_index = len(default_characters_list) - 1
+		top_line_index = self.findClosestLine()
+		top_line_data = default_characters_list[top_line_index]
+		line_y = top_line_data[1]
+		scale_factor = top_line_data[2]
+		line_height = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+		# Check to see how much ot top line is visible.
+		amount_visible = (line_y + line_height) - self.viewport.top
+		line_half = line_height / 2.0
+		if amount_visible >= line_half:
+			top_line_y = top_line_data[1]
+		else:
+			# If less than half the top line is showing we want to use the next
+			# line as the top line.
+			top_line_index += 1
+			# Make sure that we have a valid index.
+			if top_line_index > max_line_index:
+				top_line_index = max_line_index
+			top_line_data = default_characters_list[top_line_index]
+			top_line_y = top_line_data[1]
+		# Find the bottom-most fully visible line.
+		characters_after_current_line = default_characters_list[top_line_index:]
+		for i, each_set in enumerate(characters_after_current_line):
+			line_y = each_set[1]
+			scale_factor = each_set[2]
+			line_height = self.slide.calculateSize(self.lane_length, scale_factor, self.slide.dpi())
+			page_bottom = line_y + line_height
+			page_height = page_bottom - top_line_y
+			if page_height < self.viewport.height:
+				bottom_line_index = i
+				bottom_line_lower_y = page_bottom
+				continue
+			else:
+				break
+		page_height = bottom_line_lower_y - top_line_y
+		# Calculate total page height compared to viewport and vertical margins.
+		top_margin = (self.viewport.height - page_height) / 2.0
+		top_position = top_line_y - top_margin
+		# Move viewport to correct position.
+		self.viewport.top = top_position
+		# Remember to call self.update() to actually display the changes.
+		
+	def isolateSingleLine(self):
+		'''
+		Isolates a single line in the center of the screen.
+		'''
+		# Find the closest line.
+		view_center_y = self.viewport.centery
+		def_chrs = self.slide.defaultCharacters()
+		closest_line = self.findCenterLine()
+		# Calculate mask size.
+		scale_factor = def_chrs[closest_line][2]
+		# The mask window should be twice the line size.
+		size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
+		# Need to center closest line.
+		y_jump = def_chrs[closest_line][1] + (size / 4.0) - view_center_y
+		self.viewport = self.viewport.move(0, y_jump)
+		# Now that full view is centered, we shrink it down to
+		# the size we want, but keeping the same center point.
+		y = self.viewport.height - size
+		self.viewport.inflate_ip(0, -y)
+		
+	def isolateCharacter(self):
+		'''
+		Isolate a single character.
+		'''
+		# Need to find the closest line - this might be advoided if we kept an
+		# instance variable for which line is in the center of the screen.
+		def_chrs = self.slide.defaultCharacters()
+		closest_line = self.findCenterLine()
+		# Calculate size - window is 2x line size.
+		scale_factor = def_chrs[closest_line][2]
+		mask_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
+		# Need to make the viewport the correct size first.
+		x = self.viewport.width - mask_size
+		self.viewport.inflate_ip(-x, 0)
+		# Now center the window on the letter. We do this after
+		# the window is the correct size.
+		chr_x = def_chrs[closest_line][0]
+		chr_width = def_chrs[closest_line][3]
+		gap = (mask_size - chr_width) / 2.0
+		position_x = chr_x - gap
+		self.viewport.left = position_x
+		
 	def toggleRedGreen(self):
 		if not self.red_green:
 			self.red_green = 1
@@ -519,24 +629,37 @@ class Projector(object):
 		if closest_marker is not None:
 			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
+			self.checkVerticalCentering()
 		
 		
 	
 	def pageDown(self):
+		# Get data used.
 		page_coordinates = self.slide.pageCoordinates()
 		view_top_y = self.viewport.top
-		min_diff = self.slide_surface.get_height()
-		closest_marker = None
+		diff_list = []
+		# Calculate all diffs.
 		for i, each_pair in enumerate(page_coordinates):
-			diff = each_pair[1] - view_top_y
-			if diff < 51:
+			diff = view_top_y - each_pair[1]
+			# Ignore any that are above the current position - page up markers.
+			if diff > 0:
 				continue
-			if diff < min_diff:
-				min_diff = diff
-				closest_marker = i
-		if closest_marker is not None:
-			y_jump = page_coordinates[closest_marker][1] - 20
-			self.viewport.top = y_jump
+			# Keep a list of all possible next markes.
+			diff_list.append(i)
+		# Sort the list smallest first.
+		diff_list.sort()
+		try:
+			# Ignore the first (smallest) marker - is the current page.
+			diff_list.pop(0)
+			# Get the current marker.
+			closest_marker = diff_list.pop(0)
+		except IndexError:
+			# If list is empty, no more pages below this point - return.
+			return
+		# Jump to the next page.
+		y_jump = page_coordinates[closest_marker][1]
+		self.viewport.top = y_jump
+		self.checkVerticalCentering()
 	
 	def nextChart(self):
 		'''
@@ -547,6 +670,14 @@ class Projector(object):
 			self.current_chart_index = self.max_chart_index
 		chart_name = self.chart_list[self.current_chart_index]
 		self.display(chart_name)
+		
+		# If in single line mode, make sure that mask size is correct on
+		# the new chart.
+		if self.mode == 1:
+			self.isolateSingleLine()
+		
+		self.checkVerticalCentering()
+		self.update()
 	
 	def previousChart(self):
 		'''
@@ -557,6 +688,12 @@ class Projector(object):
 			self.current_chart_index = 0
 		chart_name = self.chart_list[self.current_chart_index]
 		self.display(chart_name)
+		
+		if self.mode == 1:
+			self.isolateSingleLine()
+		
+		self.checkVerticalCentering()
+		self.update()
 	
 	def pollLircEvents(self):
 		'''
@@ -570,7 +707,16 @@ class Projector(object):
 				key_dict = {'key' : ir_key_map[each_code]}
 				new_event = pygame.event.Event(pygame.KEYDOWN, key_dict)
 				pygame.event.post(new_event)
-		
+	
+	def exit(self):
+		'''
+		Code to clean up before exit.
+		'''
+		if LIRC_ENABLED:
+			pylirc.exit()
+		pygame.quit()
+		sys.exit()
+	
 	def startEventLoop(self):
 		'''
 		The main key handeling event loop.
@@ -579,15 +725,12 @@ class Projector(object):
 			self.pollLircEvents()
 			for each_event in pygame.event.get():
 				if each_event.type == QUIT:
-					sys.exit()
+					self.exit()
 				if each_event.type == KEYDOWN:
 					print each_event.dict # Debugging
 					print each_event # Debugging
 					if each_event.key == K_q:				# q Quits
-						if LIRC_ENABLED:
-							pylirc.exit()
-						pygame.quit()
-						sys.exit()
+						self.exit()
 					elif each_event.key == K_EQUALS:		# '=' - Next Chart
 						self.nextChart()
 					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
@@ -626,49 +769,10 @@ class Projector(object):
 						self.mode += 1
 						if self.mode == 1:
 							# Isolate just a single line.
-							# Find the closest line.
-							view_center_y = self.viewport.centery
-							def_chrs = self.slide.defaultCharacters()
-							all_y_diffs = []
-							for i, each_chr_position in enumerate(def_chrs):
-								y_diff = math.fabs(view_center_y - each_chr_position[1])
-								all_y_diffs.append([y_diff, i])
-							closest_line = min(all_y_diffs)
-							# Calculate mask size.
-							scale_factor = def_chrs[closest_line[1]][2]
-							# The mask window should be twice the line size.
-							size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
-							# Need to center closest line.
-							y_jump = def_chrs[closest_line[1]][1] + (size / 4.0) - view_center_y
-							self.viewport = self.viewport.move(0, y_jump)
-							# Now that full view is centered, we shrink it down to
-							# the size we want, but keeping the same center point.
-							y = self.viewport.height - size
-							self.viewport.inflate_ip(0, -y)
+							self.isolateSingleLine()
 						elif self.mode == 2:
 							# Isolate a single letter.
-							# Need to find the closest line - this might be advoided if we kept an
-							# instance variable for which line is in the center of the screen.
-							view_center_y = self.viewport.centery
-							def_chrs = self.slide.defaultCharacters()
-							all_y_diffs = []
-							for i, each_chr_position in enumerate(def_chrs):
-								y_diff = math.fabs(view_center_y - each_chr_position[1])
-								all_y_diffs.append([y_diff, i])
-							closest_line = min(all_y_diffs)
-							# Calculate size - window is 2x line size.
-							scale_factor = def_chrs[closest_line[1]][2]
-							mask_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
-							# Need to make the viewport the correct size first.
-							x = self.viewport.width - mask_size
-							self.viewport.inflate_ip(-x, 0)
-							# Now center the window on the letter. We do this after
-							# the window is the correct size.
-							chr_x = def_chrs[closest_line[1]][0]
-							chr_width = def_chrs[closest_line[1]][3]
-							gap = (mask_size - chr_width) / 2.0
-							position_x = chr_x - gap
-							self.viewport.left = position_x
+							self.isolateCharacter()
 						elif self.mode == 3:
 							# Return to viewing a full line.
 							self.viewport.width = self.slide.slideWidth()
@@ -677,6 +781,7 @@ class Projector(object):
 							self.mode = 0
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
+							self.checkVerticalCentering()
 							# We clear any mask that has been applied - this allows
 							# for a 'return to default screen' ability.
 							self.mask.clear()
