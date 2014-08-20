@@ -213,6 +213,7 @@ class Projector(object):
 		self.mask = Mask(self.viewport.size)
 		
 		self.display(chart_name)
+		self.update()
 		
 		
 	def readConfig(self):
@@ -257,7 +258,10 @@ class Projector(object):
 		
 	def display(self, chart_name):
 		'''
-		Takes a chart name, loads and displays it.
+		Takes a chart name, loads it and creates a slide surface.
+		
+		Must call self.update() after this function to draw the slide on
+		the screen.
 		'''
 		self.slide.setChartName(chart_name)
 		self.slide.layout()
@@ -268,8 +272,6 @@ class Projector(object):
 		
 		# This creates mirror writing.
 	#	self.slide_surface = pygame.transform.flip(self.slide_surface, True, False)
-		
-		self.update()
 		
 	def update(self):
 		'''
@@ -654,6 +656,14 @@ class Projector(object):
 			self.current_chart_index = self.max_chart_index
 		chart_name = self.chart_list[self.current_chart_index]
 		self.display(chart_name)
+		
+		# If in single line mode, make sure that mask size is correct on
+		# the new chart.
+		if self.mode == 1:
+			self.isolateSingleLine()
+		
+		self.checkVerticalCentering()
+		self.update()
 	
 	def previousChart(self):
 		'''
@@ -664,6 +674,12 @@ class Projector(object):
 			self.current_chart_index = 0
 		chart_name = self.chart_list[self.current_chart_index]
 		self.display(chart_name)
+		
+		if self.mode == 1:
+			self.isolateSingleLine()
+		
+		self.checkVerticalCentering()
+		self.update()
 	
 	def pollLircEvents(self):
 		'''
