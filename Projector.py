@@ -730,6 +730,7 @@ class Projector(object):
 							self.mode = 0
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
+							self.checkVerticalCentering()
 							# We clear any mask that has been applied - this allows
 							# for a 'return to default screen' ability.
 							self.mask.clear()
