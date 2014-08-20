@@ -501,6 +501,7 @@ class Projector(object):
 		'''
 		# Get the current top line.
 		default_characters_list = self.slide.defaultCharacters()
+		max_line_index = len(default_characters_list) - 1
 		top_line_index = self.findClosestLine()
 		top_line_data = default_characters_list[top_line_index]
 		line_y = top_line_data[1]
@@ -515,6 +516,9 @@ class Projector(object):
 			# If less than half the top line is showing we want to use the next
 			# line as the top line.
 			top_line_index += 1
+			# Make sure that we have a valid index.
+			if top_line_index > max_line_index:
+				top_line_index = max_line_index
 			top_line_data = default_characters_list[top_line_index]
 			top_line_y = top_line_data[1]
 		# Find the bottom-most fully visible line.
