@@ -204,15 +204,16 @@ class Projector(object):
 		# if need slides to reset to the default view when switching.
 		# The viewport is the same size as the virtual chart projections size.
 		self.viewport = pygame.Rect(0, 0, self.slide.slideWidth(), self.slide.slideHeight())
-		# Move the viewport to show the top of the letters surface.
+		# Set the viewport to the top of the screen.
 		self.viewport.left = 0
-		self.viewport.top = -30
+		self.viewport.top = 0
 		
 		# Creat a mask the same size as the viewport.  This means it only has
 		# to mask what is visible, rather than the whole screen.
 		self.mask = Mask(self.viewport.size)
 		
 		self.display(chart_name)
+		self.checkVerticalCentering()
 		self.update()
 		
 		
