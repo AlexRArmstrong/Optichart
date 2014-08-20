@@ -493,6 +493,20 @@ class Projector(object):
 		closest_line = min(all_y_diffs)
 		return closest_line[1]
 	
+	def findCenterLine(self):
+		'''
+		Returns the index, in the default characters array, of the line closest
+		to the center of the viewport.
+		'''
+		view_center_y = self.viewport.centery
+		def_chrs = self.slide.defaultCharacters()
+		all_y_diffs = []
+		for i, each_chr_position in enumerate(def_chrs):
+			y_diff = math.fabs(view_center_y - each_chr_position[1])
+			all_y_diffs.append([y_diff, i])
+		closest_line = min(all_y_diffs)
+		return closest_line[1]
+		
 	def checkVerticalCentering(self):
 		'''
 		Here we check that the current lines displayed are centered in the view.
@@ -550,17 +564,13 @@ class Projector(object):
 		# Find the closest line.
 		view_center_y = self.viewport.centery
 		def_chrs = self.slide.defaultCharacters()
-		all_y_diffs = []
-		for i, each_chr_position in enumerate(def_chrs):
-			y_diff = math.fabs(view_center_y - each_chr_position[1])
-			all_y_diffs.append([y_diff, i])
-		closest_line = min(all_y_diffs)
+		closest_line = self.findCenterLine()
 		# Calculate mask size.
-		scale_factor = def_chrs[closest_line[1]][2]
+		scale_factor = def_chrs[closest_line][2]
 		# The mask window should be twice the line size.
 		size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
 		# Need to center closest line.
-		y_jump = def_chrs[closest_line[1]][1] + (size / 4.0) - view_center_y
+		y_jump = def_chrs[closest_line][1] + (size / 4.0) - view_center_y
 		self.viewport = self.viewport.move(0, y_jump)
 		# Now that full view is centered, we shrink it down to
 		# the size we want, but keeping the same center point.
@@ -573,23 +583,18 @@ class Projector(object):
 		'''
 		# Need to find the closest line - this might be advoided if we kept an
 		# instance variable for which line is in the center of the screen.
-		view_center_y = self.viewport.centery
 		def_chrs = self.slide.defaultCharacters()
-		all_y_diffs = []
-		for i, each_chr_position in enumerate(def_chrs):
-			y_diff = math.fabs(view_center_y - each_chr_position[1])
-			all_y_diffs.append([y_diff, i])
-		closest_line = min(all_y_diffs)
+		closest_line = self.findCenterLine()
 		# Calculate size - window is 2x line size.
-		scale_factor = def_chrs[closest_line[1]][2]
+		scale_factor = def_chrs[closest_line][2]
 		mask_size = self.slide.calculateSize(self.lane_length, (scale_factor * 2), self.slide.dpi())
 		# Need to make the viewport the correct size first.
 		x = self.viewport.width - mask_size
 		self.viewport.inflate_ip(-x, 0)
 		# Now center the window on the letter. We do this after
 		# the window is the correct size.
-		chr_x = def_chrs[closest_line[1]][0]
-		chr_width = def_chrs[closest_line[1]][3]
+		chr_x = def_chrs[closest_line][0]
+		chr_width = def_chrs[closest_line][3]
 		gap = (mask_size - chr_width) / 2.0
 		position_x = chr_x - gap
 		self.viewport.left = position_x
