@@ -629,6 +629,7 @@ class Projector(object):
 		if closest_marker is not None:
 			y_jump = page_coordinates[closest_marker][1] - 20
 			self.viewport.top = y_jump
+			self.checkVerticalCentering()
 		
 		
 	
