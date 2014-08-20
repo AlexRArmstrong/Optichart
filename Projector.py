@@ -634,20 +634,32 @@ class Projector(object):
 		
 	
 	def pageDown(self):
+		# Get data used.
 		page_coordinates = self.slide.pageCoordinates()
 		view_top_y = self.viewport.top
-		min_diff = self.slide_surface.get_height()
-		closest_marker = None
+		diff_list = []
+		# Calculate all diffs.
 		for i, each_pair in enumerate(page_coordinates):
-			diff = each_pair[1] - view_top_y
-			if diff < 51:
+			diff = view_top_y - each_pair[1]
+			# Ignore any that are above the current position - page up markers.
+			if diff > 0:
 				continue
-			if diff < min_diff:
-				min_diff = diff
-				closest_marker = i
-		if closest_marker is not None:
-			y_jump = page_coordinates[closest_marker][1] - 20
-			self.viewport.top = y_jump
+			# Keep a list of all possible next markes.
+			diff_list.append(i)
+		# Sort the list smallest first.
+		diff_list.sort()
+		try:
+			# Ignore the first (smallest) marker - is the current page.
+			diff_list.pop(0)
+			# Get the current marker.
+			closest_marker = diff_list.pop(0)
+		except IndexError:
+			# If list is empty, no more pages below this point - return.
+			return
+		# Jump to the next page.
+		y_jump = page_coordinates[closest_marker][1]
+		self.viewport.top = y_jump
+		self.checkVerticalCentering()
 	
 	def nextChart(self):
 		'''
