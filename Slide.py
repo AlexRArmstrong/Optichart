@@ -359,6 +359,9 @@ class Slide(object):
 				y = position[1]
 				pg_coords = [x, y]
 				self._pages.append(pg_coords)
+			# Find the line spaceing for this line.
+			scale_factor = all_lines[line_no].lineSpaceingScaleFactor()
+			line_spaceing = self.calculateSize(lane_length, scale_factor, dpi)
 			# Incriment the position for the next line.
 			position[0] = slide_width / 2
 			position[1] += y_r + line_spaceing
