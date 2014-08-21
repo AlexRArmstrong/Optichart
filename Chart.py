@@ -166,6 +166,9 @@ class Chart(object):
 					# Strip out any quote marks.
 					if text.startswith('"') or text.startswith("'"):
 						text = text.strip('"\'')
+					# Check for blank lines - insert a space in that case.
+					if text == '':
+						text = ' '
 					# Add a section to the current line.
 					a_section = Section(ratio, text)
 					current_line.addSection(a_section)
