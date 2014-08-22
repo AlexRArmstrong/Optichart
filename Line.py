@@ -36,7 +36,7 @@ class Line(object):
 	and a font name.  All are optional,	and if omitted the class will 
 	return an empty line.
 	'''
-	def __init__(self, sections = None, def_chr = 0, font = None, line_space = '20/80'):
+	def __init__(self, sections = None, def_chr = 0, font = None, line_space = '20/80', column_sizes = 100):
 		# Sections is a list of all the sections that make up a line.
 		self._sections = []
 		if sections:
@@ -52,6 +52,9 @@ class Line(object):
 		
 		# The distance between this and the next line.
 		self.line_spaceing = line_space
+		
+		# The amount of space each column of text occupies - as a percent.
+		self.column_sizes = [column_sizes]
 		
 	def __getitem__(self, offset):
 		return self._sections[offset]
@@ -105,6 +108,12 @@ class Line(object):
 		scale_factor = denomerator / numerator
 		return scale_factor
 		
+	def columnSizes(self):
+		'''
+		Return a list containing the percent width each column is supposed to be.
+		'''
+		return self.column_sizes
+		
 	def setFont(self, font):
 		'''
 		Set the font name for the line to font.  Return True on success, False
@@ -138,6 +147,21 @@ class Line(object):
 		except:
 			return False
 	
+	def setColumnSizes(self, sizes):
+		'''
+		Set the column sizes.
+		
+		Takes a string as an argument.
+		'''
+		# Clear the current setting.
+		self.column_sizes = []
+		# Parse the input string.
+		sizes = sizes.strip()
+		all_sizes = sizes.split('|')
+		for each_size in all_sizes:
+			self.column_sizes.append(int(each_size))
+		
+		
 	def addSection(self, section, position = None):
 		'''
 		Add a line section - consisting of a ratio and text. Position is optional

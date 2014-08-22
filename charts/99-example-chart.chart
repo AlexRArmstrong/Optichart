@@ -18,7 +18,9 @@
 # 		lowercase letters for mirror writing.
 # LineSize = Snellen ratio - Indicates the line spacing to use for the following
 #		lines.  Current till over ridden or new chart is loaded.
-#
+# ColumnSizes = #|#|# - Indicates the precentage of the view width that each
+#		column of the chart should take up. By default, only a single column is
+#		active.
 # By default each column is centered based on the number of columns in the line.
 #
 20/60 : EXAMPLE
