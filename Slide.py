@@ -313,6 +313,7 @@ class Slide(object):
 					chr_surface.set_colorkey(NOTBLACK)
 					chr_position = [x_pos, y_pos]
 					section_surface.blit(chr_surface, chr_position)
+					# Check for default character position.
 					if default_chr_position == current_line.defaultCharacterPosition():
 						self._default_characters.append([x_pos, y_pos, scale_factor, chr_width, space_width])
 					x_pos = x_pos + chr_width + space_width
