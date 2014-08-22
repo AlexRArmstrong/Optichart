@@ -279,13 +279,15 @@ class Slide(object):
 			line_font = current_line.font()
 			full_font_name = self.fixFontName(line_font)
 			num_sections = len(current_line.sections())
-			section_width = slide_width / num_sections
+			all_section_widths = current_line.columnSizes()
 			sect_x = 0
 			sect_y = 0
 			all_rendered_sections = []
 			line_height = 0
 			default_chr_position = 0
-			for each_section in current_line.sections():
+			for i, each_section in enumerate(current_line.sections()):
+				# Figure the current section width.
+				section_width = slide_width * all_section_widths[i] / 100
 				# Get the scaling factor and calculate the size in pixels
 				scale_factor = each_section.scaleFactor()
 				line_size = self.calculateSize(lane_length, scale_factor, dpi)
@@ -322,7 +324,9 @@ class Slide(object):
 			# Now blit all the section surfaces onto a line surface.
 			line_surface = pygame.Surface([slide_width, line_height])
 			line_surface.fill(WHITE)
-			for each_sect_surf in all_rendered_sections:
+			for i, each_sect_surf in enumerate(all_rendered_sections):
+				# Get the correct width for this section.
+				section_width = slide_width * all_section_widths[i] / 100
 				section_position = [sect_x, sect_y]
 				line_surface.blit(each_sect_surf, section_position)
 				sect_x += section_width
