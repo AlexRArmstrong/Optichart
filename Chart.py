@@ -138,6 +138,12 @@ class Chart(object):
 				key, value = line.split('=')
 				current_line.setLineSpacing(value.strip())
 				continue
+			# If we find a ColumnSize spec., set the column spacing.
+			elif all_lines[i].upper().startswith('COLUMNSIZES'):
+				line = all_lines[i]
+				key, value = line.split('=')
+				current_line.setColumnSizes(value)
+				continue
 			# If we have a data line...
 			elif all_lines[i].upper().startswith('20'):
 				line = all_lines[i]
