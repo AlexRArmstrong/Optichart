@@ -327,6 +327,7 @@ class Slide(object):
 			for i, each_sect_surf in enumerate(all_rendered_sections):
 				# Get the correct width for this section.
 				section_width = slide_width * all_section_widths[i] / 100
+				sect_y = (line_surface.get_height() - each_sect_surf.get_height()) / 2.0
 				section_position = [sect_x, sect_y]
 				line_surface.blit(each_sect_surf, section_position)
 				sect_x += section_width
