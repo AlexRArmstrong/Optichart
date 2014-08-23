@@ -1,19 +1,16 @@
-# Chart file for Optichart.
-# Landolt C's
+# Chart file for Optichart.  
+# A chart with three columns
 
-# LineSize = Snellen ratio
-20/200 : !#
-20/100 : #%!&
-20/80 : %!&#
-!
-20/60 : &%##!
-20/40 : #%!&%#&
-20/30 : !##&%!&%
-20/30 : &%#!&#%&
-20/25 : &%&!#&#%
-!
-20/25 : !##%&%!#&
-20/20 : %!&##%!#&
-20/20 : #&!%&&!#%
-20/15 : &%#!%#&!#
-20/15 : #%!&%#!%#
+ColumnSizes = 45|10|45
+LineSize = 20/30
+20/100 : e | 20/20 : U | 20/100 : e
+20/80 : zn | 20/20 : T | 20/80 : nz
+20/60 : slv | 20/20 : Y | 20/60 : vls
+20/40 : pvfu | 20/20 : V | 20/40 : ufvp
+20/30 : frtsn | 20/20 : P | 20/30 : nstrf
+20/20 : btglcr | 20/20 : E | 20/20 : rclgtb
+20/15 : urfpvth | 20/20 : N | 20/15 : htvpfru
+#S
+#B
+# TODO: Need to center vertically, and horizontally
+# such that smaller letters only take up space they need.
