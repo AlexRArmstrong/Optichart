@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2014-08-22, 18:39:43 -->
+<!-- Saved: 2014-08-23, 00:31:06 -->
 <!-- Copyright (C) 2014 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
@@ -32,15 +32,16 @@
   <Others>
     <Other>charts/10-chart.chart</Other>
     <Other>charts/20-chart.chart</Other>
-    <Other>charts/30-chart.chart</Other>
-    <Other>charts/40-chart.chart</Other>
-    <Other>charts/50-chart.chart</Other>
     <Other>charts/70-chart.chart</Other>
     <Other>charts/60-chart.chart</Other>
     <Other>config.conf</Other>
     <Other>charts/99-example-chart.chart</Other>
     <Other>doc</Other>
     <Other>TODO.txt</Other>
+    <Other>charts/80-chart.chart</Other>
+    <Other>charts/50-chart.chart</Other>
+    <Other>charts/40-chart.chart</Other>
+    <Other>charts/30-chart.chart</Other>
   </Others>
   <MainScript>main.py</MainScript>
   <Vcs>
