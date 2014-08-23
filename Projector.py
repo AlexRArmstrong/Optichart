@@ -307,8 +307,8 @@ class Projector(object):
 		if self.red_green:
 			left_rect = pygame.Rect(0, 0, self.viewport.width / 2, self.viewport.height)
 			right_rect = pygame.Rect(self.viewport.width / 2, 0,  self.viewport.width, self.viewport.height)
-			background.fill(RED, left_rect)
-			background.fill(GREEN, right_rect)
+			background.fill(GREEN, left_rect)
+			background.fill(RED, right_rect)
 		else:
 			background.fill(WHITE)
 		
