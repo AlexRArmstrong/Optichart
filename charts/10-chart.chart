@@ -1,24 +1,24 @@
 # Chart file for Optichart.
-# A simple Baush & Lome Chart
+# A chart modeled after a Baush & Lomeb chart.
 
 LineSize = 20/100
-20/200 : r~d
+20/200 : d~r
 LineSize = 20/80
-20/100 : zvne
-20/80 : gty~d
+20/100 : envz
+20/80 : dytg
 !
-20/60 : rnzp6
-20/40 : gpf~ohr4
-20/30 : shn~ytzu3
-20/30 : nfc~uvsru
-20/25 : yhtp~gn25
+20/60 : ^pznr
+20/40 : $rh~ofpg
+20/30 : #uzt~ynhs
+20/30 : ursv~ucfn
+20/25 : %@n~gpthy
 !
-20/25 : zgevrn~dos
-20/20 : r~dgzupns2
-20/20 : fshdvr~gue
-20/15 : dhr~uspei5
-20/15 : psnezu~dgp
-20/10 : defp~otcez
+20/25 : so~dnrvegz
+20/20 : @snpuzg~dr
+20/20 : eu~grvdhsf
+20/15 : %ieps~urhd
+20/15 : pg~duzensp
+20/10 : zect~opfed
 !
 # The astigmatic dial.
 20/500 : +
