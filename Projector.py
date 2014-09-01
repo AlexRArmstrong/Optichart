@@ -35,7 +35,7 @@ import pygame
 from pygame.locals import KEYDOWN, QUIT
 from pygame.locals import K_x, K_q, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT
 from pygame.locals import K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
-from pygame.locals import K_EQUALS, K_MINUS
+from pygame.locals import K_EQUALS, K_MINUS, K_SPACE
 
 from Slide import Slide
 from Mask import Mask
@@ -53,6 +53,7 @@ try:
 				'Last' :  K_x,
 				'Next' : K_EQUALS,
 				'Previous' : K_MINUS,
+				'Space' : K_SPACE,
 				'0' : K_0,
 				'1' : K_1,
 				'2' : K_2,
@@ -175,6 +176,9 @@ class Projector(object):
 		# 2 - Character Mode.
 		# 3 - Line Mode - second time.
 		self.mode = 0
+		
+		# Variable to hold state of viewport across blank screen calls.
+		self.previous_view_size = 0
 		
 		# Fill the screen with a while background.
 		self.screen.fill(WHITE)
@@ -321,6 +325,17 @@ class Projector(object):
 		
 		# Update the display.
 		pygame.display.update()
+	
+	def blankScreen(self):
+		'''
+		Blank the screen.
+		'''
+		if not self.previous_view_size:
+			self.previous_view_size = self.viewport.size
+			self.viewport.height = 0
+		else:
+			self.viewport.size = self.previous_view_size
+			self.previous_view_size = 0
 	
 	def moveUp(self):
 		'''
@@ -763,6 +778,8 @@ class Projector(object):
 						self.viewport.move_ip(-JUMP, 0)
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
 						self.viewport.move_ip(JUMP, 0)
+					elif each_event.key == K_SPACE:			# Space - Blank the screen.
+						self.blankScreen()
 					elif each_event.key == K_RETURN:		# Enter is center btn.
 						self.mode += 1
 						if self.mode == 1:
