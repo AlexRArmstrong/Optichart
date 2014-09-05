@@ -337,6 +337,16 @@ class Projector(object):
 			self.viewport.size = self.previous_view_size
 			self.previous_view_size = 0
 	
+	def unblankScreen(self):
+		'''
+		Restore the viewport to it's previous size.
+		'''
+		if self.previous_view_size:
+			self.viewport.size = self.previous_view_size
+			self.previous_view_size = 0
+		else:
+			return
+	
 	def moveUp(self):
 		'''
 		Scroll up by one line.
@@ -531,6 +541,9 @@ class Projector(object):
 		This ensures that none of them are cut off. Another way to think of it is
 		that we check that the viewport displays only full lines.
 		'''
+		# If no letters are visible, we should just return - nothing to center.
+		if self.viewport.width == 0 or self.viewport.height == 0:
+			return 0
 		# Get the current top line.
 		default_characters_list = self.slide.defaultCharacters()
 		max_line_index = len(default_characters_list) - 1
@@ -745,42 +758,57 @@ class Projector(object):
 					if each_event.key == K_q:				# q Quits
 						self.exit()
 					elif each_event.key == K_EQUALS:		# '=' - Next Chart
+						self.unblankScreen()
 						self.nextChart()
 					elif each_event.key == K_MINUS:			# '-' - Prev. Chart
+						self.unblankScreen()
 						self.previousChart()
 					elif each_event.key == K_RIGHT:			# Right Arrow Move Right
+						self.unblankScreen()
 						self.moveRight()
 					elif each_event.key == K_LEFT:			# Left Arrow Move Left
+						self.unblankScreen()
 						self.moveLeft()
 					elif each_event.key == K_UP:			# Up Arrow Scroll Up
+						self.unblankScreen()
 						self.moveDown()
 					elif each_event.key == K_DOWN:			# Down Arrow Scroll Down
+						self.unblankScreen()
 						self.moveUp()
 					elif each_event.key == K_2:				# 2 - Page up
+						self.unblankScreen()
 						self.pageUp()
 					elif each_event.key == K_8:				# 8 - Page down
+						self.unblankScreen()
 						self.pageDown()
 					elif each_event.key == K_x:				# x Toggles Red/Green
 						self.toggleRedGreen()
 					elif each_event.key == K_7:				# 7 - Bigger Horz. aperture
+						self.unblankScreen()
 						self.viewport.inflate_ip(0, JUMP)
 					elif each_event.key == K_1:				# 1 - Smaller Horz. aperture
+						self.unblankScreen()
 						self.viewport.inflate_ip(0, -JUMP)
 						if self.viewport.height < 0:
 							self.viewport.height = 0
 					elif each_event.key == K_9:				# 9 - Bigger Vert. slit
+						self.unblankScreen()
 						self.viewport.inflate_ip(JUMP, 0)
 					elif each_event.key == K_3:				# 3 - Smaller Vert. slit
+						self.unblankScreen()
 						self.viewport.inflate_ip(-JUMP, 0)
 						if self.viewport.width < 0:
 							self.viewport.width = 0
 					elif each_event.key == K_4:				# 4 - Move Vert. slit left
+						self.unblankScreen()
 						self.viewport.move_ip(-JUMP, 0)
 					elif each_event.key == K_6:				# 6 - Move Vert. slit right
+						self.unblankScreen()
 						self.viewport.move_ip(JUMP, 0)
 					elif each_event.key == K_SPACE:			# Space - Blank the screen.
 						self.blankScreen()
 					elif each_event.key == K_RETURN:		# Enter is center btn.
+						self.unblankScreen()
 						self.mode += 1
 						if self.mode == 1:
 							# Isolate just a single line.
