@@ -1,0 +1,65 @@
+****************************
+	---Some Bugs---
+****************************
+* If Pi boots before monitor, will have wrong screen size.
+
+* When moving up line wise, if go from start up, will skip several lines: Problem
+is that calculations are from top of viewport and that is well above the screen top.
+Might be able to fix this by calculating from the center of viewport.
+
+* In full screen mode, changing charts can sometimes lead to lines cut off. - I 
+think this is due to charts not being exactly the same - don't all have the same
+size lines in the same positions.
+
+
+****************************
+	---Things to Do---
+****************************
+* Fonts need full path specified - should only need a valid fond name in the
+fonts dir.
+
+* Snellen Font only has letters (normal and mirrored) but no numbers, symbols.
+
+* Reduce network timeout when shutting down with network plugged in - Linux thing.
+
+* Worth 4 Dot.
+
+* Fixation spot
+
+* Childrens pictures.
+
+* Line, Section, Chart classes are somewhat fragile - if called with wrong
+arguments, can crash the program.
+
+* Move up/down, left/right functions are reversed from what the programmer expects.
+
+* Use twice the character width for masking rather than twice the vertical line
+size - this is a very small thing, and may not even be correct. Using the
+character width would account for the fact that pixels aren't square, however,
+using the vertical size gives us a square based on snellen ratio.
+
+* A gradient across and up/down of strips. Go from distinct black/white to what
+appears as gray.
+
+* Similar a gradient of letters and background shades - from black letters/white
+background to gray/gray ? or all the way to white letters/black background?
+
+* Have Red/Green specifiable in chart file? Is this usefull?
+
+* An option in the config file to set the screen resoulition?
+
+
+****************************
+	---Some Ideas---
+****************************
+* Notes on saving position across power cycles:
+
+Every time we update the display, we write the coordinates of the viewport,
+along with the current chart file out to a text file.  Then on startup, we
+read this file and return to the most recent state.
+
+* Maybe use systemd to monitor program and reboot automatically if something 
+goes wrong.
+
+
+
