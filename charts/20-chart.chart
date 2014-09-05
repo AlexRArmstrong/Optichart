@@ -1,7 +1,9 @@
 # Chart file for Optichart.
 # A simple American Optical chart.
 
+LineSize = 20/100
 20/200 : e
+LineSize = 20/80
 20/100 : pf
 20/70 : zot
 !
