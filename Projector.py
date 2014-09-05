@@ -531,6 +531,9 @@ class Projector(object):
 		This ensures that none of them are cut off. Another way to think of it is
 		that we check that the viewport displays only full lines.
 		'''
+		# If no letters are visible, we should just return - nothing to center.
+		if self.viewport.width == 0 or self.viewport.height == 0:
+			return 0
 		# Get the current top line.
 		default_characters_list = self.slide.defaultCharacters()
 		max_line_index = len(default_characters_list) - 1
