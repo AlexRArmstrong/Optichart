@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project optichart -->
-<!-- Saved: 2014-09-03, 00:58:39 -->
+<!-- Saved: 2014-09-28, 23:40:22 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Does this need to be round?</Summary>
@@ -87,7 +87,7 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Test the handeling of font pathing.</Summary>
     <Description></Description>
-    <Created>2014-09-03, 00:55:08</Created>
+    <Created>2014-09-28, 23:05:27</Created>
     <Resource>
       <Filename>Projector.py</Filename>
       <Linenumber>119</Linenumber>
@@ -96,7 +96,7 @@
   <Task priority="1" completed="False" bugfix="True">
     <Summary>FIXME: Need to have full path.</Summary>
     <Description></Description>
-    <Created>2014-09-03, 00:55:08</Created>
+    <Created>2014-09-28, 23:05:27</Created>
     <Resource>
       <Filename>Projector.py</Filename>
       <Linenumber>120</Linenumber>

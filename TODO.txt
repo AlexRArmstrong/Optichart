@@ -3,7 +3,7 @@
 ****************************
 * If Pi boots before monitor, will have wrong screen size.
 
-* When moving up line wise, if go from start up, will skip several lines: Problem
+* When moving up line wise, if go from star up, will skip several lines: Problem
 is that calculations are from top of viewport and that is well above the screen top.
 Might be able to fix this by calculating from the center of viewport.
 
