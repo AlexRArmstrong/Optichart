@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2015-12-10, 00:40:37 -->
+<!-- Saved: 2015-12-10, 02:00:13 -->
 <!-- Copyright (C) 2015 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
@@ -40,6 +40,7 @@
     <Other>charts/50-chart.chart</Other>
     <Other>charts/40-chart.chart</Other>
     <Other>charts/30-chart.chart</Other>
+    <Other>README.txt</Other>
   </Others>
   <MainScript>main.py</MainScript>
   <Vcs>
