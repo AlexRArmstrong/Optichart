@@ -38,7 +38,6 @@ from pygame.locals import K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9
 from pygame.locals import K_EQUALS, K_MINUS, K_SPACE
 
 from Slide import Slide
-from Mask import Mask
 
 # Check if we have an IR Remote Control
 try:
@@ -211,10 +210,6 @@ class Projector(object):
 		# Set the viewport to the top of the screen.
 		self.viewport.left = 0
 		self.viewport.top = 0
-		
-		# Creat a mask the same size as the viewport.  This means it only has
-		# to mask what is visible, rather than the whole screen.
-		self.mask = Mask(self.viewport.size)
 		
 		self.display(chart_name)
 		self.checkVerticalCentering()
@@ -822,12 +817,11 @@ class Projector(object):
 							self.viewport.left = 0
 						else:
 							self.mode = 0
+							# We clear any mask that has been applied - this allows
+							# for a 'return to default screen' ability.
 							y = self.slide.slideHeight() - self.viewport.height
 							self.viewport.inflate_ip(0, y)
 							self.checkVerticalCentering()
-							# We clear any mask that has been applied - this allows
-							# for a 'return to default screen' ability.
-							self.mask.clear()
 						# Add additional key presses here...
 					# After the screen status is changed by the key press we
 					# call update() to draw the screen. At the current indentation
