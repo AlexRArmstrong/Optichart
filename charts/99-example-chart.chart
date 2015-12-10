@@ -5,7 +5,7 @@
 # 
 # Grammer:
 # # - Comments
-# : - Seperates snellen ration and text
+# : - Seperates snellen ratio and text
 # ~ - Indicates that the next letter is the default letter to display 
 #		on centering button press, if not specified the first letter is used.
 # ! - Denotes blocks or pages of text.
