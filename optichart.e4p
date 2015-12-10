@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2014-09-05, 18:12:06 -->
-<!-- Copyright (C) 2014 Alexander Armstrong, AlexRArmstrong@gmail.com -->
+<!-- Saved: 2015-12-09, 20:56:28 -->
+<!-- Copyright (C) 2015 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -19,7 +19,6 @@
     <Source>Line.py</Source>
     <Source>Chart.py</Source>
     <Source>Slide.py</Source>
-    <Source>Mask.py</Source>
   </Sources>
   <Forms>
   </Forms>
