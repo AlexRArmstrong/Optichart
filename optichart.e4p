@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2015-12-09, 20:56:28 -->
+<!-- Saved: 2015-12-10, 00:40:37 -->
 <!-- Copyright (C) 2015 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
@@ -13,7 +13,6 @@
   <Email>AlexRArmstrong@gmail.com</Email>
   <Sources>
     <Source>main.py</Source>
-    <Source>tt.py</Source>
     <Source>Projector.py</Source>
     <Source>Section.py</Source>
     <Source>Line.py</Source>
