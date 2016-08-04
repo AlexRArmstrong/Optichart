@@ -1,0 +1,101 @@
+Welcome to the Optichart User Manual.  This manual covers basic setup and use.
+
+==============================
+Requires:
+==============================
+Python 2.7.6
+Pygame 1.9.1
+
+ Untested with any other versions - if you find some that work, let me know!
+
+==============================
+Optional:
+==============================
+pylirc 0.0.5
+
+ Needed if using an IR Remote Control.
+ 
+==============================
+Instillation:
+==============================
+Once the prerequisites are installed, simply unpack the Optichart files into
+their own directory.
+
+==============================
+Setup:
+==============================
+After instillation, several settings should be adjusted based on the physical
+machine Optichart is running on.
+
+- config.conf
+In this file you need to set the monitor vertical and horizontal size. Simply 
+use your handy tape measure and enter the values in millimeters. The vertical 
+size is used to calculate dots per inch for scaling. Currently, the horizontal
+size is not used, but it's a good idea to set it anyway. Next you need
+to set the physical size the electronic chart should appear. Again using
+millimeters.  Finally you need to set the lane length.  This is the distance
+from the chart to the patients eye (again with the mm). The other settings in
+this file (Font Directory and Default Font) should be fine if you are using a 
+standard instillation.
+
+- /charts 
+This directory contains a sampling of charts, some standard, some not so much.
+It is perfectly fine to leave this directory alone, but you may find you prefer
+the charts in a different order or even want to make your own charts. To reorder
+the charts, change their file names. Optichart starts by displaying the lowest 
+numbered chart, and counting up. If you are interested in making your own charts,
+check the 99-example-chart.chart file for examples and an explanation of the 
+chart file syntax.
+
+==============================
+Running the Program.:
+==============================
+You should be able to run the program by typing:
+
+prompt:> python main.py
+
+==============================
+Controls:
+==============================
+Using a typical keyboard:
+
+ 'Up' : Up Arrow Key - Page Up
+ 'Down' : Down Arrow Key - Page Down
+ 'Left' : Left Arrow Key - Previous Chart
+ 'Right' : Right Arrow Key - Next Chart
+ 'Enter' : Return Key (Main Enter Key) - Toggle mode: full chart/single line/character
+ 'Last' :  X Key - Toggle Red/Green
+ 'Next' : Equal Key - Next Chart
+ 'Previous' : Minus Key - Previous Chart
+ 'Space' : Space Bar - Blank Screen 
+ '0' : Key 0 - Not Used
+ '1' : Key 1 - Smaller Horz. aperture
+ '2' : Key 2 - Page up
+ '3' : Key 3 - Smaller Vert. slit
+ '4' : Key 4 - Move Vert. slit left (Letters go Right)
+ '5' : Key 5 - Not Used
+ '6' : Key 6 - Move Vert. slit right (Letter go Left)
+ '7' : Key 7 - Bigger Horz. aperture
+ '8' : Key 8 - Page down
+ '9' : Key 9 - Bigger Vert. slit
+ '\x1b' : Q key - Quits
+
+Or, grouped by function:
+ Enter is multi-button.
+ Space - Blank the screen.
+ 6 - Move Vert. slit right (Letter go Left)
+ 4 - Move Vert. slit left (Letters go Right)
+ 3 - Smaller Vert. slit
+ 9 - Bigger Vert. slit
+ 1 - Smaller Horz. aperture
+ 7 - Bigger Horz. aperture
+ x Toggles Red/Green
+ 8 - Page down
+ 2 - Page up
+ Down Arrow Page Down
+ Up Arrow Page Up
+ Left Arrow Previous Chart
+ Right Arrow Next Chart
+ '-' - Prev. Chart
+ '=' - Next Chart
+ q Quits
