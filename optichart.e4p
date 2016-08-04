@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project optichart -->
-<!-- Saved: 2015-12-10, 02:00:13 -->
-<!-- Copyright (C) 2015 Alexander Armstrong, AlexRArmstrong@gmail.com -->
+<!-- Saved: 2016-08-04, 13:00:57 -->
+<!-- Copyright (C) 2016 Alexander Armstrong, AlexRArmstrong@gmail.com -->
 <Project version="4.6">
   <Language></Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -41,6 +41,7 @@
     <Other>charts/40-chart.chart</Other>
     <Other>charts/30-chart.chart</Other>
     <Other>README.txt</Other>
+    <Other>UserManual.txt</Other>
   </Others>
   <MainScript>main.py</MainScript>
   <Vcs>
