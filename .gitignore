@@ -1,0 +1,12 @@
+# Files to ignore in git - project wide
+
+# Backup files
+*~
+
+# Local directory settings
+.directory
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
